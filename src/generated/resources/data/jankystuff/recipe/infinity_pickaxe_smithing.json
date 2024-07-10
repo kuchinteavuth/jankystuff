@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:nether_star"
+  },
+  "base": {
+    "item": "minecraft:netherite_pickaxe"
+  },
+  "result": {
+    "count": 1,
+    "id": "jankystuff:infinity_pickaxe"
+  },
+  "template": {
+    "item": "jankystuff:infinity_smithing_template"
+  }
+}

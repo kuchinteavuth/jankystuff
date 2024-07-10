@@ -1,0 +1,55 @@
+package com.inteavuthkuch.jankystuff.screen;
+
+import com.inteavuthkuch.jankystuff.common.ContainerType;
+import com.inteavuthkuch.jankystuff.common.Texture;
+import com.inteavuthkuch.jankystuff.menu.BasicQuarryMenu;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+
+public class BasicQuarryScreen extends AbstractContainerScreen<BasicQuarryMenu> implements MenuAccess<BasicQuarryMenu> {
+
+    private final Texture texture;
+
+    public BasicQuarryScreen(BasicQuarryMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+        super(pMenu, pPlayerInventory, pTitle);
+        this.texture = ContainerType.BASIC_QUARRY.getGui().getTexture();
+        this.imageWidth = this.texture.imageWidth();
+        this.imageHeight = this.texture.imageHeight();
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, this.texture.location());
+
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+
+        pGuiGraphics.blit(this.texture.location(), x, y, 0,0, imageWidth, imageHeight, this.texture.textureWidth(), this.texture.textureHeight());
+    }
+
+    @Override
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        this.renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        pGuiGraphics.drawString(this.font, this.title, 8, 6, 4210752, false);
+        pGuiGraphics.drawString(this.font, this.playerInventoryTitle, 8, (this.imageHeight - 96 + 4), 4210752, false);
+
+        pGuiGraphics.drawWordWrap(this.font, menu.getQuarryState(), 82, 19, 80,4210752);
+
+        Component fuelInfo = Component.translatable("block.jankystuff.basic_quarry.fuel_remaining").append(Component.literal(String.format(" %d ticks", menu.getBurnTime())));
+        pGuiGraphics.drawWordWrap(this.font, fuelInfo, 82, 48, 80,4210752);
+    }
+}

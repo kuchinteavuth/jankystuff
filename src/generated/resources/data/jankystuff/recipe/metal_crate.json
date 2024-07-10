@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "jankystuff:reinforced_compound"
+    },
+    "C": {
+      "item": "jankystuff:wooden_crate"
+    }
+  },
+  "pattern": [
+    "###",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jankystuff:metal_crate"
+  }
+}

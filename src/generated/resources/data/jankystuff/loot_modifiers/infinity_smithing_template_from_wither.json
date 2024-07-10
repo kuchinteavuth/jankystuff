@@ -1,0 +1,14 @@
+{
+  "type": "jankystuff:janky_loot_modifier",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/wither"
+    },
+    {
+      "chance": 0.2,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "jankystuff:infinity_smithing_template"
+}

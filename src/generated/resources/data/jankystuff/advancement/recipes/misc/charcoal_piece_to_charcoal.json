@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_charcoal_piece": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jankystuff:charcoal_piece"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jankystuff:charcoal_piece_to_charcoal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_charcoal_piece"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jankystuff:charcoal_piece_to_charcoal"
+    ]
+  }
+}

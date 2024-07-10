@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "jankystuff:charcoal_piece"
+    },
+    {
+      "item": "jankystuff:charcoal_piece"
+    },
+    {
+      "item": "jankystuff:charcoal_piece"
+    },
+    {
+      "item": "jankystuff:charcoal_piece"
+    },
+    {
+      "item": "jankystuff:charcoal_piece"
+    },
+    {
+      "item": "jankystuff:charcoal_piece"
+    },
+    {
+      "item": "jankystuff:charcoal_piece"
+    },
+    {
+      "item": "jankystuff:charcoal_piece"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:charcoal"
+  }
+}

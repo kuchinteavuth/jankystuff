@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "jankystuff:block/basic_quarry_front",
+    "side": "jankystuff:block/metal_crate",
+    "top": "jankystuff:block/metal_crate"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:storage_blocks/coal"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "I": {
+      "item": "jankystuff:reinforced_compound"
+    }
+  },
+  "pattern": [
+    "CIC",
+    "IDI",
+    "CIC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jankystuff:basic_quarry"
+  }
+}

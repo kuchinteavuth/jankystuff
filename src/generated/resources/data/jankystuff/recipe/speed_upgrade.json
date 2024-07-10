@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "jankystuff:reinforced_compound"
+    },
+    "E": {
+      "tag": "c:gems/diamond"
+    },
+    "L": {
+      "tag": "c:storage_blocks/lapis"
+    }
+  },
+  "pattern": [
+    "#E#",
+    "ELE",
+    "#E#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jankystuff:speed_upgrade"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_reinforced_compound": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jankystuff:reinforced_compound"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:rods/wooden"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jankystuff:metal_crate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wooden_crate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jankystuff:wooden_crate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stick",
+      "has_reinforced_compound",
+      "has_wooden_crate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jankystuff:metal_crate"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:rods/wooden"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "jankystuff:portable_crate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wooden_crate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "jankystuff:wooden_crate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wooden_crate",
+      "has_stick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "jankystuff:portable_crate"
+    ]
+  }
+}

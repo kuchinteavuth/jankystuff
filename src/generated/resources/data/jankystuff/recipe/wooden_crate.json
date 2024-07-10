@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:chests/wooden"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SLS",
+    "LCL",
+    "SLS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "jankystuff:wooden_crate"
+  }
+}
