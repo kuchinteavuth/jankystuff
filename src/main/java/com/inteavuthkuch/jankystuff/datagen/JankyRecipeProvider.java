@@ -42,12 +42,71 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
         simpleShapelessWithUncrafting(output, ModItems.CHARCOAL_PIECE, 8, Items.CHARCOAL, 1);
         simpleShapelessWithUncrafting(output, ModItems.COAL_PIECE, 8, Items.COAL, 1);
 
-        reinforcedSmithing(output, Items.IRON_PICKAXE, Items.IRON_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_IRON_PICKAXE.get());
-        reinforcedSmithing(output, Items.DIAMOND_PICKAXE, Items.DIAMOND, RecipeCategory.TOOLS, ModItems.REINFORCED_DIAMOND_PICKAXE.get());
         reinforcedSmithing(output, Items.IRON_SWORD, Items.IRON_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_IRON_SWORD.get());
+        reinforcedSmithing(output, Items.IRON_PICKAXE, Items.IRON_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_IRON_PICKAXE.get());
+        reinforcedSmithing(output, Items.IRON_SHOVEL, Items.IRON_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_IRON_SHOVEL.get());
+        reinforcedSmithing(output, Items.IRON_AXE, Items.IRON_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_IRON_AXE.get());
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.REINFORCED_IRON_PAXEL)
+                .pattern("ASP").pattern(" # ").pattern(" # ")
+                .define('#', Tags.Items.RODS_WOODEN)
+                .define('A', ModItems.REINFORCED_IRON_AXE)
+                .define('S', ModItems.REINFORCED_IRON_SHOVEL)
+                .define('P', ModItems.REINFORCED_IRON_PICKAXE)
+                .unlockedBy(getHasName(Items.STICK), has(Tags.Items.RODS_WOODEN))
+                .unlockedBy(getHasName(ModItems.REINFORCED_IRON_AXE), has(ModItems.REINFORCED_IRON_AXE))
+                .unlockedBy(getHasName(ModItems.REINFORCED_IRON_SHOVEL), has(ModItems.REINFORCED_IRON_SHOVEL))
+                .unlockedBy(getHasName(ModItems.REINFORCED_IRON_PICKAXE), has(ModItems.REINFORCED_IRON_PICKAXE))
+                .save(output);
+
         reinforcedSmithing(output, Items.DIAMOND_SWORD, Items.DIAMOND, RecipeCategory.TOOLS, ModItems.REINFORCED_DIAMOND_SWORD.get());
+        reinforcedSmithing(output, Items.DIAMOND_PICKAXE, Items.DIAMOND, RecipeCategory.TOOLS, ModItems.REINFORCED_DIAMOND_PICKAXE.get());
+        reinforcedSmithing(output, Items.DIAMOND_SHOVEL, Items.DIAMOND, RecipeCategory.TOOLS, ModItems.REINFORCED_DIAMOND_SHOVEL.get());
+        reinforcedSmithing(output, Items.DIAMOND_AXE, Items.DIAMOND, RecipeCategory.TOOLS, ModItems.REINFORCED_DIAMOND_AXE.get());
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.REINFORCED_DIAMOND_PAXEL)
+                .pattern("ASP").pattern(" # ").pattern(" # ")
+                .define('#', Tags.Items.RODS_WOODEN)
+                .define('A', ModItems.REINFORCED_DIAMOND_AXE)
+                .define('S', ModItems.REINFORCED_DIAMOND_SHOVEL)
+                .define('P', ModItems.REINFORCED_DIAMOND_PICKAXE)
+                .unlockedBy(getHasName(Items.STICK), has(Tags.Items.RODS_WOODEN))
+                .unlockedBy(getHasName(ModItems.REINFORCED_DIAMOND_AXE), has(ModItems.REINFORCED_DIAMOND_AXE))
+                .unlockedBy(getHasName(ModItems.REINFORCED_DIAMOND_SHOVEL), has(ModItems.REINFORCED_DIAMOND_SHOVEL))
+                .unlockedBy(getHasName(ModItems.REINFORCED_DIAMOND_PICKAXE), has(ModItems.REINFORCED_DIAMOND_PICKAXE))
+                .save(output);
+
         reinforcedSmithing(output, Items.NETHERITE_SWORD, Items.NETHERITE_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_NETHERITE_SWORD.get());
-        infinitySmithing(output, Items.NETHERITE_PICKAXE, Items.NETHER_STAR, RecipeCategory.TOOLS, ModItems.INFINITY_PICKAXE.get());
+        reinforcedSmithing(output, Items.NETHERITE_PICKAXE, Items.NETHERITE_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_NETHERITE_PICKAXE.get());
+        reinforcedSmithing(output, Items.NETHERITE_SHOVEL, Items.NETHERITE_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_NETHERITE_SHOVEL.get());
+        reinforcedSmithing(output, Items.NETHERITE_AXE, Items.NETHERITE_INGOT, RecipeCategory.TOOLS, ModItems.REINFORCED_NETHERITE_AXE.get());
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.REINFORCED_NETHERITE_PAXEL)
+                .pattern("ASP").pattern(" # ").pattern(" # ")
+                .define('#', Tags.Items.RODS_WOODEN)
+                .define('A', ModItems.REINFORCED_NETHERITE_AXE)
+                .define('S', ModItems.REINFORCED_NETHERITE_SHOVEL)
+                .define('P', ModItems.REINFORCED_NETHERITE_PICKAXE)
+                .unlockedBy(getHasName(Items.STICK), has(Tags.Items.RODS_WOODEN))
+                .unlockedBy(getHasName(ModItems.REINFORCED_NETHERITE_AXE), has(ModItems.REINFORCED_NETHERITE_AXE))
+                .unlockedBy(getHasName(ModItems.REINFORCED_NETHERITE_SHOVEL), has(ModItems.REINFORCED_NETHERITE_SHOVEL))
+                .unlockedBy(getHasName(ModItems.REINFORCED_NETHERITE_PICKAXE), has(ModItems.REINFORCED_NETHERITE_PICKAXE))
+                .save(output);
+
+        infinitySmithing(output, ModItems.REINFORCED_NETHERITE_SWORD.get(), Items.NETHER_STAR, RecipeCategory.TOOLS, ModItems.INFINITY_SWORD.get());
+        infinitySmithing(output, ModItems.REINFORCED_NETHERITE_PICKAXE.get(), Items.NETHER_STAR, RecipeCategory.TOOLS, ModItems.INFINITY_PICKAXE.get());
+        infinitySmithing(output, ModItems.REINFORCED_NETHERITE_SHOVEL.get(), Items.NETHER_STAR, RecipeCategory.TOOLS, ModItems.INFINITY_SHOVEL.get());
+        infinitySmithing(output, ModItems.REINFORCED_NETHERITE_AXE.get(), Items.NETHER_STAR, RecipeCategory.TOOLS, ModItems.INFINITY_AXE.get());
+        infinitySmithing(output, ModItems.REINFORCED_NETHERITE_PAXEL.get(), Items.NETHER_STAR, RecipeCategory.TOOLS, ModItems.INFINITY_PAXEL.get());
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.INFINITY_PAXEL)
+                .pattern("ASP").pattern(" # ").pattern(" # ")
+                .define('#', Tags.Items.RODS_WOODEN)
+                .define('A', ModItems.INFINITY_AXE)
+                .define('S', ModItems.INFINITY_SHOVEL)
+                .define('P', ModItems.INFINITY_AXE)
+                .unlockedBy(getHasName(Items.STICK), has(Tags.Items.RODS_WOODEN))
+                .unlockedBy(getHasName(ModItems.INFINITY_AXE), has(ModItems.INFINITY_AXE))
+                .unlockedBy(getHasName(ModItems.INFINITY_SHOVEL), has(ModItems.INFINITY_SHOVEL))
+                .unlockedBy(getHasName(ModItems.INFINITY_AXE), has(ModItems.INFINITY_AXE))
+                .save(output, getItemNameForMod(ModItems.INFINITY_PAXEL) + "_crafting");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.REINFORCED_COMPOUND, 4)
                 .pattern("ICI")

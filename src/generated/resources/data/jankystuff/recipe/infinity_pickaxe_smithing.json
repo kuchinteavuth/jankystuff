@@ -4,7 +4,7 @@
     "item": "minecraft:nether_star"
   },
   "base": {
-    "item": "minecraft:netherite_pickaxe"
+    "item": "jankystuff:reinforced_netherite_pickaxe"
   },
   "result": {
     "count": 1,
