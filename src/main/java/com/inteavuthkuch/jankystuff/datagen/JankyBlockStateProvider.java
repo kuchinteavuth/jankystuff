@@ -36,5 +36,6 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.WOODEN_CRATE);
         simpleBlockWithItem(ModBlocks.METAL_CRATE);
         simpleBlockWithItem(ModBlocks.LAMP);
+        blockWithCustomBlockModel(ModBlocks.CORRUPTED_DIRT);
     }
 }
