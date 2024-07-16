@@ -1,7 +1,7 @@
 package com.inteavuthkuch.jankystuff.blockentity;
 
-import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.BasicQuarryBlock;
+import com.inteavuthkuch.jankystuff.block.IBlockEntityTicker;
 import com.inteavuthkuch.jankystuff.common.ContainerType;
 import com.inteavuthkuch.jankystuff.common.UpgradeType;
 import com.inteavuthkuch.jankystuff.config.JankyStuffCommonConfig;
@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements IUpgradableBlockEntity {
+public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements IUpgradableBlockEntity, IBlockEntityTicker {
 
     private NonNullList<ItemStack> items;
     private final ContainerType containerType;
@@ -221,6 +221,7 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
         return stack1.getCount() + stack2.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameComponents(stack1, stack2);
     }
 
+    @Override
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         boolean isEnabled = pState.getValue(BasicQuarryBlock.ENABLED);
         if(!isEnabled) {
