@@ -2,9 +2,16 @@ package com.inteavuthkuch.jankystuff.datagen;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
+import com.inteavuthkuch.jankystuff.common.Constraints;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.client.NeoForgeRenderTypes;
+import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -30,6 +37,22 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(block.get(), new ModelFile.UncheckedModelFile(parent));
     }
 
+    private void glassBlockWithItem(@NotNull DeferredBlock<Block> block) {
+        Block b = block.get();
+        ResourceLocation blockKey = BuiltInRegistries.BLOCK.getKey(b);
+        String blockName = blockKey.getPath();
+        var model = models().cubeAll(blockName, blockTexture(b)).renderType("minecraft:cutout");
+        simpleBlockItem(b, model);
+    }
+
+    private void glassBlockWithItem(@NotNull DeferredBlock<Block> block, Constraints.RenderType renderType) {
+        Block b = block.get();
+        ResourceLocation blockKey = BuiltInRegistries.BLOCK.getKey(b);
+        String blockName = blockKey.getPath();
+        var model = models().cubeAll(blockName, blockTexture(b)).renderType(renderType.getName());
+        simpleBlockWithItem(b, model);
+    }
+
     @Override
     protected void registerStatesAndModels() {
         blockWithCustomBlockModel(ModBlocks.TICK_ACCELERATOR);
@@ -37,5 +60,7 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.METAL_CRATE);
         simpleBlockWithItem(ModBlocks.LAMP);
         blockWithCustomBlockModel(ModBlocks.CORRUPTED_DIRT);
+        glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
+
     }
 }

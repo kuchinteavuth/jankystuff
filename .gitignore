@@ -24,3 +24,6 @@ runs
 run-data
 
 repo
+
+# mc-dev auto generated
+src/generated

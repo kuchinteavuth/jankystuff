@@ -22,6 +22,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> BASIC_QUARRY;
     public static final DeferredBlock<Block> CORRUPTED_DIRT;
     public static final DeferredBlock<Block> BLOCK_BREAKER;
+    public static final DeferredBlock<Block> PASSTHROUGH_GLASS;
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MODID);
@@ -32,6 +33,7 @@ public class ModBlocks {
         BASIC_QUARRY = registerBlockWithItem("basic_quarry", BasicQuarryBlock::create, new Item.Properties().stacksTo(1));
         CORRUPTED_DIRT = registerBlockWithItem("corrupted_dirt", CorruptedDirtBlock::new);
         BLOCK_BREAKER = registerBlockWithItem("block_breaker", BlockBreakerBlock::new);
+        PASSTHROUGH_GLASS = registerBlockWithItem("passthrough_tinted_glass", PassthroughGlassBlock::new);
     }
 
     private static @NotNull DeferredBlock<Block> registerBlockWithItem(String name, Supplier<? extends Block> supplier) {
