@@ -14,6 +14,14 @@
     "facing=west": {
       "model": "jankystuff:block/block_breaker",
       "y": 270
+    },
+    "facing=up": {
+      "model": "jankystuff:block/block_breaker",
+      "x": -90
+    },
+    "facing=down": {
+      "model": "jankystuff:block/block_breaker",
+      "x": 90
     }
   }
 }
