@@ -88,7 +88,10 @@
   "block.jankystuff.basic_quarry.code.normal": "Quarry is working",
   "block.jankystuff.basic_quarry.code.pause": "Pause",
   "block.jankystuff.basic_quarry.fuel_remaining": "Remaining Fuels",
+  "block.jankystuff.corrupted_dirt": "Corrupted Dirt",
+  "block.jankystuff.corrupted_dirt.description": "Will spawn hostile mob if light level is below 7",
   "block.jankystuff.block_breaker": "Block Breaker",
   "block.jankystuff.block_breaker.description1": "Break block that it facing. Put dropped item into container on the opposite side if exists",
-  "block.jankystuff.block_breaker.description2": "Currently on beta testing. There might be some bug and error"
+  "block.jankystuff.block_breaker.description2": "Currently on beta testing. There might be some bug and error",
+  "block.jankystuff.passthrough_tinted_glass": "Passthrough Tinted Glass"
 }

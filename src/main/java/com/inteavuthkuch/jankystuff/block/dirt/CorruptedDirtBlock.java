@@ -1,19 +1,26 @@
 package com.inteavuthkuch.jankystuff.block.dirt;
 
 import com.inteavuthkuch.jankystuff.config.JankyStuffCommonConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CorruptedDirtBlock extends Block {
@@ -23,6 +30,19 @@ public class CorruptedDirtBlock extends Block {
                 Blocks.DIRT.properties()
                         .randomTicks()
         );
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTootipComponents, TooltipFlag pTooltipFlag) {
+        super.appendHoverText(pStack, pContext, pTootipComponents, pTooltipFlag);
+        pTootipComponents.add(Component.translatable("block.jankystuff.corrupted_dirt").withStyle(ChatFormatting.GRAY));
+        pTootipComponents.add(Component.translatable("block.jankystuff.corrupted_dirt.description").withStyle(ChatFormatting.GRAY));
+    }
+
+    @Override
+    protected void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
+        super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
+        pLevel.scheduleTick(pPos, pState.getBlock(), 40);
     }
 
     @Override

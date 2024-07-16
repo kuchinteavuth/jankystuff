@@ -59,25 +59,27 @@ public class BlockBreakerBlockEntity extends BlockEntity implements IBlockEntity
                 builder.withOptionalParameter(LootContextParams.BLOCK_ENTITY, pLevel.getBlockEntity(breakFace));
 
                 BlockPos checkContainer = this.getBlockPos().relative(this.getBlockState().getValue(BlockBreakerBlock.FACING).getOpposite());
-                var items = breakFaceState.getDrops(builder);
-                ContainerUtil.getContainerAt(pLevel, checkContainer).ifPresentOrElse(container -> {
-                    for(ItemStack item : items) {
-                        if(!item.isEmpty()){
-                            if(ContainerUtil.canInsertItemStack(container, item)){
+                if(!breakFaceState.hasBlockEntity()){
+                    var items = breakFaceState.getDrops(builder);
+                    ContainerUtil.getContainerAt(pLevel, checkContainer).ifPresentOrElse(container -> {
+                        for(ItemStack item : items) {
+                            if(!item.isEmpty()){
+                                if(ContainerUtil.canInsertItemStack(container, item)){
+                                    pLevel.destroyBlock(breakFace, false);
+                                }
+                            }
+                        }
+                        setChanged();
+                    }, () -> {
+                        for(ItemStack item : items) {
+                            if(!item.isEmpty()){
+                                ContainerUtil.dropItemStack(pLevel, breakFace, item);
                                 pLevel.destroyBlock(breakFace, false);
                             }
                         }
-                    }
-                    setChanged();
-                }, () -> {
-                    for(ItemStack item : items) {
-                        if(!item.isEmpty()){
-                            ContainerUtil.dropItemStack(pLevel, breakFace, item);
-                            pLevel.destroyBlock(breakFace, false);
-                        }
-                    }
-                    setChanged();
-                });
+                        setChanged();
+                    });
+                }
             }
             setCooldown(20);
         }

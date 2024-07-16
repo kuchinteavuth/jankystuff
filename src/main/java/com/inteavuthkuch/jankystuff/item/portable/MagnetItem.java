@@ -54,10 +54,6 @@ public class MagnetItem extends Item {
         CompoundTag tag = pStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
         String magnetStateString = tag.getBoolean("enabled") ? "state.jankystuff.on" : "state.jankystuff.off";
         pTooltipComponents.add(Component.translatable("item.jankystuff.magnet.state", Component.translatable(magnetStateString)));
-
-        pTooltipComponents.add(Component.empty());
-
-        pTooltipComponents.add(Component.literal("Current texture has not yet finalized"));
     }
 
     @Override

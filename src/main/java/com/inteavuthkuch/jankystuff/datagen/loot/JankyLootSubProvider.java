@@ -26,6 +26,7 @@ public class JankyLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.BASIC_QUARRY.get());
         this.dropSelf(ModBlocks.BLOCK_BREAKER.get());
         this.dropOther(ModBlocks.CORRUPTED_DIRT.get(), Blocks.DIRT);
+        this.dropSelf(ModBlocks.PASSTHROUGH_GLASS.get());
     }
 
     @Override

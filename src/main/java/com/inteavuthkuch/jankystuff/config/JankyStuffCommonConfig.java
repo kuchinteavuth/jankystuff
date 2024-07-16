@@ -3,7 +3,7 @@ package com.inteavuthkuch.jankystuff.config;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class JankyStuffCommonConfig {
-    public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     public static final ModConfigSpec SPEC;
 
     public static final ModConfigSpec.ConfigValue<Integer> QUARRY_COOLDOWN;
@@ -22,7 +22,7 @@ public class JankyStuffCommonConfig {
                         .defineInRange("Magnet range", 8, 1, 64);
 
         CORRUPTED_DIRT_SPAWN_DELAY = BUILDER.comment("Speed which corrupted dirt spawn mob")
-                        .defineInRange("Corrupted Dirt spawn delay", 200, 1, Integer.MAX_VALUE);
+                        .defineInRange("Corrupted Dirt max spawn delay", 100, 1, Integer.MAX_VALUE);
 
         CORRUPTED_DIRT_MAX_ENTITY = BUILDER.comment("Corrupted dirt will not spawn anymore mob if total mob cab is met")
                         .defineInRange("Corrupted Dirt entity cap", 24, 1, 64);
