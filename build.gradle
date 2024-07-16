@@ -25,9 +25,6 @@ repositories {
         url = "https://maven.terraformersmc.com/"
     }
     maven {
-        url = "https://maven.theillusivec4.top/"
-    }
-    maven {
         url "https://cursemaven.com"
     }
 }
@@ -124,14 +121,14 @@ configurations {
 }
 
 dependencies {
-    implementation "curse.maven:jei-238222:5497837"
+    //implementation "curse.maven:jei-238222:5497837"
     implementation "curse.maven:adorned-1036809:5466622"
     implementation "curse.maven:jade-324717:5444008"
-    //implementation "curse.maven:applied-energistics-2-223794:5490518"
-    //implementation "curse.maven:kubejs-238086:5495805"
-    //implementation "curse.maven:rhino-416294:5495611"
-    //implementation "curse.maven:mekanism-268560:5478403"
-    //implementation "curse.maven:ctm-267602:5426034"
+    api "dev.emi:emi-neoforge:1.1.10+1.21:api"
+    implementation "dev.emi:emi-neoforge:1.1.10+1.21"
+
+    //implementation "curse.maven:kubejs-238086:5508982"
+    //implementation "curse.maven:rhino-416294:5499585"
 }
 
 

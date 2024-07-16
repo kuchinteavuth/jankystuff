@@ -2,6 +2,7 @@
   "values": [
     "jankystuff:tick_accelerator",
     "jankystuff:metal_crate",
+    "jankystuff:block_breaker",
     "jankystuff:basic_quarry"
   ]
 }

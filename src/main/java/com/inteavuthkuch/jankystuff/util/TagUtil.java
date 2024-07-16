@@ -8,7 +8,9 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class TagUtil {
@@ -21,13 +23,8 @@ public final class TagUtil {
                 .toList();
     }
 
-    /**
-     * Ores: Iron, gold, copper etc<br/>
-     * Gems: Redstone, glowstone, diamond ect
-     * @return List Valuable ItemStack
-     */
-    public static List<ItemStack> getCommonResources() {
-        return getItemsFromTags(
+    public static List<TagKey<Item>> getCommonResourceTags() {
+        return Arrays.asList(
                 Tags.Items.RAW_MATERIALS,
                 Tags.Items.GEMS_LAPIS,
                 Tags.Items.GEMS_AMETHYST,
@@ -39,8 +36,17 @@ public final class TagUtil {
         );
     }
 
-    @SafeVarargs
-    public static @NotNull List<ItemStack> getItemsFromTags(TagKey<Item> @NotNull ... tags) {
+    /**
+     * Ores: Iron, gold, copper etc<br/>
+     * Gems: Redstone, glowstone, diamond ect
+     * @return List Valuable ItemStack
+     */
+    public static List<ItemStack> getCommonResources() {
+        var tags = getCommonResourceTags();
+        return getItemsFromTags(tags);
+    }
+
+    public static @NotNull List<ItemStack> getItemsFromTags(List<TagKey<Item>> tags) {
         List<ItemStack> stacks = new ArrayList<>();
 
         for(TagKey<Item> tag : tags) {

@@ -35,13 +35,32 @@ public class JankyItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.RING_OF_REGENERATION);
         simpleItem(ModItems.RING_OF_SATURATION);
         simpleItem(ModItems.RING_OF_WATER);
-        basicHandHeldItem(ModItems.REINFORCED_IRON_PICKAXE);
-        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_PICKAXE);
-        basicHandHeldItem(ModItems.INFINITY_PICKAXE);
+
         basicHandHeldItem(ModItems.REINFORCED_IRON_SWORD);
+        basicHandHeldItem(ModItems.REINFORCED_IRON_PICKAXE);
+        basicHandHeldItem(ModItems.REINFORCED_IRON_AXE);
+        basicHandHeldItem(ModItems.REINFORCED_IRON_SHOVEL);
+        basicHandHeldItem(ModItems.REINFORCED_IRON_PAXEL);
+
         basicHandHeldItem(ModItems.REINFORCED_DIAMOND_SWORD);
+        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_PICKAXE);
+        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_AXE);
+        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_SHOVEL);
+        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_PAXEL);
+
         basicHandHeldItem(ModItems.REINFORCED_NETHERITE_SWORD);
-        simpleItem(ModItems.PORTABLE_CRATE);
+        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_PICKAXE);
+        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_AXE);
+        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_SHOVEL);
+        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_PAXEL);
+
+        basicHandHeldItem(ModItems.INFINITY_SWORD);
+        basicHandHeldItem(ModItems.INFINITY_PICKAXE);
+        basicHandHeldItem(ModItems.INFINITY_AXE);
+        basicHandHeldItem(ModItems.INFINITY_SHOVEL);
+        basicHandHeldItem(ModItems.INFINITY_PAXEL);
+
+        basicHandHeldItem(ModItems.PORTABLE_CRATE);
         simpleItem(ModItems.MAGNET);
         simpleItem(ModItems.SPEED_UPGRADE);
     }

@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -23,6 +24,8 @@ public class JankyLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.METAL_CRATE.get());
         this.dropSelf(ModBlocks.LAMP.get());
         this.dropSelf(ModBlocks.BASIC_QUARRY.get());
+        this.dropSelf(ModBlocks.BLOCK_BREAKER.get());
+        this.dropOther(ModBlocks.CORRUPTED_DIRT.get(), Blocks.DIRT);
     }
 
     @Override

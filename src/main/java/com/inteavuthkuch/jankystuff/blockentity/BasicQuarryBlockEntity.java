@@ -1,13 +1,14 @@
 package com.inteavuthkuch.jankystuff.blockentity;
 
-import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.BasicQuarryBlock;
+import com.inteavuthkuch.jankystuff.block.IBlockEntityTicker;
 import com.inteavuthkuch.jankystuff.common.ContainerType;
 import com.inteavuthkuch.jankystuff.common.UpgradeType;
 import com.inteavuthkuch.jankystuff.config.JankyStuffCommonConfig;
 import com.inteavuthkuch.jankystuff.item.upgrade.BaseUpgradeItem;
 import com.inteavuthkuch.jankystuff.menu.BasicQuarryMenu;
 import com.inteavuthkuch.jankystuff.util.ComponentUtil;
+import com.inteavuthkuch.jankystuff.util.ContainerUtil;
 import com.inteavuthkuch.jankystuff.util.ItemStackUtil;
 import com.inteavuthkuch.jankystuff.util.TagUtil;
 import net.minecraft.core.BlockPos;
@@ -20,25 +21,19 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.WorldlyContainerHolder;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements IUpgradableBlockEntity {
+public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements IUpgradableBlockEntity, IBlockEntityTicker {
 
     private NonNullList<ItemStack> items;
     private final ContainerType containerType;
@@ -152,57 +147,20 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
     private boolean consumeBurnItem(Level pLevel) {
         if(items.isEmpty() || pLevel.isClientSide()) return false;
 
-        for(int i=0;i<items.size();i++){
+        for (int i=0; i<items.size(); i++) {
             ItemStack item = items.get(i);
-            if(FurnaceBlockEntity.isFuel(item)){
+            if (FurnaceBlockEntity.isFuel(item)) {
                 this.burnTime = item.getBurnTime(null);
-                //this.data.set(BURN_TIME_DATA_SLOT, this.burnTime);
-                this.removeItem(i, 1);
+                if(item.hasCraftingRemainingItem()){
+                    items.set(i, item.getCraftingRemainingItem());
+                    this.setChanged();
+                }else{
+                    item.shrink(1);
+                }
                 return true;
             }
         }
         return false;
-    }
-
-    private Optional<Container> getTopContainer(Level pLevel, BlockPos pPos, BlockState pState) {
-        BlockPos pos = pPos.above();
-        BlockState state = pLevel.getBlockState(pos);
-        Block block = state.getBlock();
-
-        if(block instanceof WorldlyContainerHolder) {
-            return Optional.of(((WorldlyContainerHolder) block).getContainer(pState, pLevel, pPos));
-        }
-        else if(state.hasBlockEntity() && pLevel.getBlockEntity(pos) instanceof Container container){
-            if(container instanceof ChestBlockEntity && block instanceof ChestBlock) {
-                Container chestContainer = ChestBlock.getContainer((ChestBlock) block, state, pLevel, pos, true);
-                assert chestContainer != null;
-                return Optional.of(chestContainer);
-            }else{
-                return Optional.of(container);
-            }
-        }
-        return Optional.empty();
-    }
-
-    private boolean isCanInsertToInventory(Container container, ItemStack itemStack) {
-        boolean flag = false;
-        for(int i=0;i<container.getContainerSize();i++){
-            if(container.canPlaceItem(i, itemStack)){
-                ItemStack currentStack = container.getItem(i);
-                if(currentStack.isEmpty()){
-                    container.setItem(i, itemStack);
-                    flag = true;
-                    break;
-                }
-                else if(canMergeItems(currentStack, itemStack)){
-                    currentStack.grow(itemStack.getCount());
-                    container.setItem(i, currentStack);
-                    flag = true;
-                    break;
-                }
-            }
-        }
-        return flag;
     }
 
     private Optional<List<BaseUpgradeItem>> getUpgradeItem() {
@@ -221,6 +179,25 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
         return stack1.getCount() + stack2.getCount() <= stack1.getMaxStackSize() && ItemStack.isSameItemSameComponents(stack1, stack2);
     }
 
+    private void checkForUpgrade() {
+        Optional<List<BaseUpgradeItem>> upgrades = getUpgradeItem();
+        if(upgrades.isPresent()){
+            double speedUsage = 0;
+            for(BaseUpgradeItem upgrade : upgrades.get()){
+                if(upgrade.getUpgradeType() == UpgradeType.SPEED){
+                    speedUsage += JankyStuffCommonConfig.QUARRY_COOLDOWN.get() * upgrade.speedUsage();
+                }
+            }
+
+            int finalSpeed = Math.max(1, JankyStuffCommonConfig.QUARRY_COOLDOWN.get() - (int)speedUsage);
+            setCooldown(finalSpeed);
+        }
+        else{
+            setCooldown(JankyStuffCommonConfig.QUARRY_COOLDOWN.get());
+        }
+    }
+
+    @Override
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         boolean isEnabled = pState.getValue(BasicQuarryBlock.ENABLED);
         if(!isEnabled) {
@@ -238,7 +215,7 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
             }
         }
         else{
-            Optional<Container> topContainer = getTopContainer(pLevel, pPos, pState);
+            Optional<Container> topContainer = ContainerUtil.getContainerAt(pLevel, pPos.above());
             if(topContainer.isPresent()) {
                 if(errorCode == CODE_NORMAL)
                     this.burnTime--;
@@ -247,31 +224,15 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
                 if(!isOnCooldown()){
 
                     // Check for upgrade items
-                    Optional<List<BaseUpgradeItem>> upgrades = getUpgradeItem();
-                    if(upgrades.isPresent()){
-                        double speedUsage = 0;
-                        for(BaseUpgradeItem upgrade : upgrades.get()){
-                            if(upgrade.getUpgradeType() == UpgradeType.SPEED){
-                                speedUsage += JankyStuffCommonConfig.QUARRY_COOLDOWN.get() * upgrade.speedUsage();
-                            }
-                        }
+                    checkForUpgrade();
 
-                        int finalSpeed = Math.max(1, JankyStuffCommonConfig.QUARRY_COOLDOWN.get() - (int)speedUsage);
-                        setCooldown(finalSpeed);
-                    }
-                    else{
-                        setCooldown(JankyStuffCommonConfig.QUARRY_COOLDOWN.get());
-                    }
-
-                    // This might cause lag issue
                     List<ItemStack> stacks = TagUtil.getCommonResources();
                     ItemStack itemToGet = ItemStackUtil.getRandomItem(stacks);
 
-                    if(!isCanInsertToInventory(topContainer.get(),itemToGet)){
+                    if(!ContainerUtil.canInsertItemStack(topContainer.get(),itemToGet)){
                         this.data.set(ERROR_CODE_DATA_SLOT, CODE_NOT_ENOUGH_SPACE);
                         pState = pState.setValue(BasicQuarryBlock.ON, Boolean.FALSE);
                     }else{
-                        //JankyStuff.LOGGER.debug("Quarry get: {}", itemToGet);
                         this.data.set(ERROR_CODE_DATA_SLOT, CODE_NORMAL);
                         pState = pState.setValue(BasicQuarryBlock.ON, Boolean.TRUE);
                         setChanged(pLevel, pPos, pState);

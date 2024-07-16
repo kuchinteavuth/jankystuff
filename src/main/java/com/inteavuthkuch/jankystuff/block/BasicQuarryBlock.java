@@ -138,7 +138,6 @@ public class BasicQuarryBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         if(pLevel.isClientSide()) return null;
 
-        return createTickerHelper(pBlockEntityType, ModBlockEntity.BASIC_QUARRY_BE.get(),
-                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
+        return createTickerHelper(pBlockEntityType, ModBlockEntity.BASIC_QUARRY_BE.get(), IBlockEntityTicker.getTickerHelper());
     }
 }

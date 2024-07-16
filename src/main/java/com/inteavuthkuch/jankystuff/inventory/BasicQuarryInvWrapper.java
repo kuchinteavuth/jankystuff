@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,7 +28,13 @@ public class BasicQuarryInvWrapper extends InvWrapper {
 
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        // Not allow any extraction from the quarry by capability
-        return ItemStack.EMPTY;
+        if(getStackInSlot(slot).is(Items.BUCKET)){
+            // Handle regular bucket not sure about modded bucket
+            return super.extractItem(slot, amount, simulate);
+        }
+        else {
+            // Not allow any extraction from the quarry by capability
+            return ItemStack.EMPTY;
+        }
     }
 }
