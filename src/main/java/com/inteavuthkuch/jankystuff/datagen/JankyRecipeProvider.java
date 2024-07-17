@@ -310,5 +310,17 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(Items.IRON_PICKAXE), has(Items.IRON_PICKAXE))
                 .unlockedBy(getHasName(Blocks.OBSERVER), has(Blocks.OBSERVER))
                 .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.CORRUPTED_DIRT, 8)
+                .pattern("DSD")
+                .pattern("SPS")
+                .pattern("DSD")
+                .define('D', Blocks.DIRT)
+                .define('S', Blocks.SOUL_SAND)
+                .define('P', Items.BLAZE_POWDER)
+                .unlockedBy(getHasName(Blocks.DIRT), has(Blocks.DIRT))
+                .unlockedBy(getHasName(Blocks.SOUL_SAND), has(Blocks.SOUL_SAND))
+                .unlockedBy(getHasName(Items.BLAZE_POWDER), has(Items.BLAZE_POWDER))
+                .save(output);
     }
 }

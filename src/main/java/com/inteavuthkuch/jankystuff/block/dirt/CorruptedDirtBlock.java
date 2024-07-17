@@ -35,7 +35,6 @@ public class CorruptedDirtBlock extends Block {
     @Override
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTootipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTootipComponents, pTooltipFlag);
-        pTootipComponents.add(Component.translatable("block.jankystuff.corrupted_dirt").withStyle(ChatFormatting.GRAY));
         pTootipComponents.add(Component.translatable("block.jankystuff.corrupted_dirt.description").withStyle(ChatFormatting.GRAY));
     }
 
