@@ -4,6 +4,8 @@ import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.crate.MetalCrateBlock;
 import com.inteavuthkuch.jankystuff.block.crate.WoodenCrateBlock;
 import com.inteavuthkuch.jankystuff.block.dirt.CorruptedDirtBlock;
+import com.inteavuthkuch.jankystuff.block.plate.AdvanceDamagePlateBlock;
+import com.inteavuthkuch.jankystuff.block.plate.MobDamagePlateBlock;
 import com.inteavuthkuch.jankystuff.item.ModItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -23,6 +25,8 @@ public class ModBlocks {
     public static final DeferredBlock<Block> CORRUPTED_DIRT;
     public static final DeferredBlock<Block> BLOCK_BREAKER;
     public static final DeferredBlock<Block> PASSTHROUGH_GLASS;
+    public static final DeferredBlock<Block> MOB_DAMAGE_PLATE;
+    public static final DeferredBlock<Block> ADVANCE_DAMAGE_PLATE;
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MODID);
@@ -34,6 +38,8 @@ public class ModBlocks {
         CORRUPTED_DIRT = registerBlockWithItem("corrupted_dirt", CorruptedDirtBlock::new);
         BLOCK_BREAKER = registerBlockWithItem("block_breaker", BlockBreakerBlock::new);
         PASSTHROUGH_GLASS = registerBlockWithItem("passthrough_tinted_glass", PassthroughGlassBlock::new);
+        MOB_DAMAGE_PLATE = registerBlockWithItem("mob_damage_plate", MobDamagePlateBlock::new);
+        ADVANCE_DAMAGE_PLATE = registerBlockWithItem("advance_damage_plate", AdvanceDamagePlateBlock::new);
     }
 
     private static @NotNull DeferredBlock<Block> registerBlockWithItem(String name, Supplier<? extends Block> supplier) {

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_diamond": {
+    "has_diamond_block": {
       "conditions": {
         "items": [
           {
-            "items": "#c:gems/diamond"
+            "items": "minecraft:diamond_block"
           }
         ]
       },
@@ -63,7 +63,7 @@
       "has_the_recipe",
       "has_gold_ingot",
       "has_redstone",
-      "has_diamond",
+      "has_diamond_block",
       "has_lapis",
       "has_iron_ingot"
     ]

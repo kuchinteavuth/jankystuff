@@ -1,0 +1,7 @@
+{
+	"parent": "jankystuff:block/base_plate",
+	"textures": {
+		"texture": "minecraft:block/polished_blackstone",
+		"up": "jankystuff:block/mob_damage_plate_up"
+	}
+}

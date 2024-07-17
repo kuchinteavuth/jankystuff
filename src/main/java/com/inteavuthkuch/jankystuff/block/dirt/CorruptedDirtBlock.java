@@ -65,7 +65,7 @@ public class CorruptedDirtBlock extends Block {
         pLevel.scheduleTick(pPos, pState.getBlock(), pLevel.random.nextInt(JankyStuffCommonConfig.CORRUPTED_DIRT_SPAWN_DELAY.get()));
 
         trySpawnMob(pLevel, pPos, pRandom).ifPresent(entity -> {
-            entity.setPos(pPos.getX(), pPos.getY() + 1, pPos.getZ());
+            entity.setPos(pPos.getX(), pPos.getY() + 1.2d, pPos.getZ());
             if(!pLevel.noCollision(entity) || !pLevel.isUnobstructed(entity)) return;
             pLevel.addFreshEntity(entity);
         });

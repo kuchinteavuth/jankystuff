@@ -9,6 +9,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
@@ -242,12 +243,12 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .pattern("ILI")
                 .define('G', Tags.Items.INGOTS_GOLD)
                 .define('R', Tags.Items.DUSTS_REDSTONE)
-                .define('E', Tags.Items.GEMS_DIAMOND)
+                .define('E', Blocks.DIAMOND_BLOCK)
                 .define('L', Tags.Items.GEMS_LAPIS)
                 .define('I', Tags.Items.INGOTS_IRON)
                 .unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
                 .unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
-                .unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
+                .unlockedBy("has_diamond_block", has(Blocks.DIAMOND_BLOCK))
                 .unlockedBy("has_lapis", has(Tags.Items.GEMS_LAPIS))
                 .unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
                 .save(output, getItemNameForMod(ModItems.MAGNET) + "_alt");
@@ -262,6 +263,52 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy("has_diamond", has(Tags.Items.GEMS_DIAMOND))
                 .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
                 .unlockedBy("has_lapis_brock", has(Tags.Items.STORAGE_BLOCKS_LAPIS))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PASSTHROUGH_GLASS, 8)
+                .pattern("E##")
+                .pattern("###")
+                .pattern("###")
+                .define('#', Blocks.TINTED_GLASS)
+                .define('E', Items.ENDER_EYE)
+                .unlockedBy(getHasName(Blocks.TINTED_GLASS), has(Blocks.TINTED_GLASS))
+                .unlockedBy(getHasName(Items.ENDER_EYE), has(Items.ENDER_EYE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.MOB_DAMAGE_PLATE, 4)
+                .pattern("###")
+                .pattern("SIS")
+                .pattern("###")
+                .define('#', Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE)
+                .define('S', Tags.Items.SLIMEBALLS)
+                .define('I', Items.IRON_SWORD)
+                .unlockedBy(getHasName(Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE), has(Blocks.POLISHED_BLACKSTONE_PRESSURE_PLATE))
+                .unlockedBy(getHasName(Items.IRON_SWORD), has(Items.IRON_SWORD))
+                .unlockedBy("has_slime_ball", has(Tags.Items.SLIMEBALLS))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ADVANCE_DAMAGE_PLATE, 4)
+                .pattern("P#P")
+                .pattern("#D#")
+                .pattern("P#P")
+                .define('P', Tags.Items.ENDER_PEARLS)
+                .define('#', ModBlocks.MOB_DAMAGE_PLATE)
+                .define('D', Items.DIAMOND_SWORD)
+                .unlockedBy(getHasName(ModBlocks.MOB_DAMAGE_PLATE), has(ModBlocks.MOB_DAMAGE_PLATE))
+                .unlockedBy(getHasName(Items.DIAMOND_SWORD), has(Items.DIAMOND_SWORD))
+                .unlockedBy("has_ender_pearl", has(Tags.Items.ENDER_PEARLS))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BLOCK_BREAKER)
+                .pattern("###")
+                .pattern("POP")
+                .pattern("###")
+                .define('#', ModItems.REINFORCED_COMPOUND)
+                .define('P', Items.IRON_PICKAXE)
+                .define('O', Blocks.OBSERVER)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(Items.IRON_PICKAXE), has(Items.IRON_PICKAXE))
+                .unlockedBy(getHasName(Blocks.OBSERVER), has(Blocks.OBSERVER))
                 .save(output);
     }
 }

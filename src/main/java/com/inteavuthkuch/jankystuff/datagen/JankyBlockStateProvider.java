@@ -60,6 +60,8 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.METAL_CRATE);
         simpleBlockWithItem(ModBlocks.LAMP);
         blockWithCustomBlockModel(ModBlocks.CORRUPTED_DIRT);
+        blockWithCustomBlockModel(ModBlocks.MOB_DAMAGE_PLATE);
+        blockWithCustomBlockModel(ModBlocks.ADVANCE_DAMAGE_PLATE);
         glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
 
     }

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "E": {
-      "tag": "c:gems/diamond"
+      "item": "minecraft:diamond_block"
     },
     "G": {
       "tag": "c:ingots/gold"

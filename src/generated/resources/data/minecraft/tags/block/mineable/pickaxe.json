@@ -3,6 +3,8 @@
     "jankystuff:tick_accelerator",
     "jankystuff:metal_crate",
     "jankystuff:block_breaker",
+    "jankystuff:mob_damage_plate",
+    "jankystuff:advance_damage_plate",
     "jankystuff:basic_quarry"
   ]
 }
