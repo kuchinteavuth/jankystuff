@@ -1,8 +1,8 @@
 package com.inteavuthkuch.jankystuff.screen;
 
 import com.inteavuthkuch.jankystuff.common.ContainerType;
-import com.inteavuthkuch.jankystuff.menu.WoodenCrateMenu;
 import com.inteavuthkuch.jankystuff.common.Texture;
+import com.inteavuthkuch.jankystuff.menu.BlockBreakerMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -11,15 +11,14 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class WoodenCrateScreen extends AbstractContainerScreen<WoodenCrateMenu> implements MenuAccess<WoodenCrateMenu> {
-
+public class BlockBreakerScreen extends AbstractContainerScreen<BlockBreakerMenu> implements MenuAccess<BlockBreakerMenu> {
     private final Texture texture;
 
-    public WoodenCrateScreen(WoodenCrateMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public BlockBreakerScreen(BlockBreakerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-        this.texture = ContainerType.WOODEN.getGui().getTexture();
-        this.imageWidth = this.texture.imageWidth();
+        this.texture = ContainerType.BLOCK_BREAKER.getGui().getTexture();
         this.imageHeight = this.texture.imageHeight();
+        this.imageWidth = this.texture.imageWidth();
     }
 
     @Override
@@ -43,6 +42,6 @@ public class WoodenCrateScreen extends AbstractContainerScreen<WoodenCrateMenu> 
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         pGuiGraphics.drawString(this.font, this.title, 8, 6, 4210752, false);
-        pGuiGraphics.drawString(this.font, this.playerInventoryTitle, 26, (this.imageHeight - 96 + 4), 4210752, false);
+        pGuiGraphics.drawString(this.font, this.playerInventoryTitle, 8, (this.imageHeight - 96 + 4), 4210752, false);
     }
 }

@@ -126,6 +126,7 @@ dependencies {
     implementation "curse.maven:jade-324717:5444008"
     api "dev.emi:emi-neoforge:1.1.10+1.21:api"
     implementation "dev.emi:emi-neoforge:1.1.10+1.21"
+    implementation "curse.maven:mekanism-268560:5478403"
 
     //implementation "curse.maven:kubejs-238086:5508982"
     //implementation "curse.maven:rhino-416294:5499585"

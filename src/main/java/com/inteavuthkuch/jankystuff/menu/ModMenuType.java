@@ -13,6 +13,7 @@ public class ModMenuType {
     public static final DeferredHolder<MenuType<?>, MenuType<MetalCrateMenu>> METAL_CRATE;
     public static final DeferredHolder<MenuType<?>, MenuType<PortableCrateMenu>> PORTABLE_CRATE;
     public static final DeferredHolder<MenuType<?>, MenuType<BasicQuarryMenu>> BASIC_QUARRY;
+    public static final DeferredHolder<MenuType<?>, MenuType<BlockBreakerMenu>> BLOCK_BREAKER;
 
     static {
         MENUS = DeferredRegister.create(Registries.MENU, JankyStuff.MODID);
@@ -20,5 +21,6 @@ public class ModMenuType {
         METAL_CRATE = MENUS.register("metal_crate", () -> new MenuType<>(MetalCrateMenu::new, FeatureFlags.REGISTRY.allFlags()));
         PORTABLE_CRATE = MENUS.register("portable_crate", () -> new MenuType<>(PortableCrateMenu::new, FeatureFlags.REGISTRY.allFlags()));
         BASIC_QUARRY = MENUS.register("basic_quarry", () -> new MenuType<>(BasicQuarryMenu::new, FeatureFlags.REGISTRY.allFlags()));
+        BLOCK_BREAKER = MENUS.register("block_breaker", () -> new MenuType<>(BlockBreakerMenu::new, FeatureFlags.REGISTRY.allFlags()));
     }
 }

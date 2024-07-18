@@ -4,10 +4,7 @@ import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.client.KeyBinding;
 import com.inteavuthkuch.jankystuff.menu.ModMenuType;
 import com.inteavuthkuch.jankystuff.network.packet.ItemTogglePacket;
-import com.inteavuthkuch.jankystuff.screen.BasicQuarryScreen;
-import com.inteavuthkuch.jankystuff.screen.MetalCrateScreen;
-import com.inteavuthkuch.jankystuff.screen.PortableCrateScreen;
-import com.inteavuthkuch.jankystuff.screen.WoodenCrateScreen;
+import com.inteavuthkuch.jankystuff.screen.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -31,6 +28,7 @@ public class ClientModBusEvents {
         event.register(ModMenuType.METAL_CRATE.get(), MetalCrateScreen::new);
         event.register(ModMenuType.PORTABLE_CRATE.get(), PortableCrateScreen::new);
         event.register(ModMenuType.BASIC_QUARRY.get(), BasicQuarryScreen::new);
+        event.register(ModMenuType.BLOCK_BREAKER.get(), BlockBreakerScreen::new);
     }
 
     @SubscribeEvent

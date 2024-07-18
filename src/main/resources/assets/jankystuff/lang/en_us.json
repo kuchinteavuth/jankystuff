@@ -91,7 +91,7 @@
   "block.jankystuff.corrupted_dirt": "Corrupted Dirt",
   "block.jankystuff.corrupted_dirt.description": "Will spawn hostile mob if light level is below 7",
   "block.jankystuff.block_breaker": "Block Breaker",
-  "block.jankystuff.block_breaker.description1": "Break block that it facing. Put dropped item into container on the opposite side if exists",
+  "block.jankystuff.block_breaker.description1": "Break block that it facing. Optionally pickaxe can be place for fortune",
   "block.jankystuff.block_breaker.description2": "Currently on beta testing. There might be some bug and error",
   "block.jankystuff.passthrough_tinted_glass": "Passthrough Tinted Glass",
   "block.jankystuff.mob_damage_plate": "Mob Damage Plate",

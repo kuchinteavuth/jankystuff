@@ -2,11 +2,15 @@ package com.inteavuthkuch.jankystuff.block;
 
 import com.inteavuthkuch.jankystuff.blockentity.BlockBreakerBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.ModBlockEntity;
+import com.inteavuthkuch.jankystuff.util.PlayerUtil;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -23,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,5 +99,21 @@ public class BlockBreakerBlock extends BaseEntityBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         if(pLevel.isClientSide()) return null;
         return createTickerHelper(pBlockEntityType, ModBlockEntity.BLOCK_BREAKER_BE.get(), IBlockEntityTicker.getTickerHelper());
+    }
+
+    @Override
+    protected void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        Containers.dropContentsOnDestroy(pState, pNewState, pLevel, pPos);
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        if (pLevel.isClientSide) {
+            return InteractionResult.SUCCESS;
+        } else {
+            PlayerUtil.tryOpenMenu(pPlayer, pLevel, pPos);
+            return InteractionResult.CONSUME;
+        }
     }
 }
