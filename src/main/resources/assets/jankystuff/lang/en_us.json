@@ -71,6 +71,7 @@
   "item.jankystuff.magnet.description": "Absorb Item and Exp in %1$s block(s) radius",
   "item.jankystuff.magnet.state": "Magnet is %1$s",
   "item.jankystuff.speed_upgrade": "Speed Upgrade",
+  "item.jankystuff.advance_speed_upgrade": "Advance Speed Upgrade",
   "item.jankystuff.speed_upgrade.description": "Base Speed: +%1$d%%",
 
   "block.jankystuff.tick_accelerator": "Tick Accelerator",
@@ -78,15 +79,17 @@
   "block.jankystuff.wooden_crate": "Wooden Crate",
   "block.jankystuff.wooden_crate.description": "Can hold up to 88 stacks of any item",
   "block.jankystuff.metal_crate": "Metal Crate",
-  "block.jankystuff.metal_crate.description": "Can hold up to 117 stacks of any item",
+  "block.jankystuff.metal_crate.content": "%s x%s",
+  "block.jankystuff.metal_crate.more": "and %s more...",
   "block.jankystuff.lamp": "Lamp",
   "block.jankystuff.basic_quarry": "Basic Quarry",
-  "block.jankystuff.basic_quarry.description": "Collect resources from different biomes and dimension",
+  "block.jankystuff.basic_quarry.description": "Mine all block below quarry till bedrock inside current chunk that placed the quarry",
   "block.jankystuff.basic_quarry.code.missing_top_inventory": "Missing output inventory on top",
   "block.jankystuff.basic_quarry.code.not_enough_space": "Not enough space for output",
   "block.jankystuff.basic_quarry.code.not_enough_fuel": "Not enough fuel",
   "block.jankystuff.basic_quarry.code.normal": "Quarry is working",
   "block.jankystuff.basic_quarry.code.pause": "Pause",
+  "block.jankystuff.basic_quarry.code.finished": "Quarry is finished",
   "block.jankystuff.basic_quarry.fuel_remaining": "Remaining Fuels",
   "block.jankystuff.corrupted_dirt": "Corrupted Dirt",
   "block.jankystuff.corrupted_dirt.description": "Will spawn hostile mob if light level is below 7",
@@ -97,5 +100,7 @@
   "block.jankystuff.mob_damage_plate": "Mob Damage Plate",
   "block.jankystuff.mob_damage_plate.description": "Ignore Player and attack any entity that stand on. (No exp drop)",
   "block.jankystuff.advance_damage_plate": "Advance Damage Plate",
-  "block.jankystuff.advance_damage_plate.description": "Ignore Player and attack any entity that stand on. (Drop exp)"
+  "block.jankystuff.advance_damage_plate.description": "Ignore Player and attack any entity that stand on. (Drop exp)",
+  "block.jankystuff.the_void": "The Void",
+  "block.jankystuff.the_void.description": "Accept item and fluid and send them to the void"
 }

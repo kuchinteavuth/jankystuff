@@ -265,6 +265,18 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy("has_lapis_brock", has(Tags.Items.STORAGE_BLOCKS_LAPIS))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.ADVANCE_SPEED_UPGRADE)
+                .pattern("#E#")
+                .pattern("ELE")
+                .pattern("#E#")
+                .define('#', ModItems.REINFORCED_COMPOUND)
+                .define('L', ModItems.SPEED_UPGRADE)
+                .define('E', Tags.Items.INGOTS_NETHERITE)
+                .unlockedBy(getHasName(ModItems.SPEED_UPGRADE), has(ModItems.SPEED_UPGRADE))
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy("has_netherite_ingot", has(Tags.Items.INGOTS_NETHERITE))
+                .save(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PASSTHROUGH_GLASS, 8)
                 .pattern("E##")
                 .pattern("###")
@@ -321,6 +333,20 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(Blocks.DIRT), has(Blocks.DIRT))
                 .unlockedBy(getHasName(Blocks.SOUL_SAND), has(Blocks.SOUL_SAND))
                 .unlockedBy(getHasName(Items.BLAZE_POWDER), has(Items.BLAZE_POWDER))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.THE_VOID)
+                .pattern("CRC")
+                .pattern("LBL")
+                .pattern("CRC")
+                .define('C', Tags.Items.CHESTS_WOODEN)
+                .define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE)
+                .define('L', Items.LAVA_BUCKET)
+                .define('B', Items.BUCKET)
+                .unlockedBy(getHasName(Items.BUCKET), has(Items.BUCKET))
+                .unlockedBy(getHasName(Items.LAVA_BUCKET), has(Items.LAVA_BUCKET))
+                .unlockedBy("has_chest", has(Tags.Items.CHESTS_WOODEN))
+                .unlockedBy("has_redstone_block", has(Tags.Items.STORAGE_BLOCKS_REDSTONE))
                 .save(output);
     }
 }

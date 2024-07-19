@@ -63,6 +63,7 @@ public class JankyItemModelProvider extends ItemModelProvider {
         basicHandHeldItem(ModItems.PORTABLE_CRATE);
         simpleItem(ModItems.MAGNET);
         simpleItem(ModItems.SPEED_UPGRADE);
+        simpleItem(ModItems.ADVANCE_SPEED_UPGRADE);
     }
 
     protected void basicHandHeldItem(@NotNull DeferredItem<Item> item){

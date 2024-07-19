@@ -21,7 +21,7 @@ public class BlockBreakerMenu extends AbstractContainerMenuBase {
     }
 
     public BlockBreakerMenu(int pContainerId, Inventory inventory, Container container) {
-        super(ModMenuType.BLOCK_BREAKER.get(), pContainerId, container, ContainerType.BLOCK_BREAKER.getAdditionalSlot());
+        super(ModMenuType.BLOCK_BREAKER.get(), pContainerId, container);
 
         this.containerType = ContainerType.BLOCK_BREAKER;
         checkContainerSize(this.container, containerType.getSize());

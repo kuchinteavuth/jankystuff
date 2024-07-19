@@ -1,32 +1,32 @@
 {
   "variants": {
-    "facing=east,on=false": {
+    "facing=east,enabled=false": {
       "model": "jankystuff:block/basic_quarry",
       "y": 90
     },
-    "facing=east,on=true": {
+    "facing=east,enabled=true": {
       "model": "jankystuff:block/basic_quarry_on",
       "y": 90
     },
-    "facing=north,on=false": {
+    "facing=north,enabled=false": {
       "model": "jankystuff:block/basic_quarry"
     },
-    "facing=north,on=true": {
+    "facing=north,enabled=true": {
       "model": "jankystuff:block/basic_quarry_on"
     },
-    "facing=south,on=false": {
+    "facing=south,enabled=false": {
       "model": "jankystuff:block/basic_quarry",
       "y": 180
     },
-    "facing=south,on=true": {
+    "facing=south,enabled=true": {
       "model": "jankystuff:block/basic_quarry_on",
       "y": 180
     },
-    "facing=west,on=false": {
+    "facing=west,enabled=false": {
       "model": "jankystuff:block/basic_quarry",
       "y": 270
     },
-    "facing=west,on=true": {
+    "facing=west,enabled=true": {
       "model": "jankystuff:block/basic_quarry_on",
       "y": 270
     }

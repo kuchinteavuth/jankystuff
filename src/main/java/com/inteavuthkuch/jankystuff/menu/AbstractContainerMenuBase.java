@@ -12,18 +12,10 @@ import org.jetbrains.annotations.Nullable;
 public abstract class AbstractContainerMenuBase extends AbstractContainerMenu {
 
     protected final Container container;
-    protected final int upgradeCount;
 
     public AbstractContainerMenuBase(@Nullable MenuType<?> pMenuType, int pContainerId, Container container) {
         super(pMenuType, pContainerId);
         this.container = container;
-        this.upgradeCount = 0;
-    }
-
-    public AbstractContainerMenuBase(@Nullable MenuType<?> pMenuType, int pContainerId, Container container, int upgradeCount) {
-        super(pMenuType, pContainerId);
-        this.container = container;
-        this.upgradeCount = upgradeCount;
     }
 
     /**

@@ -37,7 +37,6 @@ import java.util.List;
 public class BasicQuarryBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final BooleanProperty ON = BooleanProperty.create("on");
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
 
     public static final MapCodec<BasicQuarryBlock> CODEC = simpleCodec(BasicQuarryBlock::new);
@@ -56,8 +55,7 @@ public class BasicQuarryBlock extends BaseEntityBlock {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(ON, Boolean.FALSE)
-                .setValue(ENABLED, Boolean.TRUE)
+                .setValue(ENABLED, Boolean.FALSE)
         );
     }
 
@@ -65,15 +63,15 @@ public class BasicQuarryBlock extends BaseEntityBlock {
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTootipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTootipComponents, pTooltipFlag);
         pTootipComponents.add(ComponentUtil.translateBlock(ModBlocks.BASIC_QUARRY, "description").withStyle(ChatFormatting.GRAY));
-        pTootipComponents.add(Component.empty());
-        pTootipComponents.add(Component.literal("WIP: Currently only collect specific useful ores"));
-        pTootipComponents.add(Component.literal("Recipe will be add in later version"));
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite()).setValue(ENABLED, Boolean.TRUE);
+        return this.defaultBlockState()
+                .setValue(FACING, pContext.getHorizontalDirection().getOpposite())
+                .setValue(ENABLED, Boolean.FALSE)
+        ;
     }
 
     @Override
@@ -93,16 +91,16 @@ public class BasicQuarryBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING, ON, ENABLED);
+        pBuilder.add(FACING, ENABLED);
     }
 
     @Override
     protected void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pNeighborBlock, BlockPos pNeighborPos, boolean pMovedByPiston) {
         boolean hasNeighborSignal = pLevel.hasNeighborSignal(pPos);
         if(hasNeighborSignal){
-            pLevel.setBlock(pPos, pState.setValue(ENABLED, Boolean.FALSE), 2);
-        }else{
             pLevel.setBlock(pPos, pState.setValue(ENABLED, Boolean.TRUE), 2);
+        }else{
+            pLevel.setBlock(pPos, pState.setValue(ENABLED, Boolean.FALSE), 2);
         }
     }
 

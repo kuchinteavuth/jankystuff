@@ -32,7 +32,6 @@ public class BlockBreakerInvWrapper extends InvWrapper {
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         int deniedSlot = ContainerType.BLOCK_BREAKER.getCol() * ContainerType.BLOCK_BREAKER.getRow();
-        //JankyStuff.LOGGER.debug("Tried extract slot: {}", slot);
         if(slot < deniedSlot){
             return super.extractItem(slot, amount, simulate);
         }

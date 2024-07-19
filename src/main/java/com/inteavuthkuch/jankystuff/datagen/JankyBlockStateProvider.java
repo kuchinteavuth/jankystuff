@@ -3,15 +3,11 @@ package com.inteavuthkuch.jankystuff.datagen;
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.common.Constraints;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.client.NeoForgeRenderTypes;
-import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -59,10 +55,10 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(ModBlocks.WOODEN_CRATE);
         simpleBlockWithItem(ModBlocks.METAL_CRATE);
         simpleBlockWithItem(ModBlocks.LAMP);
+        blockWithCustomBlockModel(ModBlocks.THE_VOID);
         blockWithCustomBlockModel(ModBlocks.CORRUPTED_DIRT);
         blockWithCustomBlockModel(ModBlocks.MOB_DAMAGE_PLATE);
         blockWithCustomBlockModel(ModBlocks.ADVANCE_DAMAGE_PLATE);
         glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
-
     }
 }

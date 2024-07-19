@@ -9,6 +9,11 @@ import net.minecraft.world.item.TooltipFlag;
 import java.util.List;
 
 public class SpeedUpgradeItem extends BaseUpgradeItem {
+
+    public SpeedUpgradeItem(double speedModifier) {
+        super(new Properties(), speedModifier, 0);
+    }
+
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
@@ -20,10 +25,5 @@ public class SpeedUpgradeItem extends BaseUpgradeItem {
     @Override
     public UpgradeType getUpgradeType() {
         return UpgradeType.SPEED;
-    }
-
-    @Override
-    public double speedUsage() {
-        return 0.2D;
     }
 }

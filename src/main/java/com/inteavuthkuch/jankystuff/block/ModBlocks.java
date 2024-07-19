@@ -27,6 +27,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PASSTHROUGH_GLASS;
     public static final DeferredBlock<Block> MOB_DAMAGE_PLATE;
     public static final DeferredBlock<Block> ADVANCE_DAMAGE_PLATE;
+    public static final DeferredBlock<Block> THE_VOID;
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MODID);
@@ -40,6 +41,7 @@ public class ModBlocks {
         PASSTHROUGH_GLASS = registerBlockWithItem("passthrough_tinted_glass", PassthroughGlassBlock::new);
         MOB_DAMAGE_PLATE = registerBlockWithItem("mob_damage_plate", MobDamagePlateBlock::new);
         ADVANCE_DAMAGE_PLATE = registerBlockWithItem("advance_damage_plate", AdvanceDamagePlateBlock::new);
+        THE_VOID = registerBlockWithItem("the_void", TheVoidBlock::new);
     }
 
     private static @NotNull DeferredBlock<Block> registerBlockWithItem(String name, Supplier<? extends Block> supplier) {

@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 public enum ContainerType {
     WOODEN("wooden_crate", 8, 11, 0,UserInterface.CONTAINER_11_BY_8),
     PORTABLE("portable_crate", 8, 11, 0,UserInterface.CONTAINER_11_BY_8),
-    BASIC_QUARRY("basic_quarry", 3, 3, 0,UserInterface.BASIC_QUARRY),
+    BASIC_QUARRY("basic_quarry", 3, 3, 3,UserInterface.BASIC_QUARRY),
     METAL("metal_crate", 9,13, 0,UserInterface.CONTAINER_13_BY_9),
     BLOCK_BREAKER("block_breaker", 3, 6, 4, UserInterface.BLOCK_BREAKER)
     ;

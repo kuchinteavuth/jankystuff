@@ -1,5 +1,7 @@
 package com.inteavuthkuch.jankystuff.blockentity;
 
+import com.google.common.collect.AbstractIterator;
+import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.BasicQuarryBlock;
 import com.inteavuthkuch.jankystuff.block.IBlockEntityTicker;
 import com.inteavuthkuch.jankystuff.common.ContainerType;
@@ -19,16 +21,26 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -42,12 +54,16 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
     private int burnTime = 0;
     private int errorCode;
     private int cooldown = -1;
+    private boolean waiting;
+    private Iterator<BlockPos> blocksToMine = null;
+    private List<ItemStack> itemBuffer = null;
 
     public static final int CODE_NORMAL = 0;
     public static final int CODE_MISSING_TOP_INVENTORY = 1;
     public static final int CODE_NOT_ENOUGH_SPACE = 2;
     public static final int CODE_NOT_ENOUGH_FUEL = 3;
     public static final int CODE_PAUSE = 4;
+    public static final int CODE_FINISHED = 5;
 
     public static final int BURN_TIME_DATA_SLOT = 0;
     public static final int ERROR_CODE_DATA_SLOT = 1;
@@ -185,7 +201,7 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
                 }
             }
 
-            int finalSpeed = Math.max(1, JankyStuffCommonConfig.QUARRY_COOLDOWN.get() - (int)speedUsage);
+            int finalSpeed = Math.max(0, JankyStuffCommonConfig.QUARRY_COOLDOWN.get() - (int)speedUsage);
             setCooldown(finalSpeed);
         }
         else{
@@ -193,12 +209,139 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
         }
     }
 
+    private boolean canBeBreak(Level level, BlockState state, BlockPos pos) {
+        return !(state.getBlock() instanceof LiquidBlock) || state.getDestroySpeed(level, pos) < 0f;
+    }
+
+    private Iterable<BlockPos> scanChunkForMine(Level pLevel, BlockPos pPos) {
+        LevelChunk currentChunk = pLevel.getChunkAt(pPos);
+        ChunkPos chunkPos = currentChunk.getPos();
+        final int maxY = pPos.getY() - 1; // below quarry
+        final int minY = currentChunk.getMinBuildHeight() + 1;
+        BlockPos pos1 = new BlockPos(chunkPos.x * 16 , maxY, chunkPos.z * 16);
+        BlockPos pos2 = new BlockPos(pos1.getX() + 15, minY, pos1.getZ() + 15);
+
+        return BlockPos.betweenClosed(pos1, pos2);
+    }
+
+    private void startQuarry(@NotNull Container container, Level pLevel, BlockState pState, BlockPos pPos) {
+
+        if(errorCode == CODE_FINISHED) return; // need to break and put back again
+
+        if(blocksToMine == null){
+            blocksToMine = scanChunkForMine(pLevel, pPos).iterator();
+        }
+
+        if(blocksToMine.hasNext()){
+            BlockPos pos = blocksToMine.next();
+            BlockState state = pLevel.getBlockState(pos);
+            FluidState fluid = pLevel.getFluidState(pPos);
+            JankyStuff.LOGGER.debug("Pos: X:{},Y:{},Z:{}", pos.getX(), pos.getY(), pos.getZ());
+            if(!fluid.isEmpty()){
+                pLevel.destroyBlock(pPos, false);
+            }
+            if(!state.isEmpty() && !state.hasBlockEntity()){
+                if(canBeBreak(pLevel, pState, pos)){
+                    LootParams.Builder builder = new LootParams.Builder((ServerLevel) pLevel);
+                    builder.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos));
+                    builder.withParameter(LootContextParams.TOOL, new ItemStack(Items.DIAMOND_PICKAXE));
+                    builder.withOptionalParameter(LootContextParams.BLOCK_ENTITY, pLevel.getBlockEntity(pos));
+                    var items = state.getDrops(builder);
+                    for(ItemStack item : items) {
+                        if(ContainerUtil.canInsertItemStackSimulate(container, item)){
+                            ContainerUtil.canInsertItemStack(container, item);
+                        }
+                        else{
+                            if(this.itemBuffer == null)
+                            {
+                                this.itemBuffer = new ArrayList<>();
+                            }
+
+                            itemBuffer.add(item);
+                            this.data.set(ERROR_CODE_DATA_SLOT, CODE_NOT_ENOUGH_SPACE);
+                        }
+                    }
+                    pLevel.destroyBlock(pos, false);
+                }
+                checkForUpgrade();
+            }
+        }
+        else
+        {
+            blocksToMine = null;
+            this.data.set(ERROR_CODE_DATA_SLOT, CODE_FINISHED);
+        }
+    }
+
+
     @Override
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
+        var container = ContainerUtil.getContainerAt(pLevel, pPos.above());
+
+        if(container.isPresent()) {
+
+            this.data.set(ERROR_CODE_DATA_SLOT, pState.getValue(BasicQuarryBlock.ENABLED) ? CODE_NORMAL : CODE_PAUSE);
+            if(this.errorCode == CODE_PAUSE) return;
+
+            if(itemBuffer != null) {
+                boolean canInsertFlag = true;
+                for(ItemStack item : itemBuffer) {
+                    boolean flag = ContainerUtil.canInsertItemStackSimulate(container.get(), item);
+                    if(!flag){
+                        canInsertFlag = false;
+                        break;
+                    }
+                }
+
+                if(canInsertFlag) {
+                    for (ItemStack item : itemBuffer){
+                        ContainerUtil.canInsertItemStack(container.get(), item.copy());
+                    }
+                    itemBuffer = null;
+                    this.data.set(ERROR_CODE_DATA_SLOT, CODE_NORMAL);
+                }else
+                    return;
+            }
+
+            if(this.burnTime <= 0){
+                if(consumeBurnItem(pLevel)){
+                    this.data.set(ERROR_CODE_DATA_SLOT, CODE_NORMAL);
+                }else{
+                    this.data.set(ERROR_CODE_DATA_SLOT, CODE_NOT_ENOUGH_FUEL);
+                    pState = pState.setValue(BasicQuarryBlock.ENABLED, false);
+                    pLevel.setBlock(pPos, pState, 2);
+                    return;
+                }
+            }
+
+            burnTime--;
+
+            if(!isOnCooldown()) {
+                startQuarry(container.get(), pLevel, pState, pPos);
+            }
+            else {
+                cooldown--;
+            }
+
+        }
+        else{
+            this.data.set(ERROR_CODE_DATA_SLOT, CODE_MISSING_TOP_INVENTORY);
+            pState = pState.setValue(BasicQuarryBlock.ENABLED, Boolean.FALSE);
+            pLevel.setBlock(pPos, pState, 2);
+        }
+    }
+
+
+    /**
+     *  Old implementation please check tick() method instead <br/>
+     *  Might roll back and use old method again
+     */
+    @Deprecated
+    public void tickServer(Level pLevel, BlockPos pPos, BlockState pState) {
         boolean isEnabled = pState.getValue(BasicQuarryBlock.ENABLED);
         if(!isEnabled) {
             this.data.set(ERROR_CODE_DATA_SLOT, CODE_PAUSE);
-            pLevel.setBlock(pPos, pState.setValue(BasicQuarryBlock.ON, Boolean.FALSE), 2);
+            pLevel.setBlock(pPos, pState.setValue(BasicQuarryBlock.ENABLED, Boolean.FALSE), 2);
             return;
         }
 
@@ -207,7 +350,6 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
                 this.data.set(ERROR_CODE_DATA_SLOT, CODE_NORMAL);
             }else{
                 this.data.set(ERROR_CODE_DATA_SLOT, CODE_NOT_ENOUGH_FUEL);
-                pLevel.setBlock(pPos, pState.setValue(BasicQuarryBlock.ON, Boolean.FALSE), 2);
             }
         }
         else{
@@ -227,20 +369,20 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
 
                     if(!ContainerUtil.canInsertItemStack(topContainer.get(),itemToGet)){
                         this.data.set(ERROR_CODE_DATA_SLOT, CODE_NOT_ENOUGH_SPACE);
-                        pState = pState.setValue(BasicQuarryBlock.ON, Boolean.FALSE);
+                        pState = pState.setValue(BasicQuarryBlock.ENABLED, Boolean.FALSE);
                     }else{
                         this.data.set(ERROR_CODE_DATA_SLOT, CODE_NORMAL);
-                        pState = pState.setValue(BasicQuarryBlock.ON, Boolean.TRUE);
+                        pState = pState.setValue(BasicQuarryBlock.ENABLED, Boolean.TRUE);
                         setChanged(pLevel, pPos, pState);
                     }
-                    pLevel.setBlock(pPos, pState, 3);
+                    pLevel.setBlock(pPos, pState, 2);
                 }
             }
             else
             {
                 this.data.set(ERROR_CODE_DATA_SLOT, CODE_MISSING_TOP_INVENTORY);
-                pState = pState.setValue(BasicQuarryBlock.ON, Boolean.FALSE);
-                pLevel.setBlock(pPos, pState, 3);
+                pState = pState.setValue(BasicQuarryBlock.ENABLED, Boolean.FALSE);
+                pLevel.setBlock(pPos, pState, 2);
             }
 
         }
@@ -272,6 +414,6 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
 
     @Override
     public int upgradeSlotCount() {
-        return 3;
+        return this.containerType.getAdditionalSlot();
     }
 }

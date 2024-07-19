@@ -27,7 +27,7 @@ public class BasicQuarryMenu extends AbstractContainerMenuBase {
     }
 
     public BasicQuarryMenu(int pContainerId, Inventory pPlayerInventory, Container container, ContainerData data) {
-        super(ModMenuType.BASIC_QUARRY.get(), pContainerId, container,3);
+        super(ModMenuType.BASIC_QUARRY.get(), pContainerId, container);
         this.containerType = ContainerType.BASIC_QUARRY;
         this.data = data;
 
@@ -46,45 +46,16 @@ public class BasicQuarryMenu extends AbstractContainerMenuBase {
         for(int i = 0; i < this.containerType.getRow(); i++) {
             for(int j = 0; j < this.containerType.getCol(); j++){
                 int index = j + i * this.containerType.getCol();
-
-                if(index < this.containerType.getSize() - this.upgradeCount){
-                    this.addSlot(new FuelSlot(container, index, 8 + j * 18, 17 + i * 18));
-                }else{
-                    this.addSlot(new UpgradeSlot(container, index, 8 + j * 18, 17 + i * 18));
-                }
-
+                this.addSlot(new FuelSlot(container, index, 8 + j * 18, 17 + i * 18));
             }
         }
-    }
 
-    @Override
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        ItemStack newStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(pIndex);
-        if(slot.hasItem()){
-            ItemStack originalStack = slot.getItem();
-            newStack = originalStack.copy();
-            if(pIndex < this.container.getContainerSize()){
-                if(!this.moveItemStackTo(originalStack, this.container.getContainerSize(), this.slots.size(), true)){
-                    return ItemStack.EMPTY;
-                }
-            }
-            else if(!this.moveItemStackTo(originalStack, 0, this.container.getContainerSize(), false)) {
-                return ItemStack.EMPTY;
-            }
-
-            if(originalStack.isEmpty()){
-                slot.set(ItemStack.EMPTY);
-            }
-            else{
-                slot.setChanged();
-            }
+        // for upgrade slot
+        int slotIndex = this.containerType.getCol() * this.containerType.getRow();
+        for(int i=0; i<this.containerType.getAdditionalSlot();i++){
+            int index = slotIndex + i;
+            this.addSlot(new UpgradeSlot(container, index, 182, 5 + i * 18));
         }
-        return newStack;
-    }
-
-    public boolean hasBurnTime() {
-        return this.data.get(BasicQuarryBlockEntity.BURN_TIME_DATA_SLOT) > 0;
     }
 
     public int getBurnTime() {
@@ -112,6 +83,9 @@ public class BasicQuarryMenu extends AbstractContainerMenuBase {
 
             case BasicQuarryBlockEntity.CODE_PAUSE
                     -> ComponentUtil.translateBlock(ModBlocks.BASIC_QUARRY, "code.pause");
+
+            case BasicQuarryBlockEntity.CODE_FINISHED
+                  -> ComponentUtil.translateBlock(ModBlocks.BASIC_QUARRY, "code.finished");
             default
                     -> ComponentUtil.translateBlock(ModBlocks.BASIC_QUARRY, "code.normal")
                     ;

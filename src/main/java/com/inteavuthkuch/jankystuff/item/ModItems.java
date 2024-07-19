@@ -61,6 +61,7 @@ public class ModItems {
     public static final DeferredItem<Item> PORTABLE_CRATE;
     public static final DeferredItem<Item> MAGNET;
     public static final DeferredItem<Item> SPEED_UPGRADE;
+    public static final DeferredItem<Item> ADVANCE_SPEED_UPGRADE;
 
 
     static {
@@ -106,7 +107,8 @@ public class ModItems {
 
         PORTABLE_CRATE = ITEMS.register("portable_crate", PortableCrateItem::new);
         MAGNET = ITEMS.register("magnet", MagnetItem::new);
-        SPEED_UPGRADE = ITEMS.register("speed_upgrade", SpeedUpgradeItem::new);
+        SPEED_UPGRADE = ITEMS.register("speed_upgrade", () -> new SpeedUpgradeItem(0.2d));
+        ADVANCE_SPEED_UPGRADE = ITEMS.register("advance_speed_upgrade", () -> new SpeedUpgradeItem(0.5d));
     }
 
     protected static DeferredItem<Item> registerSimpleFuelItem(String name, int burnTime) {

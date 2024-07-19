@@ -15,6 +15,7 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MetalCrateBlockEntity>> METAL_CRATE_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicQuarryBlockEntity>> BASIC_QUARRY_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TheVoidBlockEntity>> THE_VOID_BE;
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MODID);
@@ -26,5 +27,7 @@ public class ModBlockEntity {
                 () -> BlockEntityType.Builder.of(BasicQuarryBlockEntity::new, ModBlocks.BASIC_QUARRY.get()).build(null));
         BLOCK_BREAKER_BE = BLOCK_ENTITIES.register("block_breaker",
                 () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new, ModBlocks.BLOCK_BREAKER.get()).build(null));
+        THE_VOID_BE = BLOCK_ENTITIES.register("the_void",
+                () -> BlockEntityType.Builder.of(TheVoidBlockEntity::new, ModBlocks.THE_VOID.get()).build(null));
     }
 }

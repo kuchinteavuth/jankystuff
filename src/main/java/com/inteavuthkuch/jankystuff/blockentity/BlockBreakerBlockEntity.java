@@ -119,7 +119,7 @@ public class BlockBreakerBlockEntity extends BaseContainerBlockEntity implements
 
                 var items = breakFaceState.getDrops(builder);
                 for(ItemStack item : items) {
-                    if(!ContainerUtil.canInsertItemStack(this, item)){
+                    if(!ContainerUtil.canInsertItemStack(this.items, item)){
                         //it will drop item on the ground If it cannot insert to it own inventory
                         ContainerUtil.dropItemStack(pLevel, breakFace, item);
                     }
@@ -167,8 +167,7 @@ public class BlockBreakerBlockEntity extends BaseContainerBlockEntity implements
 
     @Override
     public boolean canPlaceItem(int pSlot, ItemStack pStack) {
-        int deniedSlot = ContainerType.BLOCK_BREAKER.getCol() * ContainerType.BLOCK_BREAKER.getRow();
-        return pSlot < deniedSlot;
+        return false;
     }
 
     @Override

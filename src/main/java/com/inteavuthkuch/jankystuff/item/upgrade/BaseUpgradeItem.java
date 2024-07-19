@@ -12,8 +12,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public abstract class BaseUpgradeItem extends Item {
-    public BaseUpgradeItem(@NotNull Properties pProperties) {
+    private final double speedUsage, energyUsage;
+
+    public BaseUpgradeItem(@NotNull Properties pProperties, double speedUsage, double energyUsage) {
         super(pProperties.stacksTo(1));
+        this.speedUsage = speedUsage;
+        this.energyUsage = energyUsage;
     }
 
     @Override
@@ -38,16 +42,12 @@ public abstract class BaseUpgradeItem extends Item {
         return InteractionResult.SUCCESS;
     }
 
-    public BaseUpgradeItem() {
-        this(new Properties());
-    }
-
     public double energyUsage(){
-        return 0;
+        return this.energyUsage;
     }
 
     public double speedUsage(){
-        return 0;
+        return this.speedUsage;
     }
 
     public abstract UpgradeType getUpgradeType();

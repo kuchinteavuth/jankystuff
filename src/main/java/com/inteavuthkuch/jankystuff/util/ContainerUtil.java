@@ -1,6 +1,7 @@
 package com.inteavuthkuch.jankystuff.util;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainerHolder;
@@ -58,11 +59,48 @@ public final class ContainerUtil {
                     break;
                 }
                 else if(canMergeItems(currentStack, itemStack)){
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
+    public static boolean canInsertItemStackSimulate(@NotNull Container container, ItemStack itemStack) {
+        boolean flag = false;
+        for(int i=0;i<container.getContainerSize();i++){
+            if(container.canPlaceItem(i, itemStack)){
+                ItemStack currentStack = container.getItem(i);
+                if(currentStack.isEmpty()){
+                    flag = true;
+                    break;
+                }
+                else if(canMergeItems(currentStack, itemStack)){
                     currentStack.grow(itemStack.getCount());
                     container.setItem(i, currentStack);
                     flag = true;
                     break;
                 }
+            }
+        }
+        return flag;
+    }
+
+    public static boolean canInsertItemStack(@NotNull NonNullList<ItemStack> stacks, ItemStack itemStack) {
+        boolean flag = false;
+        for(int i=0;i<stacks.size();i++){
+            ItemStack currentStack = stacks.get(i);
+            if(currentStack.isEmpty()){
+                stacks.set(i, itemStack);
+                flag = true;
+                break;
+            }
+            else if(canMergeItems(currentStack, itemStack)){
+                currentStack.grow(itemStack.getCount());
+                stacks.set(i, currentStack);
+                flag = true;
+                break;
             }
         }
         return flag;
