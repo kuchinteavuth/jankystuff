@@ -30,7 +30,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> THE_VOID;
 
     static {
-        BLOCKS = DeferredRegister.createBlocks(JankyStuff.MODID);
+        BLOCKS = DeferredRegister.createBlocks(JankyStuff.MOD_ID);
         TICK_ACCELERATOR = registerBlockWithItem("tick_accelerator", TickAccelerator::new);
         WOODEN_CRATE = registerBlockWithItem("wooden_crate", WoodenCrateBlock::new);
         METAL_CRATE = registerBlockWithItem("metal_crate", MetalCrateBlock::new);

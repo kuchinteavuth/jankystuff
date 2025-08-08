@@ -17,7 +17,7 @@ import java.util.Objects;
 public class JankyItemModelProvider extends ItemModelProvider {
 
     public JankyItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, JankyStuff.MODID, existingFileHelper);
+        super(output, JankyStuff.MOD_ID, existingFileHelper);
     }
 
     @Override

@@ -24,10 +24,10 @@ import net.neoforged.fml.common.Mod;
  * Well I said now it become janky as the mod keep expanding lol
  * It's my first time trying to make a mod with NeoForge
  */
-@Mod(JankyStuff.MODID)
+@Mod(JankyStuff.MOD_ID)
 public class JankyStuff
 {
-    public static final String MODID = "jankystuff";
+    public static final String MOD_ID = "jankystuff";
     public static final Logger LOGGER = LogUtils.getLogger();
     public JankyStuff(IEventBus eventBus, ModContainer modContainer)
     {

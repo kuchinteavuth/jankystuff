@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class ResourceLocationUtil {
 
     public static @NotNull ResourceLocation path(String path) {
-        return ResourceLocation.fromNamespaceAndPath(JankyStuff.MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(JankyStuff.MOD_ID, path);
     }
 
     public static @NotNull ResourceLocation gui(String guiName) {

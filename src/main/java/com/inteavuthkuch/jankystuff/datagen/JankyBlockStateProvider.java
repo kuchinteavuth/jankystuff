@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class JankyBlockStateProvider extends BlockStateProvider {
 
     public JankyBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, JankyStuff.MODID, exFileHelper);
+        super(output, JankyStuff.MOD_ID, exFileHelper);
     }
 
     private void simpleBlockWithItem(@NotNull DeferredBlock<Block> block) {

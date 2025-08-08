@@ -14,7 +14,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-@EventBusSubscriber(modid = JankyStuff.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = JankyStuff.MOD_ID, value = Dist.CLIENT)
 public class ClientModBusEvents {
     @SubscribeEvent
     public static void onKeysRegister(RegisterKeyMappingsEvent event) {

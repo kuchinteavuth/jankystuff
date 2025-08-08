@@ -16,7 +16,7 @@ public class ModMenuType {
     public static final DeferredHolder<MenuType<?>, MenuType<BlockBreakerMenu>> BLOCK_BREAKER;
 
     static {
-        MENUS = DeferredRegister.create(Registries.MENU, JankyStuff.MODID);
+        MENUS = DeferredRegister.create(Registries.MENU, JankyStuff.MOD_ID);
         WOODEN_CRATE = MENUS.register("wooden_crate", () -> new MenuType<>(WoodenCrateMenu::new, FeatureFlags.REGISTRY.allFlags()));
         METAL_CRATE = MENUS.register("metal_crate", () -> new MenuType<>(MetalCrateMenu::new, FeatureFlags.REGISTRY.allFlags()));
         PORTABLE_CRATE = MENUS.register("portable_crate", () -> new MenuType<>(PortableCrateMenu::new, FeatureFlags.REGISTRY.allFlags()));

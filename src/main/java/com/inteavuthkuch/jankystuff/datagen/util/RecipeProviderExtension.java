@@ -5,11 +5,9 @@ import com.inteavuthkuch.jankystuff.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,7 +18,7 @@ public abstract class RecipeProviderExtension extends RecipeProvider implements 
     }
 
     protected String getItemNameForMod(ItemLike item){
-        return String.format("%s:%s", JankyStuff.MODID, getItemName(item));
+        return String.format("%s:%s", JankyStuff.MOD_ID, getItemName(item));
     }
 
     protected void reinforcedSmithing(RecipeOutput output, Item base, Item addition, RecipeCategory category, Item result) {

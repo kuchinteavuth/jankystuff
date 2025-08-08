@@ -14,7 +14,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -65,7 +64,7 @@ public class ModItems {
 
 
     static {
-        ITEMS = DeferredRegister.createItems(JankyStuff.MODID);
+        ITEMS = DeferredRegister.createItems(JankyStuff.MOD_ID);
         ROASTED_APPLE = registerSimpleFoodItem("roasted_apple", Foods.BAKED_POTATO);
         DRIED_FLESH = ITEMS.registerSimpleItem("dried_flesh");
         COAL_PIECE = registerSimpleFuelItem("coal_piece", 200);

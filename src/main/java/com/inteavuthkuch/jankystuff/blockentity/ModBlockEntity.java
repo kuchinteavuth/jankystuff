@@ -18,7 +18,7 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TheVoidBlockEntity>> THE_VOID_BE;
 
     static {
-        BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MODID);
+        BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
         WOODEN_CRATE_BE = BLOCK_ENTITIES.register("wooden_crate",
                 () -> BlockEntityType.Builder.of(WoodenCrateBlockEntity::new, ModBlocks.WOODEN_CRATE.get()).build(null));
         METAL_CRATE_BE = BLOCK_ENTITIES.register("metal_crate",

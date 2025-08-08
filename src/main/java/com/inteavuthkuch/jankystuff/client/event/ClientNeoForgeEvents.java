@@ -9,7 +9,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-@EventBusSubscriber(modid = JankyStuff.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = JankyStuff.MOD_ID, value = Dist.CLIENT)
 public class ClientNeoForgeEvents {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.Key event) {

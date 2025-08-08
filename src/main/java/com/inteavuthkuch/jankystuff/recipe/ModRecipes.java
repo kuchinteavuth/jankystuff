@@ -13,13 +13,13 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModRecipes {
     public static class Type {
-        private static DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, JankyStuff.MODID);
+        private static DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, JankyStuff.MOD_ID);
         public static DeferredHolder<RecipeType<?>, RecipeType<QuarryRecipe>> QUARRY = TYPES.register("quarry", QuarryRecipeType::new);
     }
 
 
     public static class Serializer {
-        private static DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, JankyStuff.MODID);
+        private static DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, JankyStuff.MOD_ID);
         public static DeferredHolder<RecipeSerializer<?>, RecipeSerializer<QuarryRecipe>> QUARRY = SERIALIZERS.register("quarry", QuarryRecipeSerializer::new);
     }
 

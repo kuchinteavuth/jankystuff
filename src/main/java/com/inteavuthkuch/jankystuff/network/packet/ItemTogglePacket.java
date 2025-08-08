@@ -46,7 +46,7 @@ public record ItemTogglePacket(int itemType, int slot) implements CustomPacketPa
     }
 
     public static final CustomPacketPayload.Type<ItemTogglePacket> TYPE = new Type<>(
-            ResourceLocation.fromNamespaceAndPath(JankyStuff.MODID, "janky_item_toggle_packet")
+            ResourceLocation.fromNamespaceAndPath(JankyStuff.MOD_ID, "janky_item_toggle_packet")
     );
 
     public static final StreamCodec<ByteBuf, ItemTogglePacket> STREAM_CODEC = StreamCodec.composite(

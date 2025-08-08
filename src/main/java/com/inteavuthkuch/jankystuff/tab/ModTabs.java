@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModTabs {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, JankyStuff.MODID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, JankyStuff.MOD_ID);
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> JANKY_TAB = CREATIVE_MODE_TABS.register("jankystuff_tab", () -> CreativeModeTab.builder()
         .title(Component.translatable("tab.jankystuff.main"))

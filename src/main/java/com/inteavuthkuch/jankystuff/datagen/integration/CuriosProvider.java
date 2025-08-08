@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 public class CuriosProvider extends CuriosDataProvider {
 
     public CuriosProvider(PackOutput output, ExistingFileHelper fileHelper, CompletableFuture<HolderLookup.Provider> registries) {
-        super(JankyStuff.MODID, output, fileHelper, registries);
+        super(JankyStuff.MOD_ID, output, fileHelper, registries);
     }
 
     @Override

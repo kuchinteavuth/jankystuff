@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public class JankyGlobalLootModifierProvider extends GlobalLootModifierProvider {
 
     public JankyGlobalLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, JankyStuff.MODID);
+        super(output, registries, JankyStuff.MOD_ID);
     }
 
     @Override

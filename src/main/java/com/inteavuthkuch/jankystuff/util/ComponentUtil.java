@@ -13,10 +13,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class ComponentUtil {
     public static @NotNull MutableComponent translateItem(@NotNull String path) {
-        return Component.translatable(String.format("item.%s.%s", JankyStuff.MODID, path));
+        return Component.translatable(String.format("item.%s.%s", JankyStuff.MOD_ID, path));
     }
     public static @NotNull MutableComponent translateItem(@NotNull String... paths) {
-        return Component.translatable(String.format("item.%s.%s", JankyStuff.MODID, String.join(".", paths)));
+        return Component.translatable(String.format("item.%s.%s", JankyStuff.MOD_ID, String.join(".", paths)));
     }
 
     public static @NotNull MutableComponent translateItem(DeferredItem<Item> item, @Nullable String... paths) {
@@ -27,7 +27,7 @@ public class ComponentUtil {
     }
 
     public static MutableComponent translateBlock(@NotNull String path) {
-        return Component.translatable(String.format("block.%s.%s", JankyStuff.MODID, path));
+        return Component.translatable(String.format("block.%s.%s", JankyStuff.MOD_ID, path));
     }
 
     public static @NotNull MutableComponent translateBlock(DeferredBlock<Block> block, @Nullable String... paths) {

@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 public class JankyBlockTagProvider extends BlockTagsProvider {
 
     public JankyBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, JankyStuff.MODID ,existingFileHelper);
+        super(output, lookupProvider, JankyStuff.MOD_ID,existingFileHelper);
     }
 
     @Override
