@@ -1,7 +1,6 @@
 package com.inteavuthkuch.jankystuff.capability;
 
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
-import com.inteavuthkuch.jankystuff.blockentity.TheVoidBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.AbstractCrateBlockEntity;
 import com.inteavuthkuch.jankystuff.inventory.BasicQuarryInvWrapper;
 import com.inteavuthkuch.jankystuff.inventory.BlockBreakerInvWrapper;
@@ -35,18 +34,6 @@ public class CapabilityHandler {
                 Capabilities.ItemHandler.BLOCK,
                 BlockBreakerInvWrapper::create,
                 ModBlocks.BLOCK_BREAKER.get()
-        );
-
-        event.registerBlock(
-                Capabilities.ItemHandler.BLOCK,
-                TheVoidBlockEntity::handleItem,
-                ModBlocks.THE_VOID.get()
-        );
-
-        event.registerBlock(
-                Capabilities.FluidHandler.BLOCK,
-                TheVoidBlockEntity::handleFluid,
-                ModBlocks.THE_VOID.get()
         );
     }
 

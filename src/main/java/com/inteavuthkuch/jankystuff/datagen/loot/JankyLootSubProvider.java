@@ -27,7 +27,6 @@ public class JankyLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.PASSTHROUGH_GLASS.get());
         this.dropSelf(ModBlocks.MOB_DAMAGE_PLATE.get());
         this.dropSelf(ModBlocks.ADVANCE_DAMAGE_PLATE.get());
-        this.dropSelf(ModBlocks.THE_VOID.get());
         this.add(ModBlocks.METAL_CRATE.get(), this::createShulkerBoxDrop);
         this.add(ModBlocks.CORRUPTED_DIRT.get(), b -> createSingleItemTableWithSilkTouch(b, Items.DIRT));
     }

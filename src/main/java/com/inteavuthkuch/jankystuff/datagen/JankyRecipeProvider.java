@@ -335,18 +335,5 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(Items.BLAZE_POWDER), has(Items.BLAZE_POWDER))
                 .save(output);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.THE_VOID)
-                .pattern("CRC")
-                .pattern("LBL")
-                .pattern("CRC")
-                .define('C', Tags.Items.CHESTS_WOODEN)
-                .define('R', Tags.Items.STORAGE_BLOCKS_REDSTONE)
-                .define('L', Items.LAVA_BUCKET)
-                .define('B', Items.BUCKET)
-                .unlockedBy(getHasName(Items.BUCKET), has(Items.BUCKET))
-                .unlockedBy(getHasName(Items.LAVA_BUCKET), has(Items.LAVA_BUCKET))
-                .unlockedBy("has_chest", has(Tags.Items.CHESTS_WOODEN))
-                .unlockedBy("has_redstone_block", has(Tags.Items.STORAGE_BLOCKS_REDSTONE))
-                .save(output);
     }
 }

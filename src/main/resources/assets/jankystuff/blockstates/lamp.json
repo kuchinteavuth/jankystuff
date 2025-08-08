@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=true": {
+      "model": "jankystuff:block/lamp_off"
+    },
+    "powered=false": {
+      "model": "jankystuff:block/lamp_on"
+    }
+  }
+}

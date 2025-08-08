@@ -21,10 +21,6 @@ group = mod_group_id
 repositories {
     mavenLocal()
     maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
-    maven {
         url "https://cursemaven.com"
     }
 }
@@ -123,7 +119,7 @@ configurations {
 dependencies {
 
     implementation "curse.maven:adorned-1036809:5466622"
-
+    runtimeOnly "curse.maven:jei-238222:6829086"
 }
 
 

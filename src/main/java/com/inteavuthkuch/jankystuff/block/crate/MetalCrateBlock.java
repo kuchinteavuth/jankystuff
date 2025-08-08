@@ -2,7 +2,6 @@ package com.inteavuthkuch.jankystuff.block.crate;
 
 import com.inteavuthkuch.jankystuff.blockentity.crate.MetalCrateBlockEntity;
 import com.inteavuthkuch.jankystuff.common.ContainerType;
-import com.inteavuthkuch.jankystuff.util.ComponentUtil;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -36,13 +35,23 @@ public class MetalCrateBlock extends AbstractCrateBlock {
     @Override
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTootipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTootipComponents, pTooltipFlag);
-        // idk just copy minecraft shulker box description
-        int i=0;
-        int j=0;
-        for (ItemStack itemstack : pStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).nonEmptyItems()) {
-            j++;
-            if (i < 4) {
-                i++;
+
+        ItemContainerContents containerItems = pStack.get(DataComponents.CONTAINER);
+        if(containerItems == null || !containerItems.nonEmptyItems().iterator().hasNext()){ // is it gonna be a null problem with using or?
+            pTootipComponents.add(
+                    Component.translatable("block.jankystuff.metal_crate.description")
+                            .withStyle(ChatFormatting.GRAY)
+            );
+            return;
+        }
+
+        // Display like minecraft shulker box description
+        int shown=0;
+        int total=0;
+        for (ItemStack itemstack : containerItems.nonEmptyItems()) {
+            total++;
+            if (shown < 4) {
+                shown++;
                 pTootipComponents.add(
                         Component.translatable("block.jankystuff.metal_crate.content", itemstack.getHoverName(), itemstack.getCount())
                                 .withStyle(ChatFormatting.GRAY)
@@ -50,9 +59,9 @@ public class MetalCrateBlock extends AbstractCrateBlock {
             }
         }
 
-        if (j - i > 0) {
+        if (total - shown > 0) {
             pTootipComponents.add(
-                    Component.translatable("block.jankystuff.metal_crate.more", j - i)
+                    Component.translatable("block.jankystuff.metal_crate.more", total - shown)
                             .withStyle(ChatFormatting.ITALIC)
                             .withStyle(ChatFormatting.GRAY)
             );
