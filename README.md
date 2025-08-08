@@ -8,32 +8,31 @@ A simple mod just make some blocks / items such as early game storage, item magn
 * [Adorned (Curios)](https://www.curseforge.com/minecraft/mc-mods/adorned): **1.21.0-9.0.1 or above** (_required for ability rings but optional to install_)
 * Some items might get remove in this version.
 ## Items
-* **Rings** <sup><sub>Required **[Adorned (Curios)](https://www.curseforge.com/minecraft/mc-mods/adorned)**</sub></sup>
+* **Rings** - _You cannot craft these rings except "Ring of the Sky" but you can find them in dungeon chest_.
     * **Ring of the Sky**: Grant user flight ability.
     * **Ring of Fire**: Grant user Fire resistance ability.
     * **Ring of Regeneration**: Grant user Regeneration ability.
     * **Ring of Saturation**: Grant user Saturation ability.
     * **Ring of Water**: Grant user Water Breathing ability.
     * **Ring of True Sight**: Grant user a power to see in the dark.
-    * This might change in the future to allow user to get ability without to equip item in curio inventory.
+    * _Might remove some due to overpower or might keep it all_
 * **Useful items**
-    * **Portable Crate**: A handheld portable storage item which allow user to store more item when mining and can hold up to 88 stacks of item.
-    * **Magnet**: A useful item that can absorb any items/experiences in configurable radius to player.
+    * **Portable Crate**: A handheld portable storage item which allow user to store more item when mining and can hold up to 88 stacks of item. _Press "B" key to toggle by default._
+    * **Magnet**: A useful item that can absorb any items/experiences in configurable radius to player. _Press "Y" key to toggle by default._
     * **Charcoal/Coal Piece**: Each piece can smelt 1 item which is useful in early game and want to save fuel.
     * **Dried Flesh**: An alternative way to obtain leather by smelting Rotten Flesh.
     * **Roasted Apple**: An easy food item to get just by smelting/smoking Apple. It's the same benefit as Baked Potato.
 
 ## Blocks
-* **Storage**
+* **Storage** - _a tiny bit larger storage than vanilla but helpful in the early game_
     * **Wooden Crate**: A useful storage block that is much bigger than vanilla double chest and can hold up to 88 stacks of item.
-    * **Metal Crate**: An upgrade of Wooden Crate and can hold up to 117 stacks of any item.
-* **Quarry**
+    * **Metal Crate**: An upgrade of Wooden Crate and can hold up to 117 stacks of any item. Retained contents like ShulkerBox when broken.
+* **Quarry** - _Mark for removal since other mods can have more powerful quarry than mine_
     * **Basic Quarry**: Will use burnable item as fuel and mine resources from the void and put into inventory above.
-    * **Advance Quarry**: _Work in progress_
-    * More quarry will be implemented later.
-* **Misc**
+* **Misc** - _random janky blocks and items_
     * **Tick Accelerator**: This block will accelerate tick speed of blocks that has block-tag #jankystuff:allow_acceleration in 3x2x3 radius.
-
+    * **Fluid Tank** - _(WIP)_: Store a considered amount of fluid of 1 type.
+  
 Check out the **[Wiki Page](https://github.com/kuchinteavuth/jankystuff/wiki)** for more detail information.
 
 ## Developer Note 
