@@ -1,11 +1,12 @@
 ![Janky Stuff](https://github.com/kuchinteavuth/jankystuff/blob/80db25cbcfcb627fc702eebe64c853de4698ed7d/src/main/resources/logo.png)
 
 A simple mod just make some blocks / items such as early game storage, item magnet and some janky item that I could think of to Minecraft.
+## Mod Version: 1.21.1-1.0.1
 ## Current compatible with:
-* Minecraft: **1.21**
-* [NeoForge](https://neoforged.net/): **21.0.59-beta or above**
+* Minecraft: **1.21.1**
+* [NeoForge](https://neoforged.net/): **21.1.197**
 * [Adorned (Curios)](https://www.curseforge.com/minecraft/mc-mods/adorned): **1.21.0-9.0.1 or above** (_required for ability rings but optional to install_)
-
+* Some items might get remove in this version.
 ## Items
 * **Rings** <sup><sub>Required **[Adorned (Curios)](https://www.curseforge.com/minecraft/mc-mods/adorned)**</sub></sup>
     * **Ring of the Sky**: Grant user flight ability.
