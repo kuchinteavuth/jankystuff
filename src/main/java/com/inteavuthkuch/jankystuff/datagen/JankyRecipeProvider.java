@@ -6,14 +6,12 @@ import com.inteavuthkuch.jankystuff.item.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.text.html.HTML;
 import java.util.concurrent.CompletableFuture;
 
 public class JankyRecipeProvider extends RecipeProviderExtension {
@@ -335,5 +333,31 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(Items.BLAZE_POWDER), has(Items.BLAZE_POWDER))
                 .save(output);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.MINER_STONE_PICKAXE)
+                .pattern("#R#")
+                .pattern("R#R")
+                .pattern("#R#")
+                .define('#', Items.STONE_PICKAXE)
+                .define('R', ModItems.REINFORCED_COMPOUND)
+                .unlockedBy(getHasName(Items.STONE_PICKAXE), has(Items.STONE_PICKAXE))
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.MINER_IRON_PICKAXE)
+                .pattern("#R#")
+                .pattern("R#R")
+                .pattern("#R#")
+                .define('#', Items.IRON_PICKAXE)
+                .define('R', ModItems.REINFORCED_COMPOUND)
+                .unlockedBy(getHasName(Items.IRON_PICKAXE), has(Items.IRON_PICKAXE))
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, ModItems.ENERGY_DRINK, 4)
+                .requires(Items.WATER_BUCKET)
+                .requires(Items.SUGAR, 4)
+                .unlockedBy(getHasName(Items.WATER_BUCKET), has(Items.WATER_BUCKET))
+                .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
+                .save(output);
     }
 }

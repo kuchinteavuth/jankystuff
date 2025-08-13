@@ -6,9 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -34,6 +32,7 @@ public class JankyItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.REINFORCED_DIAMOND_PICKAXE.get())
                 .add(ModItems.REINFORCED_NETHERITE_PICKAXE.get())
                 .add(ModItems.INFINITY_PICKAXE.get())
+                .add(ModItems.MINER_STONE_PICKAXE.get(), ModItems.MINER_IRON_PICKAXE.get(), ModItems.MINER_DIAMOND_PICKAXE.get())
         ;
 
         this.tag(ItemTags.SHOVELS)

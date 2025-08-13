@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -64,6 +65,11 @@ public class JankyItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.MAGNET);
         simpleItem(ModItems.SPEED_UPGRADE);
         simpleItem(ModItems.ADVANCE_SPEED_UPGRADE);
+
+        basicHandHeldItem(ModItems.MINER_STONE_PICKAXE, Items.STONE_PICKAXE);
+        basicHandHeldItem(ModItems.MINER_IRON_PICKAXE, Items.IRON_PICKAXE);
+        basicHandHeldItem(ModItems.MINER_DIAMOND_PICKAXE, Items.DIAMOND_PICKAXE);
+        simpleItem(ModItems.ENERGY_DRINK);
     }
 
     protected void basicHandHeldItem(@NotNull DeferredItem<Item> item){
@@ -71,6 +77,15 @@ public class JankyItemModelProvider extends ItemModelProvider {
         getBuilder(location.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/handheld"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath()));
+    }
+
+    protected void basicHandHeldItem(@NotNull DeferredItem<Item> item, Item forTexture) {
+        ResourceLocation itemLocation = BuiltInRegistries.ITEM.getKey(item.get());
+        ResourceLocation textureLocation = BuiltInRegistries.ITEM.getKey(forTexture);
+
+        getBuilder(itemLocation.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/handheld"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(textureLocation.getNamespace(), "item/" + textureLocation.getPath()));
     }
 
     protected void simpleItem(@NotNull DeferredItem<Item> item){

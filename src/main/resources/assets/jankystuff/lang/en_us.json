@@ -74,6 +74,11 @@
   "item.jankystuff.advance_speed_upgrade": "Advance Speed Upgrade",
   "item.jankystuff.speed_upgrade.description": "Base Speed: +%1$d%%",
 
+  "item.jankystuff.miner_stone_pickaxe": "Stone Pickaxe",
+  "item.jankystuff.miner_iron_pickaxe": "Iron Pickaxe",
+  "item.jankystuff.miner_diamond_pickaxe": "Diamond Pickaxe",
+  "item.jankystuff.energy_drink": "Energy Drink",
+
   "block.jankystuff.tick_accelerator": "Tick Accelerator",
   "block.jankystuff.tick_accelerator.description": "Increase tick speed of block around it up to 1 block above",
   "block.jankystuff.wooden_crate": "Wooden Crate",
@@ -103,5 +108,6 @@
   "block.jankystuff.advance_damage_plate": "Advance Damage Plate",
   "block.jankystuff.advance_damage_plate.description": "Ignore Player and attack any entity that stand on. (Drop exp)",
   "block.jankystuff.the_void": "The Void",
-  "block.jankystuff.the_void.description": "Accept item and fluid and send them to the void"
+  "block.jankystuff.the_void.description": "Accept item and fluid and send them to the void",
+  "block.jankystuff.miner_light": "Miner Light"
 }
