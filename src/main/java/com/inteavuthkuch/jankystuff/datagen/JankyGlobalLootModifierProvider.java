@@ -28,7 +28,7 @@ public class JankyGlobalLootModifierProvider extends GlobalLootModifierProvider 
 
         add("ring_of_the_sky_from_enderman", new AddItemModifier(new LootItemCondition[]{
                 new LootTableIdCondition.Builder(ResourceLocation.withDefaultNamespace("entities/enderman")).build(),
-                LootItemRandomChanceCondition.randomChance(0.2f).build()
+                LootItemRandomChanceCondition.randomChance(0.01f).build()
         }, ModItems.RING_OF_THE_SKY.get()));
 
         add("ring_of_the_sky_from_end_city_chest", new AddItemModifier(new LootItemCondition[]{

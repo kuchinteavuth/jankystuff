@@ -4,6 +4,7 @@ import com.inteavuthkuch.jankystuff.common.UpgradeType;
 import net.neoforged.fml.ModList;
 
 public enum ExternalMod {
+    FARMER_DELIGHT("farmersdelight"),
     AE2("ae2"),
     CURIOS("curios");
 
@@ -16,5 +17,8 @@ public enum ExternalMod {
     public boolean isLoaded() {
 
         return ModList.get().isLoaded(modId);
+    }
+    public String modId() {
+        return modId;
     }
 }

@@ -1,11 +1,16 @@
 package com.inteavuthkuch.jankystuff.item.food;
 
+import com.inteavuthkuch.jankystuff.integration.ExternalMod;
 import com.inteavuthkuch.jankystuff.util.Conversion;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -16,24 +21,34 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class EnergyDrink extends Item {
 
-    public static final FoodProperties FOOD_PROPERTIES =
-            new FoodProperties.Builder()
-                    .nutrition(6)
-                    .saturationModifier(1.0f)
-                    .alwaysEdible()
-                    .effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, Conversion.tickFromMinute(1), 0), 1.0F)
-                    .build();
+    private static @NotNull FoodProperties foodProperties() {
+        FoodProperties.Builder builder = new FoodProperties.Builder()
+                .nutrition(6)
+                .saturationModifier(1.0f)
+                .alwaysEdible()
+                .effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, Conversion.tickFromMinute(1), 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, Conversion.tickFromSecond(30), 0), 1.0F);
+
+        if(ExternalMod.FARMER_DELIGHT.isLoaded()){
+            Optional<Holder.Reference<MobEffect>> effect = BuiltInRegistries.MOB_EFFECT.getHolder(ResourceLocation.fromNamespaceAndPath(ExternalMod.FARMER_DELIGHT.modId(), "comfort"));
+            effect.ifPresent(holder -> builder.effect(() -> new MobEffectInstance(holder, Conversion.tickFromMinute(2), 0), 1.0F));
+        }
+        return builder.build();
+    }
 
     public EnergyDrink() {
         super(
                 new Properties()
-                        .food(FOOD_PROPERTIES)
+                        .food(foodProperties())
                         .rarity(Rarity.COMMON)
         );
     }
+
+
 
     @Override
     public @NotNull SoundEvent getEatingSound() {

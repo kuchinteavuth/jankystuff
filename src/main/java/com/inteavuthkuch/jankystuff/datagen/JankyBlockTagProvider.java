@@ -48,6 +48,7 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
         this.tag(ModTags.Blocks.ALLOW_ACCELERATION)
                 .addTag(ModTags.Blocks.BUDDING)
                 .addTag(Tags.Blocks.BUDDING_BLOCKS)
+                .addTag(BlockTags.SAPLINGS)
                 .addTag(BlockTags.CROPS);
     }
 }

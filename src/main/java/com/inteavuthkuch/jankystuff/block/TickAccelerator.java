@@ -58,7 +58,6 @@ public class TickAccelerator extends Block {
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         BlockState cropState = level.getBlockState(pos.above(2));
         BlockPos cropPos = pos.above(2);
-
         if(cropState.is(ModTags.Blocks.ALLOW_ACCELERATION)){
             boolean applyGeneralRandomTick = true; // if true will apply just random tick to any block above
 
@@ -108,6 +107,11 @@ public class TickAccelerator extends Block {
                 cropState.randomTick(level, cropPos, r2);
 
                 showParticles(level, cropPos);
+                applyGeneralRandomTick = false;
+            }
+            else if(cropState.getBlock() instanceof SaplingBlock saplingBlock) {
+                showParticles(level, cropPos);
+                saplingBlock.advanceTree(level, cropPos, cropState, random);
                 applyGeneralRandomTick = false;
             }
 
