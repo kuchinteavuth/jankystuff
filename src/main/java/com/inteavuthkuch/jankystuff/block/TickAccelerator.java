@@ -1,62 +1,134 @@
 package com.inteavuthkuch.jankystuff.block;
 
-import com.inteavuthkuch.jankystuff.common.Constraints;
 import com.inteavuthkuch.jankystuff.tag.ModTags;
 import com.inteavuthkuch.jankystuff.util.ComponentUtil;
+import com.inteavuthkuch.jankystuff.util.AmethystRandomSource;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.AABB;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collections;
 import java.util.List;
 
 public class TickAccelerator extends Block {
 
     public TickAccelerator() {
-        super(Blocks.STONE.properties().randomTicks());
+        super(BlockBehaviour.Properties.of()
+                .mapColor(MapColor.COLOR_BROWN)
+                .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+                .strength(0.5F, 3600000.0F)
+                .sound(SoundType.METAL));
     }
 
-    private void tickBlock(BlockState pState, ServerLevel pLevel, BlockPos pPos) {
-        pState.randomTick(pLevel, pPos, pLevel.getRandom());
-        pLevel.scheduleTick(pPos, pState.getBlock(), Constraints.ACCELERATOR_TICK_DELAY);
-    }
+    public static final Item.Properties ITEM_PROPERTY = new Item.Properties();
 
+    @ParametersAreNonnullByDefault
     @Override
-    protected void randomTick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-        pLevel.scheduleTick(pPos, pState.getBlock(), Constraints.ACCELERATOR_TICK_DELAY);
+    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> tooltips, TooltipFlag pTooltipFlag) {
+        super.appendHoverText(pStack, pContext, tooltips, pTooltipFlag);
+        tooltips.add(ComponentUtil.translateBlock("tick_accelerator.description").withStyle(ChatFormatting.GRAY));
     }
 
-    @Override
-    protected void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom) {
-
-        BlockPos.betweenClosed(pPos.offset(-1,0,-1), pPos.offset(1,0,1)).forEach(pos -> {
-            BlockState state = pLevel.getBlockState(pos);
-            if(state.is(ModTags.Blocks.ALLOW_ACCELERATION)){
-                tickBlock(state, pLevel, pos);
-            }
-        });
-
-        pLevel.scheduleTick(pPos, pState.getBlock(), Constraints.ACCELERATOR_TICK_DELAY);
-    }
-
+    @ParametersAreNonnullByDefault
     @Override
     protected void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pMovedByPiston) {
-        super.onPlace(pState, pLevel, pPos, pOldState, pMovedByPiston);
         if(pLevel.isClientSide()) return;
-        pLevel.scheduleTick(pPos, pState.getBlock(), Constraints.ACCELERATOR_TICK_DELAY);
+        pLevel.scheduleTick(pPos, pState.getBlock(), 20);
     }
 
+    @ParametersAreNonnullByDefault
     @Override
-    public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTootipComponents, TooltipFlag pTooltipFlag) {
-        super.appendHoverText(pStack, pContext, pTootipComponents, pTooltipFlag);
-        pTootipComponents.add(ComponentUtil.translateBlock("tick_accelerator.description").withStyle(ChatFormatting.GRAY));
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        BlockState cropState = level.getBlockState(pos.above(2));
+        BlockPos cropPos = pos.above(2);
+
+        if(cropState.is(ModTags.Blocks.ALLOW_ACCELERATION)){
+            boolean applyGeneralRandomTick = true; // if true will apply just random tick to any block above
+
+            if(cropState.getBlock() instanceof CropBlock crop){
+                if (!crop.isMaxAge(cropState)) {
+                    Property<?> cropProperty = crop.getStateDefinition().getProperty("age");
+                    if(cropProperty instanceof IntegerProperty ageProperty){
+                        int maxAge = Collections.max(ageProperty.getPossibleValues());
+                        boolean isMaxAge = crop.isMaxAge(cropState);
+                        boolean isTorchFlowerBlock = cropState.getBlock() == Blocks.TORCHFLOWER;
+
+                        // I don't want to apply random tick if crop is fully growth
+                        if(!isMaxAge || !isTorchFlowerBlock){
+                            BlockState newCropState = cropState.setValue(ageProperty, maxAge);
+                            if(cropState.getBlock() == Blocks.TORCHFLOWER_CROP){
+                                level.setBlock(cropPos, Blocks.TORCHFLOWER.defaultBlockState(), Block.UPDATE_ALL);
+                                showParticles(level, cropPos);
+                            }
+                            else{
+                                level.setBlock(cropPos, newCropState, Block.UPDATE_ALL);
+                                showParticles(level, cropPos);
+                            }
+                        }
+                    }
+                }
+                applyGeneralRandomTick = false;
+            }
+            else if(cropState.getBlock() instanceof StemBlock stem){
+                Property<?> cropProperty = stem.getStateDefinition().getProperty("age");
+                if(cropProperty instanceof IntegerProperty ageProperty){
+                    int maxAge = Collections.max(ageProperty.getPossibleValues());
+                    BlockState newCropState = cropState.setValue(ageProperty, maxAge);
+                    if(cropState != newCropState){
+                        level.setBlock(cropPos, newCropState, Block.UPDATE_ALL);
+                        showParticles(level, cropPos);
+                    }
+                    // Keep applied random tick to stem block so they keep making example Pumpkin or Melon
+                    cropState.randomTick(level, cropPos, random);
+                }
+                applyGeneralRandomTick = false;
+            }
+            else if(cropState.getBlock() instanceof AmethystBlock) {
+                RandomSource r1 = AmethystRandomSource.createFixSource(0);
+                RandomSource r2 = AmethystRandomSource.createFixSource(0);
+
+                cropState.randomTick(level, cropPos, r1);
+                cropState.randomTick(level, cropPos, r2);
+
+                showParticles(level, cropPos);
+                applyGeneralRandomTick = false;
+            }
+
+            if(applyGeneralRandomTick){
+                cropState.randomTick(level, cropPos, random);
+                showParticles(level, cropPos);
+            }
+        }
+        // re-schedule tick - check again every second
+        level.scheduleTick(pos, state.getBlock(), 20);
+    }
+
+    private void showParticles(ServerLevel level, BlockPos pos) {
+        level.sendParticles(ParticleTypes.HAPPY_VILLAGER,
+                pos.getX() + 0.5,
+                pos.getY() + 0.75,
+                pos.getZ() + 0.5,
+                5,
+                0.2,
+                0.2,
+                0.2,
+                0.1);
     }
 }

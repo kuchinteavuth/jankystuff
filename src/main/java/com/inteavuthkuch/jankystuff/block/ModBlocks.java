@@ -31,7 +31,7 @@ public class ModBlocks {
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MOD_ID);
-        TICK_ACCELERATOR = registerBlockWithItem("tick_accelerator", TickAccelerator::new);
+        TICK_ACCELERATOR = registerBlockWithItem("tick_accelerator", TickAccelerator::new, TickAccelerator.ITEM_PROPERTY);
         WOODEN_CRATE = registerBlockWithItem("wooden_crate", WoodenCrateBlock::new);
         METAL_CRATE = registerBlockWithItem("metal_crate", MetalCrateBlock::new);
         LAMP = registerBlockWithItem("lamp", LampBlock::new);

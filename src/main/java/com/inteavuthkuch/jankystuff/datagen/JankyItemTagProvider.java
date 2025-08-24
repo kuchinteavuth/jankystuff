@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -70,6 +71,10 @@ public class JankyItemTagProvider extends ItemTagsProvider {
                 .add(ModItems.RING_OF_SATURATION.get())
                 .add(ModItems.RING_OF_WATER.get())
                 .add(ModItems.RING_OF_THE_SKY.get())
+        ;
+
+        this.tag(Tags.Items.FOODS)
+                .add(ModItems.ENERGY_DRINK.get())
         ;
     }
 }

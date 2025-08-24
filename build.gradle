@@ -120,6 +120,9 @@ dependencies {
 
     implementation "curse.maven:adorned-1036809:5466622"
     runtimeOnly "curse.maven:jei-238222:6829086"
+    runtimeOnly "curse.maven:ae2-223794:6890346"
+    runtimeOnly "curse.maven:guideme-1173950:6812025" // AE2-Dependency
+    runtimeOnly "curse.maven:jade-324717:6738687" // Jade
 }
 
 

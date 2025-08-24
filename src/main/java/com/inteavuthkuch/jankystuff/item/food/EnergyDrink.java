@@ -13,6 +13,7 @@ import net.minecraft.world.item.*;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class EnergyDrink extends Item {
 
     public static final FoodProperties FOOD_PROPERTIES =
             new FoodProperties.Builder()
-                    .nutrition(5)
-                    .saturationModifier(0.6f)
+                    .nutrition(6)
+                    .saturationModifier(1.0f)
                     .alwaysEdible()
                     .effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, Conversion.tickFromMinute(1), 0), 1.0F)
                     .build();
@@ -51,9 +52,8 @@ public class EnergyDrink extends Item {
 
         FoodProperties foodProperties = getFoodProperties(pStack, null);
         if(foodProperties != null) {
-            List<FoodProperties.PossibleEffect> effects = foodProperties.effects();
+            List<FoodProperties.PossibleEffect> effects = new ArrayList<>(foodProperties.effects()); // Fix error while fetching food effects, because effects is ImmutableList
             effects.sort(Comparator.comparing(FoodProperties.PossibleEffect::probability).reversed());
-
             if (!effects.isEmpty()) {
                 for (FoodProperties.PossibleEffect pair : effects) {
                     MobEffectInstance effect = pair.effect();

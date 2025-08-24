@@ -80,7 +80,7 @@
   "item.jankystuff.energy_drink": "Energy Drink",
 
   "block.jankystuff.tick_accelerator": "Tick Accelerator",
-  "block.jankystuff.tick_accelerator.description": "Increase tick speed of block around it up to 1 block above",
+  "block.jankystuff.tick_accelerator.description": "Place below farmland/dirt to increase growth speed of crop/item above",
   "block.jankystuff.wooden_crate": "Wooden Crate",
   "block.jankystuff.wooden_crate.description": "Can hold up to 88 stacks of any item",
   "block.jankystuff.metal_crate": "Metal Crate",
