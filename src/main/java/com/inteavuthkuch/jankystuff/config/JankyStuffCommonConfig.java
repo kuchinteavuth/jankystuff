@@ -10,6 +10,7 @@ public class JankyStuffCommonConfig {
     public static final ModConfigSpec.ConfigValue<Integer> MAGNET_RANGE;
     public static final ModConfigSpec.ConfigValue<Integer> CORRUPTED_DIRT_SPAWN_DELAY;
     public static final ModConfigSpec.ConfigValue<Integer> CORRUPTED_DIRT_MAX_ENTITY;
+    public static final ModConfigSpec.ConfigValue<Boolean> SHOW_ACCELERATOR_LOG;
 
     static {
         BUILDER.push("Configs for JankyStuff Mod");
@@ -26,6 +27,9 @@ public class JankyStuffCommonConfig {
 
         CORRUPTED_DIRT_MAX_ENTITY = BUILDER.comment("Corrupted dirt will not spawn anymore mob if total mob cab is met")
                         .defineInRange("Corrupted Dirt entity cap", 24, 1, 64);
+
+        SHOW_ACCELERATOR_LOG = BUILDER.comment("For debugging purpose to see if accelerator is working or not")
+                        .define("Show Accelerator Log", false);
 
         BUILDER.pop();
         SPEC = BUILDER.build();

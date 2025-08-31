@@ -2,6 +2,7 @@ package com.inteavuthkuch.jankystuff.blockentity;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
+import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.BasicBlockAcceleratorBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.MetalCrateBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.WoodenCrateBlockEntity;
 import net.minecraft.core.registries.Registries;
@@ -15,6 +16,7 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MetalCrateBlockEntity>> METAL_CRATE_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicQuarryBlockEntity>> BASIC_QUARRY_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicBlockAcceleratorBlockEntity>> BASIC_BLOCK_ACCELERATOR_BE;
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
@@ -26,5 +28,7 @@ public class ModBlockEntity {
                 () -> BlockEntityType.Builder.of(BasicQuarryBlockEntity::new, ModBlocks.BASIC_QUARRY.get()).build(null));
         BLOCK_BREAKER_BE = BLOCK_ENTITIES.register("block_breaker",
                 () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new, ModBlocks.BLOCK_BREAKER.get()).build(null));
+        BASIC_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("basic_block_accelerator",
+                () -> BlockEntityType.Builder.of(BasicBlockAcceleratorBlockEntity::new, ModBlocks.BASIC_BLOCK_ACCELERATOR.get()).build(null));
     }
 }

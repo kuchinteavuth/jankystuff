@@ -1,6 +1,7 @@
 package com.inteavuthkuch.jankystuff.block;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
+import com.inteavuthkuch.jankystuff.block.blockaccelerator.BasicBlockAccelerator;
 import com.inteavuthkuch.jankystuff.block.crate.MetalCrateBlock;
 import com.inteavuthkuch.jankystuff.block.crate.WoodenCrateBlock;
 import com.inteavuthkuch.jankystuff.block.dirt.CorruptedDirtBlock;
@@ -28,6 +29,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> MOB_DAMAGE_PLATE;
     public static final DeferredBlock<Block> ADVANCE_DAMAGE_PLATE;
     public static final DeferredBlock<Block> MINER_LIGHT;
+    public static final DeferredBlock<Block> BASIC_BLOCK_ACCELERATOR;
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MOD_ID);
@@ -42,7 +44,8 @@ public class ModBlocks {
         MOB_DAMAGE_PLATE = registerBlockWithItem("mob_damage_plate", MobDamagePlateBlock::new);
         ADVANCE_DAMAGE_PLATE = registerBlockWithItem("advance_damage_plate", AdvanceDamagePlateBlock::new);
 
-        MINER_LIGHT = BLOCKS.register("miner_light", MinerLightBlock::new); // Only Block with BlockItem
+        MINER_LIGHT = BLOCKS.register("miner_light", MinerLightBlock::new); // Only Block without Item
+        BASIC_BLOCK_ACCELERATOR =  registerBlockWithItem("basic_block_accelerator", BasicBlockAccelerator::new);
     }
 
     private static @NotNull DeferredBlock<Block> registerBlockWithItem(String name, Supplier<? extends Block> supplier) {

@@ -24,6 +24,10 @@ public class ModTags {
         public static final TagKey<Block> BUDDING = BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", "budding"));
         public static final TagKey<Block> ALLOW_ACCELERATION =
                 BlockTags.create(ResourceLocation.fromNamespaceAndPath(JankyStuff.MOD_ID, "allow_acceleration"));
+
+        public static final TagKey<Block> BLOCK_ACCELERATION_BLACKLIST =
+                BlockTags.create(ResourceLocation.fromNamespaceAndPath(JankyStuff.MOD_ID, "block_acceleration_blacklist"));
+
         public static final TagKey<Block> MINEABLE_WITH_PAXEL = createTag("minecraft", "mineable/paxel");
 
         private static TagKey<Block> createTag(String mod, String tagName) {

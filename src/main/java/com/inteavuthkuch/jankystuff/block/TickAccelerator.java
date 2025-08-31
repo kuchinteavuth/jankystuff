@@ -1,5 +1,6 @@
 package com.inteavuthkuch.jankystuff.block;
 
+import com.inteavuthkuch.jankystuff.config.JankyStuffCommonConfig;
 import com.inteavuthkuch.jankystuff.tag.ModTags;
 import com.inteavuthkuch.jankystuff.util.ComponentUtil;
 import com.inteavuthkuch.jankystuff.util.AmethystRandomSource;
@@ -33,7 +34,7 @@ public class TickAccelerator extends Block {
         super(BlockBehaviour.Properties.of()
                 .mapColor(MapColor.COLOR_BROWN)
                 .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
-                .strength(0.5F, 3600000.0F)
+                .strength(1F, 3600000.0F)
                 .sound(SoundType.METAL));
     }
 

@@ -109,5 +109,7 @@
   "block.jankystuff.advance_damage_plate.description": "Ignore Player and attack any entity that stand on. (Drop exp)",
   "block.jankystuff.the_void": "The Void",
   "block.jankystuff.the_void.description": "Accept item and fluid and send them to the void",
-  "block.jankystuff.miner_light": "Miner Light"
+  "block.jankystuff.miner_light": "Miner Light",
+  "block.jankystuff.basic_block_accelerator": "Simple Block Accelerator",
+  "block.jankystuff.basic_block_accelerator.description": "Speed up Block Entity above"
 }
