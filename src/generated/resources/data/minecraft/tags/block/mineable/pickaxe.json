@@ -5,6 +5,10 @@
     "jankystuff:block_breaker",
     "jankystuff:mob_damage_plate",
     "jankystuff:advance_damage_plate",
-    "jankystuff:basic_quarry"
+    "jankystuff:basic_quarry",
+    "jankystuff:basic_block_accelerator",
+    "jankystuff:advance_block_accelerator",
+    "jankystuff:elite_block_accelerator",
+    "jankystuff:ultimate_block_accelerator"
   ]
 }

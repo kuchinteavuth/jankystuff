@@ -110,6 +110,10 @@
   "block.jankystuff.the_void": "The Void",
   "block.jankystuff.the_void.description": "Accept item and fluid and send them to the void",
   "block.jankystuff.miner_light": "Miner Light",
-  "block.jankystuff.basic_block_accelerator": "Simple Block Accelerator",
-  "block.jankystuff.basic_block_accelerator.description": "Speed up Block Entity above"
+  "block.jankystuff.basic_block_accelerator": "Basic Block Accelerator",
+  "block.jankystuff.advance_block_accelerator": "Advance Block Accelerator",
+  "block.jankystuff.elite_block_accelerator": "Elite Block Accelerator",
+  "block.jankystuff.ultimate_block_accelerator": "Ultimate Block Accelerator",
+  "block.jankystuff.block_accelerator.description": "Speed up Block Entity",
+  "block.jankystuff.block_accelerator.modifier_text": "Speed Modifier:"
 }

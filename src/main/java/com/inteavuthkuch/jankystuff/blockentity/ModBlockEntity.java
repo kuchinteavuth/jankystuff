@@ -2,7 +2,10 @@ package com.inteavuthkuch.jankystuff.blockentity;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
+import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.AdvanceBlockAcceleratorBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.BasicBlockAcceleratorBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.EliteBlockAcceleratorBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.UltimateBlockAcceleratorBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.MetalCrateBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.WoodenCrateBlockEntity;
 import net.minecraft.core.registries.Registries;
@@ -17,6 +20,9 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicQuarryBlockEntity>> BASIC_QUARRY_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicBlockAcceleratorBlockEntity>> BASIC_BLOCK_ACCELERATOR_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AdvanceBlockAcceleratorBlockEntity>> ADVANCE_BLOCK_ACCELERATOR_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EliteBlockAcceleratorBlockEntity>> ELITE_BLOCK_ACCELERATOR_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UltimateBlockAcceleratorBlockEntity>> ULTIMATE_BLOCK_ACCELERATOR_BE;
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
@@ -30,5 +36,11 @@ public class ModBlockEntity {
                 () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new, ModBlocks.BLOCK_BREAKER.get()).build(null));
         BASIC_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("basic_block_accelerator",
                 () -> BlockEntityType.Builder.of(BasicBlockAcceleratorBlockEntity::new, ModBlocks.BASIC_BLOCK_ACCELERATOR.get()).build(null));
+        ADVANCE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("advance_block_accelerator",
+                () -> BlockEntityType.Builder.of(AdvanceBlockAcceleratorBlockEntity::new, ModBlocks.ADVANCE_BLOCK_ACCELERATOR.get()).build(null));
+        ELITE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("elite_block_accelerator",
+                () -> BlockEntityType.Builder.of(EliteBlockAcceleratorBlockEntity::new, ModBlocks.ELITE_BLOCK_ACCELERATOR.get()).build(null));
+        ULTIMATE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("ultimate_block_accelerator",
+                () -> BlockEntityType.Builder.of(UltimateBlockAcceleratorBlockEntity::new, ModBlocks.ULTIMATE_BLOCK_ACCELERATOR.get()).build(null));
     }
 }

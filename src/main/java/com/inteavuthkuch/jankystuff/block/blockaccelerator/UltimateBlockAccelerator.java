@@ -1,11 +1,11 @@
 package com.inteavuthkuch.jankystuff.block.blockaccelerator;
 
 import com.inteavuthkuch.jankystuff.blockentity.ModBlockEntity;
-import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.BasicBlockAcceleratorBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.UltimateBlockAcceleratorBlockEntity;
 import com.inteavuthkuch.jankystuff.common.BlockAcceleratorTier;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,11 +14,16 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-public class BasicBlockAccelerator extends BlockAcceleratorBase {
-    public static final MapCodec<BasicBlockAccelerator> CODEC = simpleCodec(p -> new BasicBlockAccelerator());
+public class UltimateBlockAccelerator extends BlockAcceleratorBase {
+    public static final MapCodec<UltimateBlockAccelerator> CODEC = simpleCodec(p -> new UltimateBlockAccelerator());
 
-    public BasicBlockAccelerator() {
-        super(BlockAcceleratorTier.BASIC);
+    public UltimateBlockAccelerator() {
+        super(BlockAcceleratorTier.ULTIMATE);
+    }
+
+    @Override
+    protected BlockEntityType<? extends BlockEntity> getBlockEntityType() {
+        return ModBlockEntity.ULTIMATE_BLOCK_ACCELERATOR_BE.get();
     }
 
     @Override
@@ -29,11 +34,6 @@ public class BasicBlockAccelerator extends BlockAcceleratorBase {
     @ParametersAreNonnullByDefault
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new BasicBlockAcceleratorBlockEntity(blockPos, blockState);
-    }
-
-    @Override
-    protected BlockEntityType<? extends BlockEntity> getBlockEntityType() {
-        return ModBlockEntity.BASIC_BLOCK_ACCELERATOR_BE.get();
+        return new UltimateBlockAcceleratorBlockEntity(blockPos, blockState);
     }
 }

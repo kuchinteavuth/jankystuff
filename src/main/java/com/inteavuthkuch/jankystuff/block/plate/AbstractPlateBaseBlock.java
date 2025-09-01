@@ -19,6 +19,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.util.FakePlayer;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -56,6 +57,7 @@ public abstract class AbstractPlateBaseBlock extends Block {
         return AbstractPlateBaseBlock.PLATE_SHAPE;
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     protected void entityInside(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity) {
         if(pLevel.isClientSide() || !(pEntity instanceof LivingEntity entity)) return;
@@ -66,12 +68,13 @@ public abstract class AbstractPlateBaseBlock extends Block {
                 if(fakePlayer != null){
                     fakePlayer.setServerLevel(level);
                     fakePlayer.setPos(pPos.getX() + 0.5d, pPos.getY() + 0.5d, pPos.getZ() + 0.5d);
-                    fakePlayer.attack(entity);
+                    fakePlayer.attack(entity); // How to disable fake player attack sound? it so loud
                     fakePlayer.setDeltaMovement(entity.getDeltaMovement().multiply(0, 1,0));
                     entity.setLastHurtByPlayer(fakePlayer);
                 }
                 else {
                     fakePlayer = new FakePlayer(level, this.profile);
+                    fakePlayer.setSilent(true);
                     Objects.requireNonNull(fakePlayer.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(100);
                     Objects.requireNonNull(fakePlayer.getAttribute(Attributes.ATTACK_SPEED)).setBaseValue(100);
                 }

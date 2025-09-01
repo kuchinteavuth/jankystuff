@@ -10,6 +10,9 @@ public interface IBlockEntityTicker {
     void tick(Level pLevel, BlockPos pPos, BlockState pState);
 
     static <T extends BlockEntity> BlockEntityTicker<T> getTickerHelper(){
-        return (pLevel1, pPos, pState1, pBlockEntity) -> ((IBlockEntityTicker)pBlockEntity).tick(pLevel1, pPos, pState1);
+        return (pLevel1, pPos, pState1, pBlockEntity) -> {
+            if(pBlockEntity instanceof  IBlockEntityTicker)
+                ((IBlockEntityTicker)pBlockEntity).tick(pLevel1, pPos, pState1);
+        };
     }
 }

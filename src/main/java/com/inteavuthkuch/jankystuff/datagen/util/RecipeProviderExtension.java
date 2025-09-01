@@ -21,6 +21,10 @@ public abstract class RecipeProviderExtension extends RecipeProvider implements 
         return String.format("%s:%s", JankyStuff.MOD_ID, getItemName(item));
     }
 
+    protected String getItemNameForMod(ItemLike item, String folder) {
+        return String.format("%s:%s/%s", JankyStuff.MOD_ID, folder, getItemName(item));
+    }
+
     protected void reinforcedSmithing(RecipeOutput output, Item base, Item addition, RecipeCategory category, Item result) {
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(ModItems.REINFORCED_SMITHING_TEMPLATE),

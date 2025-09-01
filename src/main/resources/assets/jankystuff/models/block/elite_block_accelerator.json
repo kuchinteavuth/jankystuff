@@ -1,0 +1,6 @@
+{
+  "parent": "jankystuff:block/block_accelerator",
+  "textures": {
+    "side": "jankystuff:block/block_accelerator/elite_block_accelerator_side"
+  }
+}

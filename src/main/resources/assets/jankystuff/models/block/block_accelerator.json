@@ -1,0 +1,25 @@
+{
+  "format_version": "1.9.0",
+  "credit": "Made with Blockbench",
+  "parent": "block/cube_all",
+  "textures": {
+    "0": "jankystuff:block/block_accelerator/block_accelerator_back",
+    "2": "#side",
+    "3": "jankystuff:block/block_accelerator/block_accelerator_face",
+    "particle": "jankystuff:block/block_accelerator/block_accelerator_back"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#3"},
+        "east": {"uv": [0, 0, 16, 16], "texture": "#2"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+        "west": {"uv": [16, 0, 0, 16], "texture": "#2"},
+        "up": {"uv": [16, 0, 0, 16], "rotation": 90, "texture": "#2"},
+        "down": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#2"}
+      }
+    }
+  ]
+}

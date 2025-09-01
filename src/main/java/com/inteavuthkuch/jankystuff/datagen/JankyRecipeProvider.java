@@ -359,5 +359,55 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(Items.WATER_BUCKET), has(Items.WATER_BUCKET))
                 .unlockedBy(getHasName(Items.SUGAR), has(Items.SUGAR))
                 .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BASIC_BLOCK_ACCELERATOR)
+                .pattern("RDR")
+                .pattern("DBD")
+                .pattern("RLR")
+                .define('R', ModItems.REINFORCED_COMPOUND)
+                .define('D', Items.DIAMOND)
+                .define('L', Items.LAPIS_BLOCK)
+                .define('B', Items.BONE_BLOCK)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
+                .unlockedBy(getHasName(Items.LAPIS_BLOCK), has(Items.LAPIS_BLOCK))
+                .unlockedBy(getHasName(Items.BONE_BLOCK), has(Items.BONE_BLOCK))
+                .save(output, getItemNameForMod(ModBlocks.BASIC_BLOCK_ACCELERATOR, "block_accelerator"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ADVANCE_BLOCK_ACCELERATOR)
+                .pattern("R#R")
+                .pattern("#D#")
+                .pattern("R#R")
+                .define('R', ModItems.REINFORCED_COMPOUND)
+                .define('#', ModBlocks.BASIC_BLOCK_ACCELERATOR)
+                .define('D', Items.DIAMOND_BLOCK)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(ModBlocks.BASIC_BLOCK_ACCELERATOR), has(ModBlocks.BASIC_BLOCK_ACCELERATOR))
+                .unlockedBy(getHasName(Items.DIAMOND_BLOCK), has(Items.DIAMOND_BLOCK))
+                .save(output, getItemNameForMod(ModBlocks.ADVANCE_BLOCK_ACCELERATOR, "block_accelerator"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ELITE_BLOCK_ACCELERATOR)
+                .pattern("R#R")
+                .pattern("#D#")
+                .pattern("R#R")
+                .define('R', ModItems.REINFORCED_COMPOUND)
+                .define('#', ModBlocks.ADVANCE_BLOCK_ACCELERATOR)
+                .define('D', Items.NETHERITE_BLOCK)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(ModBlocks.ADVANCE_BLOCK_ACCELERATOR), has(ModBlocks.ADVANCE_BLOCK_ACCELERATOR))
+                .unlockedBy(getHasName(Items.NETHERITE_BLOCK), has(Items.NETHERITE_BLOCK))
+                .save(output, getItemNameForMod(ModBlocks.ELITE_BLOCK_ACCELERATOR, "block_accelerator"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ULTIMATE_BLOCK_ACCELERATOR)
+                .pattern("R#R")
+                .pattern("#D#")
+                .pattern("R#R")
+                .define('R', ModItems.REINFORCED_COMPOUND)
+                .define('#', ModBlocks.ELITE_BLOCK_ACCELERATOR)
+                .define('D', Items.NETHER_STAR)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(ModBlocks.ELITE_BLOCK_ACCELERATOR), has(ModBlocks.ELITE_BLOCK_ACCELERATOR))
+                .unlockedBy(getHasName(Items.NETHER_STAR), has(Items.NETHER_STAR))
+                .save(output, getItemNameForMod(ModBlocks.ULTIMATE_BLOCK_ACCELERATOR, "block_accelerator"));
     }
 }

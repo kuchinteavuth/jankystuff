@@ -32,7 +32,12 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
                         ModBlocks.BLOCK_BREAKER.get(),
                         ModBlocks.MOB_DAMAGE_PLATE.get(),
                         ModBlocks.ADVANCE_DAMAGE_PLATE.get(),
-                        ModBlocks.BASIC_QUARRY.get());
+                        ModBlocks.BASIC_QUARRY.get(),
+                        ModBlocks.BASIC_BLOCK_ACCELERATOR.get(),
+                        ModBlocks.ADVANCE_BLOCK_ACCELERATOR.get(),
+                        ModBlocks.ELITE_BLOCK_ACCELERATOR.get(),
+                        ModBlocks.ULTIMATE_BLOCK_ACCELERATOR.get()
+                );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBlocks.WOODEN_CRATE.get());

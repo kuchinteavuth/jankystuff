@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "jankystuff:block/ultimate_block_accelerator"
+    },
+    "facing=east": {
+      "model": "jankystuff:block/ultimate_block_accelerator",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "jankystuff:block/ultimate_block_accelerator",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "jankystuff:block/ultimate_block_accelerator",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "jankystuff:block/ultimate_block_accelerator",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "jankystuff:block/ultimate_block_accelerator",
+      "x": 90
+    }
+  }
+}
