@@ -4,6 +4,7 @@ import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.blockentity.ModBlockEntity;
 import com.inteavuthkuch.jankystuff.capability.CapabilityHandler;
 import com.inteavuthkuch.jankystuff.common.Constraints;
+import com.inteavuthkuch.jankystuff.component.ModComponents;
 import com.inteavuthkuch.jankystuff.config.JankyStuffCommonConfig;
 import com.inteavuthkuch.jankystuff.integration.CuriosIntegration;
 import com.inteavuthkuch.jankystuff.integration.ExternalMod;
@@ -37,6 +38,7 @@ public class JankyStuff
         ModLootModifier.GLOBAL_LOOT_MODIFIER.register(eventBus);
         ModBlockEntity.BLOCK_ENTITIES.register(eventBus);
         ModMenuType.MENUS.register(eventBus);
+        ModComponents.register(eventBus);
 
         CapabilityHandler.register(eventBus);
 

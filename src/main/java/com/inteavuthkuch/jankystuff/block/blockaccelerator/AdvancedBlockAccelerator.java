@@ -14,16 +14,16 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-public class AdvanceBlockAccelerator extends BlockAcceleratorBase{
+public class AdvancedBlockAccelerator extends BlockAcceleratorBase{
 
-    public static final MapCodec<AdvanceBlockAccelerator> CODEC = simpleCodec(p -> new AdvanceBlockAccelerator());
-    public AdvanceBlockAccelerator() {
+    public static final MapCodec<AdvancedBlockAccelerator> CODEC = simpleCodec(p -> new AdvancedBlockAccelerator());
+    public AdvancedBlockAccelerator() {
         super(BlockAcceleratorTier.ADVANCE);
     }
 
     @Override
     protected BlockEntityType<? extends BlockEntity> getBlockEntityType() {
-        return ModBlockEntity.ADVANCE_BLOCK_ACCELERATOR_BE.get();
+        return ModBlockEntity.ADVANCED_BLOCK_ACCELERATOR_BE.get();
     }
 
     @Override

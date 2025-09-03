@@ -8,6 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 public class AdvanceBlockAcceleratorBlockEntity extends BlockAcceleratorBlockEntityBase {
 
     public AdvanceBlockAcceleratorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntity.ADVANCE_BLOCK_ACCELERATOR_BE.get(), pPos, pBlockState, BlockAcceleratorTier.ADVANCE);
+        super(ModBlockEntity.ADVANCED_BLOCK_ACCELERATOR_BE.get(), pPos, pBlockState, BlockAcceleratorTier.ADVANCE);
     }
 }

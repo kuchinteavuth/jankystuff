@@ -2,6 +2,8 @@ package com.inteavuthkuch.jankystuff.capability;
 
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.blockentity.crate.AbstractCrateBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.fluidtank.BasicFluidTankBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.fluidtank.FluidTankBlockEntityBase;
 import com.inteavuthkuch.jankystuff.inventory.BasicQuarryInvWrapper;
 import com.inteavuthkuch.jankystuff.inventory.BlockBreakerInvWrapper;
 import net.neoforged.bus.api.IEventBus;
@@ -34,6 +36,15 @@ public class CapabilityHandler {
                 Capabilities.ItemHandler.BLOCK,
                 BlockBreakerInvWrapper::create,
                 ModBlocks.BLOCK_BREAKER.get()
+        );
+
+        event.registerBlock(
+                Capabilities.FluidHandler.BLOCK,
+                FluidTankBlockEntityBase::getFluidHandler,
+                ModBlocks.BASIC_FLUID_TANK.get(),
+                ModBlocks.ADVANCED_FLUID_TANK.get(),
+                ModBlocks.ELITE_FLUID_TANK.get(),
+                ModBlocks.ULTIMATE_FLUID_TANK.get()
         );
     }
 

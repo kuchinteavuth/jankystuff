@@ -374,7 +374,7 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(Items.BONE_BLOCK), has(Items.BONE_BLOCK))
                 .save(output, getItemNameForMod(ModBlocks.BASIC_BLOCK_ACCELERATOR, "block_accelerator"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ADVANCE_BLOCK_ACCELERATOR)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ADVANCED_BLOCK_ACCELERATOR)
                 .pattern("R#R")
                 .pattern("#D#")
                 .pattern("R#R")
@@ -384,17 +384,17 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
                 .unlockedBy(getHasName(ModBlocks.BASIC_BLOCK_ACCELERATOR), has(ModBlocks.BASIC_BLOCK_ACCELERATOR))
                 .unlockedBy(getHasName(Items.DIAMOND_BLOCK), has(Items.DIAMOND_BLOCK))
-                .save(output, getItemNameForMod(ModBlocks.ADVANCE_BLOCK_ACCELERATOR, "block_accelerator"));
+                .save(output, getItemNameForMod(ModBlocks.ADVANCED_BLOCK_ACCELERATOR, "block_accelerator"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ELITE_BLOCK_ACCELERATOR)
                 .pattern("R#R")
                 .pattern("#D#")
                 .pattern("R#R")
                 .define('R', ModItems.REINFORCED_COMPOUND)
-                .define('#', ModBlocks.ADVANCE_BLOCK_ACCELERATOR)
+                .define('#', ModBlocks.ADVANCED_BLOCK_ACCELERATOR)
                 .define('D', Items.NETHERITE_BLOCK)
                 .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
-                .unlockedBy(getHasName(ModBlocks.ADVANCE_BLOCK_ACCELERATOR), has(ModBlocks.ADVANCE_BLOCK_ACCELERATOR))
+                .unlockedBy(getHasName(ModBlocks.ADVANCED_BLOCK_ACCELERATOR), has(ModBlocks.ADVANCED_BLOCK_ACCELERATOR))
                 .unlockedBy(getHasName(Items.NETHERITE_BLOCK), has(Items.NETHERITE_BLOCK))
                 .save(output, getItemNameForMod(ModBlocks.ELITE_BLOCK_ACCELERATOR, "block_accelerator"));
 

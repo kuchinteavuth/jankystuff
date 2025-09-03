@@ -7,8 +7,12 @@
     "jankystuff:advance_damage_plate",
     "jankystuff:basic_quarry",
     "jankystuff:basic_block_accelerator",
-    "jankystuff:advance_block_accelerator",
+    "jankystuff:advanced_block_accelerator",
     "jankystuff:elite_block_accelerator",
-    "jankystuff:ultimate_block_accelerator"
+    "jankystuff:ultimate_block_accelerator",
+    "jankystuff:basic_fluid_tank",
+    "jankystuff:advanced_fluid_tank",
+    "jankystuff:elite_fluid_tank",
+    "jankystuff:ultimate_fluid_tank"
   ]
 }

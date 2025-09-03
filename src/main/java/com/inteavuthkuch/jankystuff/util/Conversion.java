@@ -1,5 +1,7 @@
 package com.inteavuthkuch.jankystuff.util;
 
+import com.inteavuthkuch.jankystuff.common.Constraints;
+
 public class Conversion {
     public static int tickFromSecond(int second) {
         return 20 * second;
@@ -19,5 +21,9 @@ public class Conversion {
         seconds = seconds % 60;
 
         return String.format("%d:%02d", minutes, seconds);
+    }
+
+    public static int fluidInMb(int value) {
+        return value * Constraints.LIQUID_PER_BUCKET;
     }
 }

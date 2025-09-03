@@ -8,6 +8,10 @@ import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.EliteBlockAccel
 import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.UltimateBlockAcceleratorBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.MetalCrateBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.WoodenCrateBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.fluidtank.AdvancedFluidTankBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.fluidtank.BasicFluidTankBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.fluidtank.EliteFluidTankBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.fluidtank.UltimateFluidTankBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -20,9 +24,13 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicQuarryBlockEntity>> BASIC_QUARRY_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicBlockAcceleratorBlockEntity>> BASIC_BLOCK_ACCELERATOR_BE;
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AdvanceBlockAcceleratorBlockEntity>> ADVANCE_BLOCK_ACCELERATOR_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AdvanceBlockAcceleratorBlockEntity>> ADVANCED_BLOCK_ACCELERATOR_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EliteBlockAcceleratorBlockEntity>> ELITE_BLOCK_ACCELERATOR_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UltimateBlockAcceleratorBlockEntity>> ULTIMATE_BLOCK_ACCELERATOR_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasicFluidTankBlockEntity>> BASIC_FLUID_TANK_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AdvancedFluidTankBlockEntity>> ADVANCED_FLUID_TANK_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EliteFluidTankBlockEntity>> ELITE_FLUID_TANK_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UltimateFluidTankBlockEntity>> ULTIMATE_FLUID_TANK_BE;
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
@@ -36,11 +44,20 @@ public class ModBlockEntity {
                 () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new, ModBlocks.BLOCK_BREAKER.get()).build(null));
         BASIC_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("basic_block_accelerator",
                 () -> BlockEntityType.Builder.of(BasicBlockAcceleratorBlockEntity::new, ModBlocks.BASIC_BLOCK_ACCELERATOR.get()).build(null));
-        ADVANCE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("advance_block_accelerator",
-                () -> BlockEntityType.Builder.of(AdvanceBlockAcceleratorBlockEntity::new, ModBlocks.ADVANCE_BLOCK_ACCELERATOR.get()).build(null));
+        ADVANCED_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("advanced_block_accelerator",
+                () -> BlockEntityType.Builder.of(AdvanceBlockAcceleratorBlockEntity::new, ModBlocks.ADVANCED_BLOCK_ACCELERATOR.get()).build(null));
         ELITE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("elite_block_accelerator",
                 () -> BlockEntityType.Builder.of(EliteBlockAcceleratorBlockEntity::new, ModBlocks.ELITE_BLOCK_ACCELERATOR.get()).build(null));
         ULTIMATE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("ultimate_block_accelerator",
                 () -> BlockEntityType.Builder.of(UltimateBlockAcceleratorBlockEntity::new, ModBlocks.ULTIMATE_BLOCK_ACCELERATOR.get()).build(null));
+
+        BASIC_FLUID_TANK_BE = BLOCK_ENTITIES.register("basic_fluid_tank",
+                () -> BlockEntityType.Builder.of(BasicFluidTankBlockEntity::new, ModBlocks.BASIC_FLUID_TANK.get()).build(null));
+        ADVANCED_FLUID_TANK_BE = BLOCK_ENTITIES.register("advanced_fluid_tank",
+                () -> BlockEntityType.Builder.of(AdvancedFluidTankBlockEntity::new, ModBlocks.ADVANCED_FLUID_TANK.get()).build(null));
+        ELITE_FLUID_TANK_BE = BLOCK_ENTITIES.register("elite_fluid_tank",
+                () -> BlockEntityType.Builder.of(EliteFluidTankBlockEntity::new, ModBlocks.ELITE_FLUID_TANK.get()).build(null));
+        ULTIMATE_FLUID_TANK_BE = BLOCK_ENTITIES.register("ultimate_fluid_tank",
+                () -> BlockEntityType.Builder.of(UltimateFluidTankBlockEntity::new, ModBlocks.ULTIMATE_FLUID_TANK.get()).build(null));
     }
 }

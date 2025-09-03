@@ -34,9 +34,13 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
                         ModBlocks.ADVANCE_DAMAGE_PLATE.get(),
                         ModBlocks.BASIC_QUARRY.get(),
                         ModBlocks.BASIC_BLOCK_ACCELERATOR.get(),
-                        ModBlocks.ADVANCE_BLOCK_ACCELERATOR.get(),
+                        ModBlocks.ADVANCED_BLOCK_ACCELERATOR.get(),
                         ModBlocks.ELITE_BLOCK_ACCELERATOR.get(),
-                        ModBlocks.ULTIMATE_BLOCK_ACCELERATOR.get()
+                        ModBlocks.ULTIMATE_BLOCK_ACCELERATOR.get(),
+                        ModBlocks.BASIC_FLUID_TANK.get(),
+                        ModBlocks.ADVANCED_FLUID_TANK.get(),
+                        ModBlocks.ELITE_FLUID_TANK.get(),
+                        ModBlocks.ULTIMATE_FLUID_TANK.get()
                 );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
