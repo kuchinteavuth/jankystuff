@@ -123,6 +123,7 @@ dependencies {
     runtimeOnly "curse.maven:ae2-223794:6890346"
     runtimeOnly "curse.maven:guideme-1173950:6812025" // AE2-Dependency
     runtimeOnly "curse.maven:jade-324717:6738687" // Jade
+    runtimeOnly "curse.maven:pipez-443900:5757713" // Pipez
 }
 
 

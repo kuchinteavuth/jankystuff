@@ -5,6 +5,8 @@
   "tooltip.jankystuff.infinity_tools": "Unbreakable",
   "state.jankystuff.on": "On",
   "state.jankystuff.off": "Off",
+  "state.jankystuff.auto_export_enabled": "Auto Export Enabled",
+  "state.jankystuff.auto_export_disabled": "Auto Export Disabled",
 
   "key.jankystuff.category.main": "Janky Stuff",
   "key.jankystuff.toggle_magnet": "Toggle Magnet",
@@ -121,5 +123,7 @@
   "block.jankystuff.basic_fluid_tank": "Basic Fluid Tank",
   "block.jankystuff.advanced_fluid_tank": "Advanced Fluid Tank",
   "block.jankystuff.elite_fluid_tank": "Elite Fluid Tank",
-  "block.jankystuff.ultimate_fluid_tank": "Ultimated Fluid Tank"
+  "block.jankystuff.ultimate_fluid_tank": "Ultimated Fluid Tank",
+  "block.jankystuff.water_source": "Water Source",
+  "block.jankystuff.water_source.description": "Click with empty hand to toggle auto push"
 }

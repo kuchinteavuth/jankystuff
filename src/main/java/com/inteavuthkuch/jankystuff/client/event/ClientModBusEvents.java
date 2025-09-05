@@ -4,6 +4,7 @@ import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.client.KeyBinding;
 import com.inteavuthkuch.jankystuff.menu.ModMenuType;
 import com.inteavuthkuch.jankystuff.network.packet.ItemTogglePacket;
+import com.inteavuthkuch.jankystuff.network.packet.PlaySoundPacket;
 import com.inteavuthkuch.jankystuff.screen.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,6 +42,12 @@ public class ClientModBusEvents {
                         ItemTogglePacket::handleClientPacket,
                         ItemTogglePacket::handleServerPacket
                 )
+        );
+
+        registrar.playToClient(
+                PlaySoundPacket.TYPE,
+                PlaySoundPacket.STREAM_CODEC,
+                PlaySoundPacket::handleClientSidePacket
         );
     }
 }

@@ -4,7 +4,6 @@ import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.component.ModComponents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
@@ -15,11 +14,9 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.neoforged.neoforge.common.NeoForge;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
-import java.util.function.Consumer;
 
 public class JankyLootSubProvider extends BlockLootSubProvider {
 
@@ -41,6 +38,7 @@ public class JankyLootSubProvider extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.ADVANCED_BLOCK_ACCELERATOR.get());
         this.dropSelf(ModBlocks.ELITE_BLOCK_ACCELERATOR.get());
         this.dropSelf(ModBlocks.ULTIMATE_BLOCK_ACCELERATOR.get());
+        this.dropSelf(ModBlocks.WATER_SOURCE.get());
         this.add(ModBlocks.BASIC_FLUID_TANK.get(), this::createFluidTankLoot);
         this.add(ModBlocks.ADVANCED_FLUID_TANK.get(), this::createFluidTankLoot);
         this.add(ModBlocks.ELITE_FLUID_TANK.get(), this::createFluidTankLoot);

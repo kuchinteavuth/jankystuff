@@ -13,9 +13,13 @@ import com.inteavuthkuch.jankystuff.blockentity.fluidtank.BasicFluidTankBlockEnt
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.EliteFluidTankBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.UltimateFluidTankBlockEntity;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
 
 public class ModBlockEntity {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES;
@@ -31,6 +35,7 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AdvancedFluidTankBlockEntity>> ADVANCED_FLUID_TANK_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EliteFluidTankBlockEntity>> ELITE_FLUID_TANK_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UltimateFluidTankBlockEntity>> ULTIMATE_FLUID_TANK_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WaterSourceBlockEntity>> WATER_SOURCE_BE;
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
@@ -59,5 +64,14 @@ public class ModBlockEntity {
                 () -> BlockEntityType.Builder.of(EliteFluidTankBlockEntity::new, ModBlocks.ELITE_FLUID_TANK.get()).build(null));
         ULTIMATE_FLUID_TANK_BE = BLOCK_ENTITIES.register("ultimate_fluid_tank",
                 () -> BlockEntityType.Builder.of(UltimateFluidTankBlockEntity::new, ModBlocks.ULTIMATE_FLUID_TANK.get()).build(null));
+
+        WATER_SOURCE_BE = createBlockEntity("water_source_be", WaterSourceBlockEntity::new, ModBlocks.WATER_SOURCE);
+    }
+
+    @NotNull
+    private static <T extends BlockEntity>DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> createBlockEntity(String name,
+                                                                                                                   BlockEntityType.BlockEntitySupplier<T> supplier,
+                                                                                                                   DeferredBlock<Block> block) {
+        return BLOCK_ENTITIES.register(name, () -> BlockEntityType.Builder.of(supplier, block.get()).build(null));
     }
 }

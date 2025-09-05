@@ -40,7 +40,8 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
                         ModBlocks.BASIC_FLUID_TANK.get(),
                         ModBlocks.ADVANCED_FLUID_TANK.get(),
                         ModBlocks.ELITE_FLUID_TANK.get(),
-                        ModBlocks.ULTIMATE_FLUID_TANK.get()
+                        ModBlocks.ULTIMATE_FLUID_TANK.get(),
+                        ModBlocks.WATER_SOURCE.get()
                 );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)

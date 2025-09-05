@@ -1,8 +1,8 @@
 package com.inteavuthkuch.jankystuff.capability;
 
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
+import com.inteavuthkuch.jankystuff.blockentity.WaterSourceBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.AbstractCrateBlockEntity;
-import com.inteavuthkuch.jankystuff.blockentity.fluidtank.BasicFluidTankBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.FluidTankBlockEntityBase;
 import com.inteavuthkuch.jankystuff.inventory.BasicQuarryInvWrapper;
 import com.inteavuthkuch.jankystuff.inventory.BlockBreakerInvWrapper;
@@ -45,6 +45,12 @@ public class CapabilityHandler {
                 ModBlocks.ADVANCED_FLUID_TANK.get(),
                 ModBlocks.ELITE_FLUID_TANK.get(),
                 ModBlocks.ULTIMATE_FLUID_TANK.get()
+        );
+
+        event.registerBlock(
+                Capabilities.FluidHandler.BLOCK,
+                WaterSourceBlockEntity::getCapability,
+                ModBlocks.WATER_SOURCE.get()
         );
     }
 

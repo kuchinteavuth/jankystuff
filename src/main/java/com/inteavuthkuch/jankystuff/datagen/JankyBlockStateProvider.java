@@ -7,11 +7,17 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
+import java.util.function.Function;
 
 public class JankyBlockStateProvider extends BlockStateProvider {
 
@@ -49,6 +55,16 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(b, model);
     }
 
+    protected void blockWithVariantsAndItem(@NotNull DeferredBlock<Block> block, @Nullable Function<BlockState, ConfiguredModel[]> configuration) {
+        String blockName = BuiltInRegistries.BLOCK.getKey(block.get()).getPath();
+        getVariantBuilder(block.get())
+                .forAllStates(Objects.requireNonNullElseGet(configuration, () -> state -> ConfiguredModel.builder()
+                        .modelFile(models().cubeAll(blockName, blockTexture(block.get())))
+                        .build()));
+
+        simpleBlockItem(block.get(), cubeAll(block.get()));
+    }
+
     @Override
     protected void registerStatesAndModels() {
         blockWithCustomBlockModel(ModBlocks.TICK_ACCELERATOR);
@@ -58,5 +74,7 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         blockWithCustomBlockModel(ModBlocks.MOB_DAMAGE_PLATE);
         blockWithCustomBlockModel(ModBlocks.ADVANCE_DAMAGE_PLATE);
         glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
+
+        blockWithVariantsAndItem(ModBlocks.WATER_SOURCE, null);
     }
 }

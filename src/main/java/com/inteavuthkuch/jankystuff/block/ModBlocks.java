@@ -44,6 +44,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ADVANCED_FLUID_TANK;
     public static final DeferredBlock<Block> ELITE_FLUID_TANK;
     public static final DeferredBlock<Block> ULTIMATE_FLUID_TANK;
+    public static final DeferredBlock<Block> WATER_SOURCE;
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MOD_ID);
@@ -67,6 +68,7 @@ public class ModBlocks {
         ADVANCED_FLUID_TANK = registerBlockWithItem("advanced_fluid_tank", AdvancedFluidTank::new);
         ELITE_FLUID_TANK = registerBlockWithItem("elite_fluid_tank", EliteFluidTank::new);
         ULTIMATE_FLUID_TANK = registerBlockWithItem("ultimate_fluid_tank", UltimateFluidTank::new);
+        WATER_SOURCE = registerBlockWithItem("water_source", WaterSourceBlock::new);
 
     }
 
