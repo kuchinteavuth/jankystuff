@@ -30,8 +30,9 @@ A simple mod just make some blocks / items such as early game storage, item magn
 * **Quarry** - _Mark for removal since other mods can have more powerful quarry than mine_
     * **Basic Quarry**: Will use burnable item as fuel and mine resources from the void and put into inventory above.
 * **Misc** - _random janky blocks and items_
-    * **Tick Accelerator**: This block will accelerate tick speed of blocks that has block-tag #jankystuff:allow_acceleration in 3x2x3 radius.
-    * **Fluid Tank** - _(WIP)_: Store a considered amount of fluid of 1 type.
+    * **Tick Accelerator**: This block will accelerate tick speed of block 2 above it (example place below farmland or dirt) including crop, saplings, geode or blocks that has block-tag #jankystuff:allow_acceleration
+    * **Block Accelerator**: This a new block introduce in 1.21.1 version of JankyStuff, It will increase BlockEntity, Machine speed base on it's tier (like Time in a bottle) but you never have to worry about running out of time it keeps going forever. (Be-careful, don't place too much. It may cause your TPS lag).
+    * **Fluid Tank**: Basic can hold 128 buckets, Advanced can hold 256 buckets, Elite can hold 512 buckets, Ultimate can hold 1024 buckets. All tanks will be retained it's fluid content when broken or craft to next tier.
   
 Check out the **[Wiki Page](https://github.com/kuchinteavuth/jankystuff/wiki)** for more detail information.
 
