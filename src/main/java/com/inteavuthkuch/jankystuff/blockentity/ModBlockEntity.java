@@ -12,6 +12,8 @@ import com.inteavuthkuch.jankystuff.blockentity.fluidtank.AdvancedFluidTankBlock
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.BasicFluidTankBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.EliteFluidTankBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.UltimateFluidTankBlockEntity;
+import com.mojang.datafixers.DSL;
+import com.mojang.datafixers.types.Type;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -39,32 +41,19 @@ public class ModBlockEntity {
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
-        WOODEN_CRATE_BE = BLOCK_ENTITIES.register("wooden_crate",
-                () -> BlockEntityType.Builder.of(WoodenCrateBlockEntity::new, ModBlocks.WOODEN_CRATE.get()).build(null));
-        METAL_CRATE_BE = BLOCK_ENTITIES.register("metal_crate",
-                () -> BlockEntityType.Builder.of(MetalCrateBlockEntity::new, ModBlocks.METAL_CRATE.get()).build(null));
-        BASIC_QUARRY_BE = BLOCK_ENTITIES.register("basic_quarry",
-                () -> BlockEntityType.Builder.of(BasicQuarryBlockEntity::new, ModBlocks.BASIC_QUARRY.get()).build(null));
-        BLOCK_BREAKER_BE = BLOCK_ENTITIES.register("block_breaker",
-                () -> BlockEntityType.Builder.of(BlockBreakerBlockEntity::new, ModBlocks.BLOCK_BREAKER.get()).build(null));
-        BASIC_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("basic_block_accelerator",
-                () -> BlockEntityType.Builder.of(BasicBlockAcceleratorBlockEntity::new, ModBlocks.BASIC_BLOCK_ACCELERATOR.get()).build(null));
-        ADVANCED_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("advanced_block_accelerator",
-                () -> BlockEntityType.Builder.of(AdvanceBlockAcceleratorBlockEntity::new, ModBlocks.ADVANCED_BLOCK_ACCELERATOR.get()).build(null));
-        ELITE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("elite_block_accelerator",
-                () -> BlockEntityType.Builder.of(EliteBlockAcceleratorBlockEntity::new, ModBlocks.ELITE_BLOCK_ACCELERATOR.get()).build(null));
-        ULTIMATE_BLOCK_ACCELERATOR_BE = BLOCK_ENTITIES.register("ultimate_block_accelerator",
-                () -> BlockEntityType.Builder.of(UltimateBlockAcceleratorBlockEntity::new, ModBlocks.ULTIMATE_BLOCK_ACCELERATOR.get()).build(null));
 
-        BASIC_FLUID_TANK_BE = BLOCK_ENTITIES.register("basic_fluid_tank",
-                () -> BlockEntityType.Builder.of(BasicFluidTankBlockEntity::new, ModBlocks.BASIC_FLUID_TANK.get()).build(null));
-        ADVANCED_FLUID_TANK_BE = BLOCK_ENTITIES.register("advanced_fluid_tank",
-                () -> BlockEntityType.Builder.of(AdvancedFluidTankBlockEntity::new, ModBlocks.ADVANCED_FLUID_TANK.get()).build(null));
-        ELITE_FLUID_TANK_BE = BLOCK_ENTITIES.register("elite_fluid_tank",
-                () -> BlockEntityType.Builder.of(EliteFluidTankBlockEntity::new, ModBlocks.ELITE_FLUID_TANK.get()).build(null));
-        ULTIMATE_FLUID_TANK_BE = BLOCK_ENTITIES.register("ultimate_fluid_tank",
-                () -> BlockEntityType.Builder.of(UltimateFluidTankBlockEntity::new, ModBlocks.ULTIMATE_FLUID_TANK.get()).build(null));
-
+        WOODEN_CRATE_BE = createBlockEntity("wooden_crate", WoodenCrateBlockEntity::new, ModBlocks.WOODEN_CRATE);
+        METAL_CRATE_BE = createBlockEntity("metal_crate", MetalCrateBlockEntity::new, ModBlocks.METAL_CRATE);
+        BASIC_QUARRY_BE = createBlockEntity("basic_quarry", BasicQuarryBlockEntity::new, ModBlocks.BASIC_QUARRY);
+        BLOCK_BREAKER_BE = createBlockEntity("block_breaker", BlockBreakerBlockEntity::new, ModBlocks.BLOCK_BREAKER);
+        BASIC_BLOCK_ACCELERATOR_BE = createBlockEntity("basic_block_accelerator", BasicBlockAcceleratorBlockEntity::new, ModBlocks.BASIC_BLOCK_ACCELERATOR);
+        ADVANCED_BLOCK_ACCELERATOR_BE = createBlockEntity("advanced_block_accelerator", AdvanceBlockAcceleratorBlockEntity::new, ModBlocks.ADVANCED_BLOCK_ACCELERATOR);
+        ELITE_BLOCK_ACCELERATOR_BE = createBlockEntity("elite_block_accelerator", EliteBlockAcceleratorBlockEntity::new, ModBlocks.ELITE_BLOCK_ACCELERATOR);
+        ULTIMATE_BLOCK_ACCELERATOR_BE = createBlockEntity("ultimate_block_accelerator", UltimateBlockAcceleratorBlockEntity::new, ModBlocks.ULTIMATE_BLOCK_ACCELERATOR);
+        BASIC_FLUID_TANK_BE = createBlockEntity("basic_fluid_tank", BasicFluidTankBlockEntity::new, ModBlocks.BASIC_FLUID_TANK);
+        ADVANCED_FLUID_TANK_BE = createBlockEntity("advanced_fluid_tank", AdvancedFluidTankBlockEntity::new, ModBlocks.ADVANCED_FLUID_TANK);
+        ELITE_FLUID_TANK_BE = createBlockEntity("elite_fluid_tank", EliteFluidTankBlockEntity::new, ModBlocks.ELITE_FLUID_TANK);
+        ULTIMATE_FLUID_TANK_BE = createBlockEntity("ultimate_fluid_tank", UltimateFluidTankBlockEntity::new, ModBlocks.ULTIMATE_FLUID_TANK);
         WATER_SOURCE_BE = createBlockEntity("water_source_be", WaterSourceBlockEntity::new, ModBlocks.WATER_SOURCE);
     }
 
@@ -72,6 +61,7 @@ public class ModBlockEntity {
     private static <T extends BlockEntity>DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> createBlockEntity(String name,
                                                                                                                    BlockEntityType.BlockEntitySupplier<T> supplier,
                                                                                                                    DeferredBlock<Block> block) {
-        return BLOCK_ENTITIES.register(name, () -> BlockEntityType.Builder.of(supplier, block.get()).build(null));
+        Type<?> type = DSL.emptyPartType();
+        return BLOCK_ENTITIES.register(name, () -> BlockEntityType.Builder.of(supplier, block.get()).build(type));
     }
 }

@@ -120,6 +120,7 @@
   "block.jankystuff.block_accelerator.modifier_text": "Speed Modifier:",
   "block.jankystuff.fluid_tank_content": "Contain: %smB of %s",
   "block.jankystuff.fluid_tank_description": "Can hold %s buckets",
+  "jei.jankystuff.fluid_tank_crafting_tooltip": "Retains fluid from previous tank when upgrading.",
   "block.jankystuff.basic_fluid_tank": "Basic Fluid Tank",
   "block.jankystuff.advanced_fluid_tank": "Advanced Fluid Tank",
   "block.jankystuff.elite_fluid_tank": "Elite Fluid Tank",

@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -72,9 +73,10 @@ public abstract class FluidTankBlockEntityBase extends BlockEntity {
     @Override
     protected void applyImplicitComponents(@NotNull DataComponentInput pComponentInput) {
         super.applyImplicitComponents(pComponentInput);
-        CompoundTag fluidTag = pComponentInput.getOrDefault(ModComponents.FLUID.get(), new CompoundTag());
+        CustomData data =  pComponentInput.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         if (level != null) {
-            fluidTank.readFromNBT(level.registryAccess(), fluidTag);
+            CompoundTag tag = data.copyTag();
+            fluidTank.readFromNBT(level.registryAccess(), tag);
         }
     }
 
@@ -82,9 +84,8 @@ public abstract class FluidTankBlockEntityBase extends BlockEntity {
     protected void collectImplicitComponents(DataComponentMap.@NotNull Builder pComponents) {
         super.collectImplicitComponents(pComponents);
         if (level != null && !fluidTank.getFluid().isEmpty()) {
-            CompoundTag fluidTag = new CompoundTag();
-            fluidTank.writeToNBT(level.registryAccess(), fluidTag);
-            pComponents.set(ModComponents.FLUID, fluidTag);
+            CompoundTag tag = fluidTank.writeToNBT(level.registryAccess(), new CompoundTag());
+            pComponents.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
         }
     }
 }

@@ -1,20 +1,23 @@
 package com.inteavuthkuch.jankystuff.block.fluidtank;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
+import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.FluidTankBlockEntityBase;
 import com.inteavuthkuch.jankystuff.common.FluidTankTier;
-import com.inteavuthkuch.jankystuff.component.ModComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -31,7 +34,6 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import javax.swing.text.html.StyleSheet;
 import java.util.List;
 
 public abstract class FluidTankBase extends BaseEntityBlock {
@@ -60,9 +62,10 @@ public abstract class FluidTankBase extends BaseEntityBlock {
     @Override
     public void appendHoverText(ItemStack pStack, Item.TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-        CompoundTag tag = pStack.getOrDefault(ModComponents.FLUID, new CompoundTag());
+        CustomData data = pStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = data.copyTag();
         Level level = pContext.level();
-        if(!tag.isEmpty() && level != null) {
+        if(!data.isEmpty() && level != null && !tag.isEmpty()) {
             FluidStack fluid = FluidStack.parseOptional(level.registryAccess(), tag.getCompound("Fluid"));
             if (!fluid.isEmpty()) {
                 pTooltipComponents.add(

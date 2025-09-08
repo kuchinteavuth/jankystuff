@@ -11,6 +11,7 @@ import com.inteavuthkuch.jankystuff.integration.ExternalMod;
 import com.inteavuthkuch.jankystuff.item.ModItems;
 import com.inteavuthkuch.jankystuff.common.loot.ModLootModifier;
 import com.inteavuthkuch.jankystuff.menu.ModMenuType;
+import com.inteavuthkuch.jankystuff.recipe.ModRecipes;
 import com.inteavuthkuch.jankystuff.tab.ModTabs;
 import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
@@ -39,6 +40,7 @@ public class JankyStuff
         ModBlockEntity.BLOCK_ENTITIES.register(eventBus);
         ModMenuType.MENUS.register(eventBus);
         ModComponents.register(eventBus);
+        ModRecipes.register(eventBus);
 
         CapabilityHandler.register(eventBus);
 

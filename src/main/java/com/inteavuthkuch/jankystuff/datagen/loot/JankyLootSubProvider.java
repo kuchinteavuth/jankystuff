@@ -4,6 +4,7 @@ import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.component.ModComponents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
@@ -58,7 +59,7 @@ public class JankyLootSubProvider extends BlockLootSubProvider {
                         .setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(block)
                                 .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
-                                        .include(ModComponents.FLUID.get()))
+                                        .include(DataComponents.CUSTOM_DATA))
                                 .apply(ApplyExplosionDecay.explosionDecay())
                         )
                 );

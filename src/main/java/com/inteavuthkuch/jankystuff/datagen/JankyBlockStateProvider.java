@@ -2,7 +2,11 @@ package com.inteavuthkuch.jankystuff.datagen;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
+import com.inteavuthkuch.jankystuff.block.blockaccelerator.BasicBlockAccelerator;
 import com.inteavuthkuch.jankystuff.common.Constraints;
+import com.inteavuthkuch.jankystuff.util.BlockSet;
+import com.inteavuthkuch.jankystuff.util.datagen.BlockStateModelConfiguration;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -13,10 +17,14 @@ import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class JankyBlockStateProvider extends BlockStateProvider {
@@ -30,13 +38,20 @@ public class JankyBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(block.get(), cubeAll(block.get()));
     }
 
-    private void blockWithCustomBlockModel(DeferredBlock<Block> block){
+    private void blockWithCustomBlockAndItemModel(DeferredBlock<Block> block){
         simpleBlock(block.get(), new ModelFile.UncheckedModelFile(modLoc("block/" + block.getId().getPath())));
         simpleBlockItem(block.get(), new ModelFile.UncheckedModelFile(modLoc("block/" + block.getId().getPath())));
     }
-    private void blockWithCustomBlockModel(DeferredBlock<Block> block, String parent){
-        simpleBlock(block.get(), new ModelFile.UncheckedModelFile(parent));
-        simpleBlockItem(block.get(), new ModelFile.UncheckedModelFile(parent));
+    private void blockWithCustomBlockAndItemModel(DeferredBlock<Block> block, @NotNull String folder, @Nullable String customModelName){
+        while(folder.endsWith("/")){
+            folder = folder.substring(0, folder.length() - 1);
+        }
+
+        folder = folder.toLowerCase(); // this can do it
+        String modelName = customModelName == null ? block.getId().getPath() : customModelName;
+        ResourceLocation location = modLoc("block/" + folder + "/" + modelName);
+        simpleBlock(block.get(), new ModelFile.UncheckedModelFile(location));
+        simpleBlockItem(block.get(), new ModelFile.UncheckedModelFile(location));
     }
 
     private void glassBlockWithItem(@NotNull DeferredBlock<Block> block) {
@@ -61,20 +76,58 @@ public class JankyBlockStateProvider extends BlockStateProvider {
                 .forAllStates(Objects.requireNonNullElseGet(configuration, () -> state -> ConfiguredModel.builder()
                         .modelFile(models().cubeAll(blockName, blockTexture(block.get())))
                         .build()));
-
         simpleBlockItem(block.get(), cubeAll(block.get()));
+    }
+
+    protected void blockWithVariantsWithCustomBlockModel(@NotNull DeferredBlock<Block> block, @Nullable BlockStateModelConfiguration configuration) {
+        String blockName = BuiltInRegistries.BLOCK.getKey(block.get()).getPath();
+        BlockStateModelConfiguration blockConfiguration = Objects.requireNonNullElseGet(configuration,
+                () -> (block1, state1)
+                        -> ConfiguredModel.builder().modelFile(models().cubeAll(blockName, blockTexture(block.get()))).build());
+        getVariantBuilder(block.get())
+                .forAllStates(blockState -> blockConfiguration.config(block.get(), blockState));
     }
 
     @Override
     protected void registerStatesAndModels() {
-        blockWithCustomBlockModel(ModBlocks.TICK_ACCELERATOR);
-        simpleBlockWithItem(ModBlocks.WOODEN_CRATE);
-        simpleBlockWithItem(ModBlocks.METAL_CRATE);
-        blockWithCustomBlockModel(ModBlocks.CORRUPTED_DIRT);
-        blockWithCustomBlockModel(ModBlocks.MOB_DAMAGE_PLATE);
-        blockWithCustomBlockModel(ModBlocks.ADVANCE_DAMAGE_PLATE);
-        glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
+        BlockSet.of(ModBlocks.WOODEN_CRATE, ModBlocks.METAL_CRATE)
+                .each(this::simpleBlockWithItem);
 
+        glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
         blockWithVariantsAndItem(ModBlocks.WATER_SOURCE, null);
+
+        BlockSet.of(ModBlocks.BASIC_BLOCK_ACCELERATOR, ModBlocks.ADVANCED_BLOCK_ACCELERATOR, ModBlocks.ELITE_BLOCK_ACCELERATOR, ModBlocks.ULTIMATE_BLOCK_ACCELERATOR)
+                        .each(b -> blockWithVariantsWithCustomBlockModel(b, (block, state) -> {
+                                    String blockName = BuiltInRegistries.BLOCK.getKey(block).getPath();
+                                    Direction direction = state.getOptionalValue(BasicBlockAccelerator.FACING).orElse(Direction.NORTH);
+                                    ModelFile blockModel = models()
+                                            .withExistingParent(blockName, modLoc("block/block_accelerator"))
+                                            .texture("side", modLoc("block/block_accelerator/" + blockName + "_side"));
+                                    ConfiguredModel.Builder<?> configuredModels = ConfiguredModel.builder().modelFile(blockModel);
+                                    return switch (direction){
+                                        case EAST -> configuredModels.rotationY(90).build();
+                                        case SOUTH -> configuredModels.rotationY(180).build();
+                                        case WEST -> configuredModels.rotationY(270).build();
+                                        case UP -> configuredModels.rotationX(270).build();
+                                        case DOWN -> configuredModels.rotationX(90).build();
+                                        default -> configuredModels.build();
+                                    };
+                                }))
+                        .each(block -> {
+                            String blockName = BuiltInRegistries.BLOCK.getKey(block.get()).getPath();
+                            ModelFile blockModel = models()
+                                    .withExistingParent(blockName, modLoc("block/block_accelerator"));
+                            simpleBlockItem(block.get(), blockModel);
+                        });
+
+        BlockSet.of(ModBlocks.TICK_ACCELERATOR,
+                ModBlocks.CORRUPTED_DIRT,
+                ModBlocks.MOB_DAMAGE_PLATE,
+                ModBlocks.ADVANCE_DAMAGE_PLATE,
+                ModBlocks.BASIC_FLUID_TANK,
+                ModBlocks.ADVANCED_FLUID_TANK,
+                ModBlocks.ELITE_FLUID_TANK,
+                ModBlocks.ULTIMATE_FLUID_TANK)
+        .each(this::blockWithCustomBlockAndItemModel);
     }
 }

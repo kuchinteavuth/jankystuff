@@ -3,11 +3,13 @@ package com.inteavuthkuch.jankystuff.datagen;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.datagen.util.RecipeProviderExtension;
 import com.inteavuthkuch.jankystuff.item.ModItems;
+import com.inteavuthkuch.jankystuff.recipe.builder.FluidTankUpgradeRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
@@ -409,5 +411,47 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(ModBlocks.ELITE_BLOCK_ACCELERATOR), has(ModBlocks.ELITE_BLOCK_ACCELERATOR))
                 .unlockedBy(getHasName(Items.NETHER_STAR), has(Items.NETHER_STAR))
                 .save(output, getItemNameForMod(ModBlocks.ULTIMATE_BLOCK_ACCELERATOR, "block_accelerator"));
+
+        FluidTankUpgradeRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.BASIC_FLUID_TANK)
+                .pattern("RIR").pattern("IBI").pattern("RIR")
+                .define('I', ModItems.REINFORCED_COMPOUND)
+                .define('R', Tags.Items.INGOTS_IRON)
+                .define('B', Items.BUCKET)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
+                .unlockedBy(getHasName(Items.BUCKET), has(Items.BUCKET))
+                .save(output, getItemNameForMod(ModBlocks.BASIC_FLUID_TANK, "fluid_tank"));
+
+        FluidTankUpgradeRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ADVANCED_FLUID_TANK)
+                .pattern("RIR").pattern("I#I").pattern("RIR")
+                .define('I', ModItems.REINFORCED_COMPOUND)
+                .define('R', Tags.Items.INGOTS_GOLD)
+                .define('#', ModBlocks.BASIC_FLUID_TANK)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(Items.GOLD_INGOT), has(Tags.Items.INGOTS_GOLD))
+                .unlockedBy(getHasName(ModBlocks.BASIC_FLUID_TANK), has(ModBlocks.BASIC_FLUID_TANK))
+                .save(output, getItemNameForMod(ModBlocks.ADVANCED_FLUID_TANK, "fluid_tank"));
+
+        FluidTankUpgradeRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.ELITE_FLUID_TANK)
+                .pattern("RIR").pattern("I#I").pattern("RIR")
+                .define('I', ModItems.REINFORCED_COMPOUND)
+                .define('R', Tags.Items.GEMS_DIAMOND)
+                .define('#', ModBlocks.ADVANCED_FLUID_TANK)
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(Items.DIAMOND), has(Tags.Items.GEMS_DIAMOND))
+                .unlockedBy(getHasName(ModBlocks.ADVANCED_FLUID_TANK), has(ModBlocks.ADVANCED_FLUID_TANK))
+                .save(output, getItemNameForMod(ModBlocks.ELITE_FLUID_TANK, "fluid_tank"));
+
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.of(ModBlocks.ELITE_FLUID_TANK),
+                        Ingredient.of(Tags.Items.INGOTS_NETHERITE),
+                        RecipeCategory.MISC,
+                        ModBlocks.ULTIMATE_FLUID_TANK.asItem()
+                )
+                .unlocks(getHasName(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), has(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
+                .unlocks(getHasName(ModBlocks.ELITE_FLUID_TANK), has(ModBlocks.ELITE_FLUID_TANK))
+                .unlocks(getHasName(Items.NETHERITE_INGOT), has(Tags.Items.INGOTS_NETHERITE))
+                .save(output, getItemNameForMod(ModBlocks.ULTIMATE_FLUID_TANK, "fluid_tank"));
     }
 }

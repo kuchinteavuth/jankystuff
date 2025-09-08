@@ -23,6 +23,16 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 
 base {
@@ -119,11 +129,15 @@ configurations {
 dependencies {
 
     implementation "curse.maven:adorned-1036809:5466622"
-    runtimeOnly "curse.maven:jei-238222:6829086"
     runtimeOnly "curse.maven:ae2-223794:6890346"
     runtimeOnly "curse.maven:guideme-1173950:6812025" // AE2-Dependency
     runtimeOnly "curse.maven:jade-324717:6738687" // Jade
     runtimeOnly "curse.maven:pipez-443900:5757713" // Pipez
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    // at runtime, use the full JEI jar for NeoForge
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 }
 
 
