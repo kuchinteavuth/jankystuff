@@ -87,6 +87,9 @@ public class WaterSourceBlockEntity extends BlockEntity implements IBlockEntityT
                             dir -> BlockCapabilityCache.create(Capabilities.FluidHandler.BLOCK, serverLevel, pPos.relative(dir), dir.getOpposite())
                     );
 
+                    if(serverLevel.getBlockEntity(pPos.relative(direction)) instanceof WaterSourceBlockEntity)
+                        return;
+
                     IFluidHandler fluidHandler = cache.getCapability();
                     if(fluidHandler != null) {
                         for(int i = 0; i < fluidHandler.getTanks(); i++) {

@@ -17,6 +17,7 @@ import com.inteavuthkuch.jankystuff.block.plate.MobDamagePlateBlock;
 import com.inteavuthkuch.jankystuff.item.ModItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -45,6 +46,7 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ELITE_FLUID_TANK;
     public static final DeferredBlock<Block> ULTIMATE_FLUID_TANK;
     public static final DeferredBlock<Block> WATER_SOURCE;
+    public static final DeferredBlock<Block> SKY_SHIFTER;
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MOD_ID);
@@ -69,7 +71,11 @@ public class ModBlocks {
         ELITE_FLUID_TANK = registerBlockWithItem("elite_fluid_tank", EliteFluidTank::new);
         ULTIMATE_FLUID_TANK = registerBlockWithItem("ultimate_fluid_tank", UltimateFluidTank::new);
         WATER_SOURCE = registerBlockWithItem("water_source", WaterSourceBlock::new);
+        SKY_SHIFTER = registerBlockWithItem("skyshifter", Skyshifter::new);
+    }
 
+    public static void register(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
     }
 
     private static @NotNull DeferredBlock<Block> registerBlockWithItem(String name, Supplier<? extends Block> supplier) {

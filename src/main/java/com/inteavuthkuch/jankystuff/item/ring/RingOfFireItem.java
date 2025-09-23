@@ -1,6 +1,5 @@
 package com.inteavuthkuch.jankystuff.item.ring;
 
-import com.inteavuthkuch.jankystuff.integration.CuriosIntegration;
 import com.inteavuthkuch.jankystuff.integration.ExternalMod;
 import com.inteavuthkuch.jankystuff.util.ComponentUtil;
 import net.minecraft.ChatFormatting;

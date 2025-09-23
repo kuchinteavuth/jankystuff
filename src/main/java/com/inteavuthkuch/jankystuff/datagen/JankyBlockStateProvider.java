@@ -95,6 +95,7 @@ public class JankyBlockStateProvider extends BlockStateProvider {
 
         glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
         blockWithVariantsAndItem(ModBlocks.WATER_SOURCE, null);
+        blockWithVariantsAndItem(ModBlocks.SKY_SHIFTER, null);
 
         BlockSet.of(ModBlocks.BASIC_BLOCK_ACCELERATOR, ModBlocks.ADVANCED_BLOCK_ACCELERATOR, ModBlocks.ELITE_BLOCK_ACCELERATOR, ModBlocks.ULTIMATE_BLOCK_ACCELERATOR)
                         .each(b -> blockWithVariantsWithCustomBlockModel(b, (block, state) -> {

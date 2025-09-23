@@ -7,6 +7,7 @@
   "state.jankystuff.off": "Off",
   "state.jankystuff.auto_export_enabled": "Auto Export Enabled",
   "state.jankystuff.auto_export_disabled": "Auto Export Disabled",
+  "jei.jankystuff.fluid_tank_crafting_tooltip": "Retains fluid from previous tank when upgrading.",
 
   "key.jankystuff.category.main": "Janky Stuff",
   "key.jankystuff.toggle_magnet": "Toggle Magnet",
@@ -42,7 +43,7 @@
   "item.jankystuff.infinity_smithing_template": "Smithing Template",
   "item.jankystuff.infinity_smithing_template.base_slot": "Infinity Upgrade",
   "item.jankystuff.infinity_smithing_template.ingredients": "Nether Star",
-  "item.jankystuff.infinity_smithing_template.applies_to": "Netherite Pickaxe",
+  "item.jankystuff.infinity_smithing_template.applies_to": "Reinforced Netherite Tools",
   "item.jankystuff.infinity_smithing_template.drop_info": "Has 20% chance drop from killing Wither",
 
   "item.jankystuff.reinforced_iron_sword": "Reinforced Iron Sword",
@@ -80,6 +81,11 @@
   "item.jankystuff.miner_iron_pickaxe": "Iron Pickaxe",
   "item.jankystuff.miner_diamond_pickaxe": "Diamond Pickaxe",
   "item.jankystuff.energy_drink": "Energy Drink",
+
+  "item.jankystuff.experience_bag.description_1": "- Right Click to store level",
+  "item.jankystuff.experience_bag.description_2": "- Shift+Right Click to retrieve level",
+  "item.jankystuff.experience_bag.stored_xp": "⚡ Stored: ~%s level",
+  "item.jankystuff.experience_bag": "Experience Bag",
 
   "block.jankystuff.tick_accelerator": "Tick Accelerator",
   "block.jankystuff.tick_accelerator.description": "Place below farmland/dirt to increase growth speed of crop/item above",
@@ -120,11 +126,11 @@
   "block.jankystuff.block_accelerator.modifier_text": "Speed Modifier:",
   "block.jankystuff.fluid_tank_content": "Contain: %smB of %s",
   "block.jankystuff.fluid_tank_description": "Can hold %s buckets",
-  "jei.jankystuff.fluid_tank_crafting_tooltip": "Retains fluid from previous tank when upgrading.",
   "block.jankystuff.basic_fluid_tank": "Basic Fluid Tank",
   "block.jankystuff.advanced_fluid_tank": "Advanced Fluid Tank",
   "block.jankystuff.elite_fluid_tank": "Elite Fluid Tank",
   "block.jankystuff.ultimate_fluid_tank": "Ultimated Fluid Tank",
   "block.jankystuff.water_source": "Water Source",
-  "block.jankystuff.water_source.description": "Click with empty hand to toggle auto push"
+  "block.jankystuff.water_source.description": "Sneak and click with empty hand to toggle auto push",
+  "block.jankystuff.skyshifter": "Sky Shifter"
 }

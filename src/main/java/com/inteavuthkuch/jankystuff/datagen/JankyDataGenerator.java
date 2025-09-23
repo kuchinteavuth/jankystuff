@@ -32,5 +32,6 @@ public class JankyDataGenerator {
         generator.addProvider(event.includeServer(), new JankyGlobalLootModifierProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), JankyBlockLootTableProvider.create(output, lookupProvider));
         generator.addProvider(event.includeServer(), new JankyRecipeProvider(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new JankyEntityTagProvider(output, lookupProvider, fileHelper));
     }
 }

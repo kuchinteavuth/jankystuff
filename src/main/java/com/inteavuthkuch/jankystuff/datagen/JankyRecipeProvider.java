@@ -453,5 +453,33 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlocks(getHasName(ModBlocks.ELITE_FLUID_TANK), has(ModBlocks.ELITE_FLUID_TANK))
                 .unlocks(getHasName(Items.NETHERITE_INGOT), has(Tags.Items.INGOTS_NETHERITE))
                 .save(output, getItemNameForMod(ModBlocks.ULTIMATE_FLUID_TANK, "fluid_tank"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModBlocks.WATER_SOURCE)
+                .pattern("WRW")
+                .pattern("RIR")
+                .pattern("WRW")
+                .define('W', Items.WATER_BUCKET)
+                .define('R', ModItems.REINFORCED_COMPOUND)
+                .define('I', Tags.Items.INGOTS_IRON)
+                .unlockedBy(getHasName(Items.WATER_BUCKET), has(Items.WATER_BUCKET))
+                .unlockedBy(getHasName(ModItems.REINFORCED_COMPOUND), has(ModItems.REINFORCED_COMPOUND))
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.EXPERIENCE_BAG)
+                .pattern(" G ")
+                .pattern("#B#")
+                .pattern("E#L")
+                .define('G', Tags.Items.GLASS_BLOCKS)
+                .define('#', Items.LEATHER)
+                .define('B', Items.EXPERIENCE_BOTTLE)
+                .define('E', Tags.Items.GEMS_EMERALD)
+                .define('L', Tags.Items.GEMS_LAPIS)
+                .unlockedBy(getHasName(Items.GLASS), has(Tags.Items.GLASS_BLOCKS))
+                .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
+                .unlockedBy(getHasName(Items.EXPERIENCE_BOTTLE), has(Items.EXPERIENCE_BOTTLE))
+                .unlockedBy(getHasName(Items.EMERALD), has(Tags.Items.GEMS_EMERALD))
+                .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS))
+                .save(output);
     }
 }

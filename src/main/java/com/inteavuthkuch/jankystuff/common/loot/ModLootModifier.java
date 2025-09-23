@@ -2,6 +2,7 @@ package com.inteavuthkuch.jankystuff.common.loot;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.mojang.serialization.MapCodec;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -13,4 +14,8 @@ public class ModLootModifier {
 
     public static final DeferredHolder<MapCodec<? extends IGlobalLootModifier>, MapCodec<AddItemModifier>> JANKY_LOOT =
             GLOBAL_LOOT_MODIFIER.register("janky_loot_modifier", AddItemModifier.CODEC);
+
+    public static void register(IEventBus eventBus) {
+        GLOBAL_LOOT_MODIFIER.register(eventBus);
+    }
 }

@@ -23,6 +23,8 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+
+    // JEI repo
     maven {
         // location of the maven that hosts JEI files since January 2023
         name = "Jared's maven"
@@ -32,6 +34,11 @@ repositories {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "https://modmaven.dev"
+    }
+
+    // REI repo
+    repositories {
+        maven { url "https://maven.shedaniel.me" }
     }
 }
 
@@ -136,7 +143,6 @@ dependencies {
 
     // compile against the JEI API but do not include it at runtime
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
-    // at runtime, use the full JEI jar for NeoForge
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 }
 

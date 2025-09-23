@@ -2,6 +2,7 @@ package com.inteavuthkuch.jankystuff.item;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.item.food.EnergyDrink;
+import com.inteavuthkuch.jankystuff.item.misc.ExperienceBagItem;
 import com.inteavuthkuch.jankystuff.item.portable.MagnetItem;
 import com.inteavuthkuch.jankystuff.item.portable.PortableCrateItem;
 import com.inteavuthkuch.jankystuff.item.ring.*;
@@ -16,6 +17,7 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -69,6 +71,8 @@ public class ModItems {
     public static final DeferredItem<Item> MINER_DIAMOND_PICKAXE;
     public static final DeferredItem<Item> ENERGY_DRINK;
 
+    public static final DeferredItem<Item> EXPERIENCE_BAG;
+
     static {
         ITEMS = DeferredRegister.createItems(JankyStuff.MOD_ID);
         ROASTED_APPLE = registerSimpleFoodItem("roasted_apple", Foods.BAKED_POTATO);
@@ -119,6 +123,11 @@ public class ModItems {
         MINER_IRON_PICKAXE = ITEMS.register("miner_iron_pickaxe", () -> new MinerPickaxe(Tiers.IRON));
         MINER_DIAMOND_PICKAXE = ITEMS.register("miner_diamond_pickaxe", () -> new MinerPickaxe(Tiers.DIAMOND));
         ENERGY_DRINK = ITEMS.register("energy_drink", EnergyDrink::new);
+        EXPERIENCE_BAG = ITEMS.register("experience_bag", ExperienceBagItem::new);
+    }
+
+    public static void register(IEventBus bus) {
+        ITEMS.register(bus);
     }
 
     protected static DeferredItem<Item> registerSimpleFuelItem(String name, int burnTime) {

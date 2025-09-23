@@ -41,7 +41,8 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
                         ModBlocks.ADVANCED_FLUID_TANK.get(),
                         ModBlocks.ELITE_FLUID_TANK.get(),
                         ModBlocks.ULTIMATE_FLUID_TANK.get(),
-                        ModBlocks.WATER_SOURCE.get()
+                        ModBlocks.WATER_SOURCE.get(),
+                        ModBlocks.SKY_SHIFTER.get()
                 );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
@@ -52,11 +53,10 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
                 .addTag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .addTag(BlockTags.MINEABLE_WITH_AXE);
 
-        this.tag(ModTags.Blocks.BUDDING)
+        this.tag(Tags.Blocks.BUDDING_BLOCKS)
                 .add(Blocks.AMETHYST_BLOCK);
 
         this.tag(ModTags.Blocks.ALLOW_ACCELERATION)
-                .addTag(ModTags.Blocks.BUDDING)
                 .addTag(Tags.Blocks.BUDDING_BLOCKS)
                 .addTag(BlockTags.SAPLINGS)
                 .addTag(BlockTags.CROPS);

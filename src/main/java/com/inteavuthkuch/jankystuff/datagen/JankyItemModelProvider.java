@@ -2,6 +2,7 @@ package com.inteavuthkuch.jankystuff.datagen;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.item.ModItems;
+import com.inteavuthkuch.jankystuff.util.BlockSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class JankyItemModelProvider extends ItemModelProvider {
 
@@ -23,53 +25,58 @@ public class JankyItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ModItems.REINFORCED_COMPOUND);
-        simpleItem(ModItems.REINFORCED_SMITHING_TEMPLATE);
-        simpleItem(ModItems.INFINITY_SMITHING_TEMPLATE);
-        simpleItem(ModItems.ROASTED_APPLE);
-        simpleItem(ModItems.DRIED_FLESH);
-        simpleItem(ModItems.COAL_PIECE);
-        simpleItem(ModItems.CHARCOAL_PIECE);
-        simpleItem(ModItems.RING_OF_THE_SKY);
-        simpleItem(ModItems.RING_OF_TRUE_SIGHT);
-        simpleItem(ModItems.RING_OF_FIRE);
-        simpleItem(ModItems.RING_OF_REGENERATION);
-        simpleItem(ModItems.RING_OF_SATURATION);
-        simpleItem(ModItems.RING_OF_WATER);
+        BlockSet.of(
+                ModItems.REINFORCED_COMPOUND,
+                ModItems.REINFORCED_SMITHING_TEMPLATE,
+                ModItems.INFINITY_SMITHING_TEMPLATE,
+                ModItems.ROASTED_APPLE,
+                ModItems.DRIED_FLESH,
+                ModItems.COAL_PIECE,
+                ModItems.CHARCOAL_PIECE,
+                ModItems.RING_OF_THE_SKY,
+                ModItems.RING_OF_TRUE_SIGHT,
+                ModItems.RING_OF_FIRE,
+                ModItems.RING_OF_REGENERATION,
+                ModItems.RING_OF_SATURATION,
+                ModItems.RING_OF_WATER,
+                ModItems.ENERGY_DRINK,
+                ModItems.EXPERIENCE_BAG,
+                ModItems.MAGNET,
+                ModItems.SPEED_UPGRADE,
+                ModItems.ADVANCE_SPEED_UPGRADE
+        ).each(this::simpleItem);
 
-        basicHandHeldItem(ModItems.REINFORCED_IRON_SWORD);
-        basicHandHeldItem(ModItems.REINFORCED_IRON_PICKAXE);
-        basicHandHeldItem(ModItems.REINFORCED_IRON_AXE);
-        basicHandHeldItem(ModItems.REINFORCED_IRON_SHOVEL);
-        basicHandHeldItem(ModItems.REINFORCED_IRON_PAXEL);
+        BlockSet.of(
+                ModItems.REINFORCED_IRON_SWORD,
+                ModItems.REINFORCED_IRON_PICKAXE,
+                ModItems.REINFORCED_IRON_AXE,
+                ModItems.REINFORCED_IRON_SHOVEL,
+                ModItems.REINFORCED_IRON_PAXEL,
 
-        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_SWORD);
-        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_PICKAXE);
-        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_AXE);
-        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_SHOVEL);
-        basicHandHeldItem(ModItems.REINFORCED_DIAMOND_PAXEL);
+                ModItems.REINFORCED_DIAMOND_SWORD,
+                ModItems.REINFORCED_DIAMOND_PICKAXE,
+                ModItems.REINFORCED_DIAMOND_AXE,
+                ModItems.REINFORCED_DIAMOND_SHOVEL,
+                ModItems.REINFORCED_DIAMOND_PAXEL,
 
-        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_SWORD);
-        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_PICKAXE);
-        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_AXE);
-        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_SHOVEL);
-        basicHandHeldItem(ModItems.REINFORCED_NETHERITE_PAXEL);
+                ModItems.REINFORCED_NETHERITE_SWORD,
+                ModItems.REINFORCED_NETHERITE_PICKAXE,
+                ModItems.REINFORCED_NETHERITE_AXE,
+                ModItems.REINFORCED_NETHERITE_SHOVEL,
+                ModItems.REINFORCED_NETHERITE_PAXEL,
 
-        basicHandHeldItem(ModItems.INFINITY_SWORD);
-        basicHandHeldItem(ModItems.INFINITY_PICKAXE);
-        basicHandHeldItem(ModItems.INFINITY_AXE);
-        basicHandHeldItem(ModItems.INFINITY_SHOVEL);
-        basicHandHeldItem(ModItems.INFINITY_PAXEL);
+                ModItems.INFINITY_SWORD,
+                ModItems.INFINITY_PICKAXE,
+                ModItems.INFINITY_AXE,
+                ModItems.INFINITY_SHOVEL,
+                ModItems.INFINITY_PAXEL,
 
-        basicHandHeldItem(ModItems.PORTABLE_CRATE);
-        simpleItem(ModItems.MAGNET);
-        simpleItem(ModItems.SPEED_UPGRADE);
-        simpleItem(ModItems.ADVANCE_SPEED_UPGRADE);
+                ModItems.PORTABLE_CRATE
+        ).each(this::basicHandHeldItem);
 
         basicHandHeldItem(ModItems.MINER_STONE_PICKAXE, Items.STONE_PICKAXE);
         basicHandHeldItem(ModItems.MINER_IRON_PICKAXE, Items.IRON_PICKAXE);
         basicHandHeldItem(ModItems.MINER_DIAMOND_PICKAXE, Items.DIAMOND_PICKAXE);
-        simpleItem(ModItems.ENERGY_DRINK);
     }
 
     protected void basicHandHeldItem(@NotNull DeferredItem<Item> item){

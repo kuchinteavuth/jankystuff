@@ -18,6 +18,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -38,6 +39,7 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EliteFluidTankBlockEntity>> ELITE_FLUID_TANK_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UltimateFluidTankBlockEntity>> ULTIMATE_FLUID_TANK_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WaterSourceBlockEntity>> WATER_SOURCE_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyShifterBlockEntity>> SKY_SHIFTER_BE;
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
@@ -55,6 +57,11 @@ public class ModBlockEntity {
         ELITE_FLUID_TANK_BE = createBlockEntity("elite_fluid_tank", EliteFluidTankBlockEntity::new, ModBlocks.ELITE_FLUID_TANK);
         ULTIMATE_FLUID_TANK_BE = createBlockEntity("ultimate_fluid_tank", UltimateFluidTankBlockEntity::new, ModBlocks.ULTIMATE_FLUID_TANK);
         WATER_SOURCE_BE = createBlockEntity("water_source_be", WaterSourceBlockEntity::new, ModBlocks.WATER_SOURCE);
+        SKY_SHIFTER_BE = createBlockEntity("sky_shifter_be", SkyShifterBlockEntity::new, ModBlocks.SKY_SHIFTER);
+    }
+
+    public static void register(IEventBus eventBus) {
+        BLOCK_ENTITIES.register(eventBus);
     }
 
     @NotNull

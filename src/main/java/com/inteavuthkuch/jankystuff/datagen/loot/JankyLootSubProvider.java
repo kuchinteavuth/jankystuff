@@ -4,6 +4,7 @@ import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.component.ModComponents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -14,10 +15,12 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.functions.SetComponentsFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
+import java.util.Set;
 
 public class JankyLootSubProvider extends BlockLootSubProvider {
 
@@ -46,6 +49,7 @@ public class JankyLootSubProvider extends BlockLootSubProvider {
         this.add(ModBlocks.ULTIMATE_FLUID_TANK.get(), this::createFluidTankLoot);
         this.add(ModBlocks.METAL_CRATE.get(), this::createShulkerBoxDrop);
         this.add(ModBlocks.CORRUPTED_DIRT.get(), b -> createSingleItemTableWithSilkTouch(b, Items.DIRT));
+        this.add(ModBlocks.SKY_SHIFTER.get(), b -> copyComponents(b, Set.of(DataComponents.CUSTOM_DATA)));
     }
 
     @Override
@@ -60,6 +64,23 @@ public class JankyLootSubProvider extends BlockLootSubProvider {
                         .add(LootItem.lootTableItem(block)
                                 .apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
                                         .include(DataComponents.CUSTOM_DATA))
+                                .apply(ApplyExplosionDecay.explosionDecay())
+                        )
+                );
+    }
+
+    private LootTable.Builder copyComponents(Block block, @NotNull Set<DataComponentType<?>> dataComponentTypes) {
+        CopyComponentsFunction.Builder copyComponentsFunction = CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY);
+
+        for(DataComponentType<?> dataComponentType : dataComponentTypes) {
+            copyComponentsFunction.include(dataComponentType);
+        }
+
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(block)
+                                .apply(copyComponentsFunction)
                                 .apply(ApplyExplosionDecay.explosionDecay())
                         )
                 );

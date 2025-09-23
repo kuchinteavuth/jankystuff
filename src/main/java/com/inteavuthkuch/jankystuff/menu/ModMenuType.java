@@ -4,6 +4,7 @@ import com.inteavuthkuch.jankystuff.JankyStuff;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -22,5 +23,9 @@ public class ModMenuType {
         PORTABLE_CRATE = MENUS.register("portable_crate", () -> new MenuType<>(PortableCrateMenu::new, FeatureFlags.REGISTRY.allFlags()));
         BASIC_QUARRY = MENUS.register("basic_quarry", () -> new MenuType<>(BasicQuarryMenu::new, FeatureFlags.REGISTRY.allFlags()));
         BLOCK_BREAKER = MENUS.register("block_breaker", () -> new MenuType<>(BlockBreakerMenu::new, FeatureFlags.REGISTRY.allFlags()));
+    }
+
+    public static void register(IEventBus eventBus) {
+        MENUS.register(eventBus);
     }
 }

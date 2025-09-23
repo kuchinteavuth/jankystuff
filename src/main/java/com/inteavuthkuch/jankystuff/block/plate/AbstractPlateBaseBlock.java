@@ -2,6 +2,7 @@ package com.inteavuthkuch.jankystuff.block.plate;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,6 +52,15 @@ public abstract class AbstractPlateBaseBlock extends Block {
 
     protected static boolean always(BlockState pState, BlockGetter pGetter, BlockPos pPos, EntityType<?> pEntity) {
         return true;
+    }
+
+    @ParametersAreNonnullByDefault
+    @Override
+    protected boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        BlockPos belowPos = pPos.below();
+        BlockState belowState = pLevel.getBlockState(belowPos);
+        VoxelShape supportShape = belowState.getBlockSupportShape(pLevel, belowPos);
+        return !supportShape.isEmpty() && supportShape.max(Direction.Axis.Y) >= 1.0;
     }
 
     @Override
