@@ -1,14 +1,17 @@
 package com.inteavuthkuch.jankystuff.client.event;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
+import com.inteavuthkuch.jankystuff.blockentity.ModBlockEntity;
 import com.inteavuthkuch.jankystuff.client.KeyBinding;
 import com.inteavuthkuch.jankystuff.menu.ModMenuType;
-import com.inteavuthkuch.jankystuff.network.packet.ItemTogglePacket;
-import com.inteavuthkuch.jankystuff.network.packet.PlaySoundPacket;
+import com.inteavuthkuch.jankystuff.network.packet.*;
+import com.inteavuthkuch.jankystuff.renderer.AdvancedQuarryBlockEntityRenderer;
 import com.inteavuthkuch.jankystuff.screen.*;
+import com.inteavuthkuch.jankystuff.screen.custom.FarmSimulationScreen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -31,6 +34,9 @@ public class ClientModBusEvents {
         event.register(ModMenuType.PORTABLE_CRATE.get(), PortableCrateScreen::new);
         event.register(ModMenuType.BASIC_QUARRY.get(), BasicQuarryScreen::new);
         event.register(ModMenuType.BLOCK_BREAKER.get(), BlockBreakerScreen::new);
+        event.register(ModMenuType.ADVANCED_QUARRY.get(), AdvancedQuarryScreen::new);
+        event.register(ModMenuType.BASIC_ITEM_FILTER.get(), BasicItemFilterScreen::new);
+        event.register(ModMenuType.FARM_SIMULATION.get(), FarmSimulationScreen::new);
     }
 
     @SubscribeEvent
@@ -50,5 +56,26 @@ public class ClientModBusEvents {
                 PlaySoundPacket.STREAM_CODEC,
                 PlaySoundPacket::handleClientSidePacket
         );
+
+        registrar.playToServer(
+                BlockEntityPacket.TYPE,
+                BlockEntityPacket.STREAM_CODEC,
+                BlockEntityPacket::handleServer
+        );
+
+        registrar.playToServer(
+                GhostSlotUpdatePacket.TYPE,
+                GhostSlotUpdatePacket.STREAM_CODEC,
+                GhostSlotUpdatePacket::handleServer);
+
+        registrar.playToClient(
+                PlayerPlaySoundPacket.TYPE,
+                PlayerPlaySoundPacket.STREAM_CODEC,
+                PlayerPlaySoundPacket::handleClient);
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ModBlockEntity.ADVANCED_QUARRY_BE.get(), AdvancedQuarryBlockEntityRenderer::new);
     }
 }

@@ -10,7 +10,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BuddingAmethystBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -88,9 +90,17 @@ public class JankyBlockStateProvider extends BlockStateProvider {
                 .forAllStates(blockState -> blockConfiguration.config(block.get(), blockState));
     }
 
+    private String getBlockName(DeferredBlock<Block> block) {
+        return getBlockName(block.get());
+    }
+
+    private String getBlockName(Block block) {
+        return BuiltInRegistries.BLOCK.getKey(block).getPath();
+    }
+
     @Override
     protected void registerStatesAndModels() {
-        BlockSet.of(ModBlocks.WOODEN_CRATE, ModBlocks.METAL_CRATE)
+        BlockSet.of(ModBlocks.WOODEN_CRATE, ModBlocks.METAL_CRATE, ModBlocks.BUDDING_CERAMETRON, ModBlocks.CERAMETRON_CLUSTER_BLOCK)
                 .each(this::simpleBlockWithItem);
 
         glassBlockWithItem(ModBlocks.PASSTHROUGH_GLASS, Constraints.RenderType.TRANSLUCENT);
@@ -130,5 +140,33 @@ public class JankyBlockStateProvider extends BlockStateProvider {
                 ModBlocks.ELITE_FLUID_TANK,
                 ModBlocks.ULTIMATE_FLUID_TANK)
         .each(this::blockWithCustomBlockAndItemModel);
+
+
+        BlockSet.of(ModBlocks.SMALL_CERAMETRON_BUD, ModBlocks.MEDIUM_CERAMETRON_BUD, ModBlocks.LARGE_CERAMETRON_BUD, ModBlocks.CERAMETRON_CLUSTER)
+                .each(b -> {
+                    blockWithVariantsWithCustomBlockModel(b, (block, state) -> {
+                        Direction facing = state.getValue(AmethystClusterBlock.FACING);
+                        ConfiguredModel.Builder<?> model = ConfiguredModel.builder()
+                                .modelFile(
+                                        models().singleTexture(
+                                                getBlockName(block),
+                                                ResourceLocation.withDefaultNamespace("block/cross"),
+                                                "cross",
+                                                blockTexture(block)
+                                        ).renderType(Constraints.RenderType.CUTOUT.getName())
+                                );
+                        return switch (facing) {
+                            case DOWN -> model.rotationX(180).build();
+                            case NORTH -> model.rotationX(90).build();
+                            case SOUTH -> model.rotationX(90).rotationY(180).build();
+                            case WEST -> model.rotationX(90).rotationY(270).build();
+                            case EAST -> model.rotationX(90).rotationY(90).build();
+                            default -> model.build();
+                        };
+                    });
+                });
+        simpleBlockItem(ModBlocks.CERAMETRON_CLUSTER.get(), new ModelFile.UncheckedModelFile(
+                ResourceLocation.fromNamespaceAndPath(JankyStuff.MOD_ID, "block/cerametron_cluster")
+        ));
     }
 }

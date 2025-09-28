@@ -1,10 +1,12 @@
 package com.inteavuthkuch.jankystuff.menu;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
+import com.inteavuthkuch.jankystuff.menu.custom.FarmSimulationMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -15,6 +17,9 @@ public class ModMenuType {
     public static final DeferredHolder<MenuType<?>, MenuType<PortableCrateMenu>> PORTABLE_CRATE;
     public static final DeferredHolder<MenuType<?>, MenuType<BasicQuarryMenu>> BASIC_QUARRY;
     public static final DeferredHolder<MenuType<?>, MenuType<BlockBreakerMenu>> BLOCK_BREAKER;
+    public static final DeferredHolder<MenuType<?>, MenuType<AdvancedQuarryMenu>> ADVANCED_QUARRY;
+    public static final DeferredHolder<MenuType<?>, MenuType<BasicItemFilterMenu>> BASIC_ITEM_FILTER;
+    public static final DeferredHolder<MenuType<?>, MenuType<FarmSimulationMenu>> FARM_SIMULATION;
 
     static {
         MENUS = DeferredRegister.create(Registries.MENU, JankyStuff.MOD_ID);
@@ -23,6 +28,9 @@ public class ModMenuType {
         PORTABLE_CRATE = MENUS.register("portable_crate", () -> new MenuType<>(PortableCrateMenu::new, FeatureFlags.REGISTRY.allFlags()));
         BASIC_QUARRY = MENUS.register("basic_quarry", () -> new MenuType<>(BasicQuarryMenu::new, FeatureFlags.REGISTRY.allFlags()));
         BLOCK_BREAKER = MENUS.register("block_breaker", () -> new MenuType<>(BlockBreakerMenu::new, FeatureFlags.REGISTRY.allFlags()));
+        ADVANCED_QUARRY = MENUS.register("advanced_quarry_menu", () -> IMenuTypeExtension.create(AdvancedQuarryMenu::new));
+        BASIC_ITEM_FILTER = MENUS.register("basic_item_filter_menu", () -> new MenuType<>(BasicItemFilterMenu::new, FeatureFlags.REGISTRY.allFlags()));
+        FARM_SIMULATION = MENUS.register("farm_simulation_menu", () -> IMenuTypeExtension.create(FarmSimulationMenu::new));
     }
 
     public static void register(IEventBus eventBus) {

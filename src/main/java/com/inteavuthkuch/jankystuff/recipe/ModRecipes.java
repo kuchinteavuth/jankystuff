@@ -1,6 +1,7 @@
 package com.inteavuthkuch.jankystuff.recipe;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
+import com.inteavuthkuch.jankystuff.recipe.custom.FarmSimulationRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -19,6 +20,17 @@ public class ModRecipes {
                 @Override
                 public String toString() {
                     return "fluid_tank_upgrade";
+                }
+            });
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<FarmSimulationRecipe>> FARM_SIMULATION_SERIALIZER =
+            SERIALIZERS.register("farm_simulation", FarmSimulationRecipe.Serializer::new);
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<FarmSimulationRecipe>> FARM_SIMULATION_TYPE =
+            TYPES.register("farm_simulation_type", () -> new RecipeType<FarmSimulationRecipe>() {
+                @Override
+                public String toString() {
+                    return "farm_simulation";
                 }
             });
 

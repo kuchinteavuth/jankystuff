@@ -273,7 +273,6 @@ public class BasicQuarryBlockEntity extends BaseContainerBlockEntity implements 
         }
     }
 
-
     @Override
     public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
         var container = ContainerUtil.getContainerAt(pLevel, pPos.above());

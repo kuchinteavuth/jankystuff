@@ -30,8 +30,9 @@ public class JankyDataGenerator {
         generator.addProvider(event.includeServer(), new JankyItemTagProvider(output, lookupProvider, blockTagProvider.contentsGetter()));
         generator.addProvider(event.includeServer(), new CuriosProvider(output, fileHelper, lookupProvider));
         generator.addProvider(event.includeServer(), new JankyGlobalLootModifierProvider(output, lookupProvider));
-        generator.addProvider(event.includeServer(), JankyBlockLootTableProvider.create(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new JankyBlockLootTableProvider.Runner(output, lookupProvider));
         generator.addProvider(event.includeServer(), new JankyRecipeProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new JankyEntityTagProvider(output, lookupProvider, fileHelper));
+        generator.addProvider(event.includeServer(), new JankyEnglishLanguageProvider(output));
     }
 }

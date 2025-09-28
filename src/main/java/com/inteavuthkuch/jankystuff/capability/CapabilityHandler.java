@@ -3,6 +3,7 @@ package com.inteavuthkuch.jankystuff.capability;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.blockentity.WaterSourceBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.AbstractCrateBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.custom.FarmSimulationBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.FluidTankBlockEntityBase;
 import com.inteavuthkuch.jankystuff.inventory.BasicQuarryInvWrapper;
 import com.inteavuthkuch.jankystuff.inventory.BlockBreakerInvWrapper;
@@ -51,6 +52,12 @@ public class CapabilityHandler {
                 Capabilities.FluidHandler.BLOCK,
                 WaterSourceBlockEntity::getCapability,
                 ModBlocks.WATER_SOURCE.get()
+        );
+
+        event.registerBlock(
+                Capabilities.ItemHandler.BLOCK,
+                FarmSimulationBlockEntity::getCapability,
+                ModBlocks.FARM_SIMULATION.get()
         );
     }
 

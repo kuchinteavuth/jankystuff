@@ -7,7 +7,26 @@
   "state.jankystuff.off": "Off",
   "state.jankystuff.auto_export_enabled": "Auto Export Enabled",
   "state.jankystuff.auto_export_disabled": "Auto Export Disabled",
+  "state.jankystuff.missing_inventory": "Missing Inventory",
+  "state.jankystuff.no_inventory": "No Inventory",
+  "state.jankystuff.pause": "Pause",
+  "state.jankystuff.running": "Running",
+  "state.jankystuff.completed": "Completed",
+  "state.jankystuff.disable": "Disable",
   "jei.jankystuff.fluid_tank_crafting_tooltip": "Retains fluid from previous tank when upgrading.",
+  "jei.jankystuff.farm_simulation": "Farm Simulation",
+  "jei.jankystuff.chance": "Chance: %s%%",
+  "jei.jankystuff.duration": "Duration: %s ticks",
+
+  "text.jankystuff.status": "Status:",
+  "text.jankystuff.mined": "Mined: %s of %s",
+  "text.jankystuff.start": "Start",
+  "text.jankystuff.filter_type": "Type:",
+  "text.jankystuff.disable_in_config": "Disabled in config",
+
+  "button.jankystuff.pause": "Pause",
+  "button.jankystuff.whitelist": "Whitelist",
+  "button.jankystuff.blacklist": "Blacklist",
 
   "key.jankystuff.category.main": "Janky Stuff",
   "key.jankystuff.toggle_magnet": "Toggle Magnet",
@@ -86,6 +105,15 @@
   "item.jankystuff.experience_bag.description_2": "- Shift+Right Click to retrieve level",
   "item.jankystuff.experience_bag.stored_xp": "⚡ Stored: ~%s level",
   "item.jankystuff.experience_bag": "Experience Bag",
+  "item.jankystuff.basic_item_filter": "Basic Item Filter",
+  "item.jankystuff.cerametron_shard": "Cerametron Shard",
+
+  "block.jankystuff.small_cerametron_bud": "Small Cerametron Budding",
+  "block.jankystuff.medium_cerametron_bud": "Medium Cerametron Budding",
+  "block.jankystuff.large_cerametron_bud": "Large Cerametron Budding",
+  "block.jankystuff.cerametron_cluster": "Cerametron Cluster",
+  "block.jankystuff.budding_cerametron": "Budding Cerametron",
+  "block.jankystuff.cerametron_cluster_block": "Cerametron Cluster Block",
 
   "block.jankystuff.tick_accelerator": "Tick Accelerator",
   "block.jankystuff.tick_accelerator.description": "Place below farmland/dirt to increase growth speed of crop/item above",
@@ -132,5 +160,8 @@
   "block.jankystuff.ultimate_fluid_tank": "Ultimated Fluid Tank",
   "block.jankystuff.water_source": "Water Source",
   "block.jankystuff.water_source.description": "Sneak and click with empty hand to toggle auto push",
-  "block.jankystuff.skyshifter": "Sky Shifter"
+  "block.jankystuff.skyshifter": "Sky Shifter",
+  "block.jankystuff.advanced_quarry": "Advanced Quarry",
+  "block.jankystuff.advanced_quarry.description": "Mines blocks in the current chunk where it is placed.",
+  "block.jankystuff.farm_simulation": "Farm Simulation"
 }

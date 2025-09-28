@@ -3,17 +3,27 @@ package com.inteavuthkuch.jankystuff.datagen;
 import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.datagen.util.RecipeProviderExtension;
 import com.inteavuthkuch.jankystuff.item.ModItems;
+import com.inteavuthkuch.jankystuff.recipe.builder.FarmSimulationRecipeBuilder;
 import com.inteavuthkuch.jankystuff.recipe.builder.FluidTankUpgradeRecipeBuilder;
+import com.inteavuthkuch.jankystuff.recipe.custom.FarmSimulationRecipe;
+import com.inteavuthkuch.jankystuff.util.ChanceItemStack;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class JankyRecipeProvider extends RecipeProviderExtension {
@@ -480,6 +490,159 @@ public class JankyRecipeProvider extends RecipeProviderExtension {
                 .unlockedBy(getHasName(Items.EXPERIENCE_BOTTLE), has(Items.EXPERIENCE_BOTTLE))
                 .unlockedBy(getHasName(Items.EMERALD), has(Tags.Items.GEMS_EMERALD))
                 .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS))
+                .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CERAMETRON_CLUSTER_BLOCK)
+                .requires(ModItems.CERAMETRON_SHARD, 4)
+                .unlockedBy(getHasName(ModItems.CERAMETRON_SHARD), has(ModItems.CERAMETRON_SHARD))
+                .save(output);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.CERAMETRON_SHARD, 4)
+                .requires(ModBlocks.CERAMETRON_CLUSTER_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.CERAMETRON_CLUSTER_BLOCK), has(ModBlocks.CERAMETRON_CLUSTER_BLOCK))
+                .save(output);
+
+        registerFarmSimulationRecipe(output);
+    }
+
+    private void registerFarmSimulationRecipe(RecipeOutput output) {
+        FarmSimulationRecipeBuilder.createSingleOutput(ModItems.CERAMETRON_SHARD)
+                .input(ModBlocks.CERAMETRON_CLUSTER)
+                .catalyst(ModBlocks.BUDDING_CERAMETRON)
+                .duration(800)
+                .unlockBy(getHasName(ModItems.CERAMETRON_SHARD), has(ModItems.CERAMETRON_SHARD))
+                .unlockBy(getHasName(ModBlocks.BUDDING_CERAMETRON), has(ModBlocks.BUDDING_CERAMETRON))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.AMETHYST_SHARD)
+                .input(Items.AMETHYST_CLUSTER)
+                .catalyst(Items.BUDDING_AMETHYST)
+                .duration(800)
+                .unlockBy(getHasName(Items.AMETHYST_CLUSTER), has(Items.AMETHYST_CLUSTER))
+                .unlockBy(getHasName(Items.BUDDING_AMETHYST), has(Items.BUDDING_AMETHYST))
+                .save(output);
+
+        // Item that use tag dirt as catalyst
+        Map<Item, Set<ChanceItemStack>> dirtCatalystItems = new HashMap<>();
+        // Saplings
+        dirtCatalystItems.put(Items.OAK_SAPLING, Set.of(ChanceItemStack.of(Items.OAK_LOG), ChanceItemStack.of(Items.OAK_SAPLING, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f), ChanceItemStack.of(Items.APPLE, 0.2f)));
+        dirtCatalystItems.put(Items.DARK_OAK_SAPLING, Set.of(ChanceItemStack.of(Items.DARK_OAK_LOG), ChanceItemStack.of(Items.DARK_OAK_SAPLING, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f), ChanceItemStack.of(Items.APPLE, 0.2f)));
+        dirtCatalystItems.put(Items.SPRUCE_SAPLING, Set.of(ChanceItemStack.of(Items.SPRUCE_LOG), ChanceItemStack.of(Items.SPRUCE_SAPLING, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f), ChanceItemStack.of(Items.APPLE, 0.2f)));
+        dirtCatalystItems.put(Items.ACACIA_SAPLING, Set.of(ChanceItemStack.of(Items.ACACIA_LOG), ChanceItemStack.of(Items.ACACIA_SAPLING, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f)));
+        dirtCatalystItems.put(Items.BIRCH_SAPLING, Set.of(ChanceItemStack.of(Items.BIRCH_LOG), ChanceItemStack.of(Items.BIRCH_SAPLING, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f)));
+        dirtCatalystItems.put(Items.CHERRY_SAPLING, Set.of(ChanceItemStack.of(Items.CHERRY_LOG), ChanceItemStack.of(Items.CHERRY_SAPLING, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f)));
+        dirtCatalystItems.put(Items.JUNGLE_SAPLING, Set.of(ChanceItemStack.of(Items.JUNGLE_LOG), ChanceItemStack.of(Items.JUNGLE_SAPLING, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f)));
+        dirtCatalystItems.put(Items.MANGROVE_PROPAGULE, Set.of(ChanceItemStack.of(Items.MANGROVE_LOG), ChanceItemStack.of(Items.MANGROVE_PROPAGULE, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f)));
+        dirtCatalystItems.put(Items.AZALEA, Set.of(ChanceItemStack.of(Items.OAK_LOG), ChanceItemStack.of(Items.AZALEA, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f), ChanceItemStack.of(Items.APPLE, 0.2f)));
+        dirtCatalystItems.put(Items.FLOWERING_AZALEA, Set.of(ChanceItemStack.of(Items.OAK_LOG), ChanceItemStack.of(Items.FLOWERING_AZALEA, 0.1f), ChanceItemStack.of(Items.AZALEA, 0.1f), ChanceItemStack.of(Items.STICK, 0.5f), ChanceItemStack.of(Items.APPLE, 0.2f)));
+        // Crops
+        dirtCatalystItems.put(Items.WHEAT_SEEDS, Set.of(ChanceItemStack.of(Items.WHEAT), ChanceItemStack.of(Items.WHEAT_SEEDS, 0.1f)));
+        dirtCatalystItems.put(Items.BEETROOT_SEEDS, Set.of(ChanceItemStack.of(Items.BEETROOT), ChanceItemStack.of(Items.BEETROOT_SEEDS, 0.1f)));
+        dirtCatalystItems.put(Items.CARROT, Set.of(ChanceItemStack.of(Items.CARROT)));
+        dirtCatalystItems.put(Items.BAMBOO, Set.of(ChanceItemStack.of(Items.BAMBOO)));
+        dirtCatalystItems.put(Items.POTATO, Set.of(ChanceItemStack.of(Items.POTATO), ChanceItemStack.of(Items.POISONOUS_POTATO, 0.2f)));
+        dirtCatalystItems.put(Items.PUMPKIN_SEEDS, Set.of(ChanceItemStack.of(Items.PUMPKIN), ChanceItemStack.of(Items.PUMPKIN_SEEDS, 0.1f)));
+        dirtCatalystItems.put(Items.MELON_SEEDS, Set.of(ChanceItemStack.of(Items.MELON), ChanceItemStack.of(Items.MELON_SEEDS, 0.1f)));
+        dirtCatalystItems.put(Items.COCOA_BEANS, Set.of(ChanceItemStack.of(Items.COCOA_BEANS)));
+        dirtCatalystItems.put(Items.SWEET_BERRIES, Set.of(ChanceItemStack.of(Items.SWEET_BERRIES)));
+        dirtCatalystItems.put(Items.GLOW_BERRIES, Set.of(ChanceItemStack.of(Items.GLOW_BERRIES)));
+        // Flowers
+        dirtCatalystItems.put(Items.DANDELION, Set.of(ChanceItemStack.of(Items.DANDELION)));
+        dirtCatalystItems.put(Items.POPPY, Set.of(ChanceItemStack.of(Items.POPPY)));
+        dirtCatalystItems.put(Items.BLUE_ORCHID, Set.of(ChanceItemStack.of(Items.BLUE_ORCHID)));
+        dirtCatalystItems.put(Items.ALLIUM, Set.of(ChanceItemStack.of(Items.ALLIUM)));
+        dirtCatalystItems.put(Items.AZURE_BLUET, Set.of(ChanceItemStack.of(Items.AZURE_BLUET)));
+        dirtCatalystItems.put(Items.RED_TULIP, Set.of(ChanceItemStack.of(Items.RED_TULIP)));
+        dirtCatalystItems.put(Items.ORANGE_TULIP, Set.of(ChanceItemStack.of(Items.ORANGE_TULIP)));
+        dirtCatalystItems.put(Items.WHITE_TULIP, Set.of(ChanceItemStack.of(Items.WHITE_TULIP)));
+        dirtCatalystItems.put(Items.PINK_TULIP, Set.of(ChanceItemStack.of(Items.PINK_TULIP)));
+        dirtCatalystItems.put(Items.OXEYE_DAISY, Set.of(ChanceItemStack.of(Items.OXEYE_DAISY)));
+        dirtCatalystItems.put(Items.CORNFLOWER, Set.of(ChanceItemStack.of(Items.CORNFLOWER)));
+        dirtCatalystItems.put(Items.LILY_OF_THE_VALLEY, Set.of(ChanceItemStack.of(Items.LILY_OF_THE_VALLEY)));
+        dirtCatalystItems.put(Items.SUNFLOWER, Set.of(ChanceItemStack.of(Items.SUNFLOWER)));
+        dirtCatalystItems.put(Items.LILAC, Set.of(ChanceItemStack.of(Items.LILAC)));
+        dirtCatalystItems.put(Items.PEONY, Set.of(ChanceItemStack.of(Items.PEONY)));
+        dirtCatalystItems.put(Items.ROSE_BUSH, Set.of(ChanceItemStack.of(Items.ROSE_BUSH)));
+        dirtCatalystItems.put(Items.PITCHER_POD, Set.of(ChanceItemStack.of(Items.PITCHER_PLANT), ChanceItemStack.of(Items.PITCHER_POD, 0.1f)));
+        dirtCatalystItems.put(Items.TORCHFLOWER_SEEDS, Set.of(ChanceItemStack.of(Items.TORCHFLOWER), ChanceItemStack.of(Items.TORCHFLOWER_SEEDS, 0.1f)));
+
+        dirtCatalystItems.forEach( (key, outputItems) -> {
+            FarmSimulationRecipeBuilder.create(outputItems)
+                    .input(key)
+                    .catalyst(ItemTags.DIRT)
+                    .duration(200)
+                    .unlockBy(getHasName(key), has(key))
+                    .unlockBy("has_dirt", has(ItemTags.DIRT))
+                    .save(output);
+        });
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.WITHER_ROSE)
+                .input(Items.WITHER_ROSE)
+                .catalyst(ItemTags.SOUL_FIRE_BASE_BLOCKS)
+                .unlockBy(getHasName(Items.WITHER_ROSE), has(Items.WITHER_ROSE))
+                .unlockBy("has_soul_sand", has(ItemTags.SOUL_FIRE_BASE_BLOCKS))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.NETHER_WART)
+                .input(Items.NETHER_WART)
+                .catalyst(ItemTags.SOUL_FIRE_BASE_BLOCKS)
+                .unlockBy(getHasName(Items.NETHER_WART), has(Items.NETHER_WART))
+                .unlockBy("has_soul_sand", has(ItemTags.SOUL_FIRE_BASE_BLOCKS))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.CACTUS)
+                .input(Items.CACTUS)
+                .catalyst(ItemTags.SAND)
+                .unlockBy(getHasName(Items.CACTUS), has(Items.CACTUS))
+                .unlockBy(getHasName(Items.SAND), has(ItemTags.SAND))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.SUGAR_CANE)
+                .input(Items.SUGAR_CANE)
+                .catalyst(ItemTags.SAND)
+                .unlockBy(getHasName(Items.SUGAR_CANE), has(Items.SUGAR_CANE))
+                .unlockBy(getHasName(Items.SAND), has(ItemTags.SAND))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.KELP)
+                .input(Items.KELP)
+                .catalyst(Items.WATER_BUCKET)
+                .unlockBy(getHasName(Items.KELP), has(Items.KELP))
+                .unlockBy(getHasName(Items.WATER_BUCKET), has(Items.WATER_BUCKET))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.create(Set.of(ChanceItemStack.of(Items.CHORUS_FRUIT), ChanceItemStack.of(Items.CHORUS_FLOWER, 0.05f)))
+                .input(Items.CHORUS_FLOWER)
+                .catalyst(Tags.Items.END_STONES)
+                .unlockBy(getHasName(Items.CHORUS_FLOWER), has(Items.CHORUS_FLOWER))
+                .unlockBy("has_end_stone", has(Tags.Items.END_STONES))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.BROWN_MUSHROOM)
+                .input(Items.BROWN_MUSHROOM)
+                .catalyst(Items.PODZOL)
+                .unlockBy(getHasName(Items.BROWN_MUSHROOM), has(Items.BROWN_MUSHROOM))
+                .unlockBy(getHasName(Items.PODZOL), has(Items.PODZOL))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.createSingleOutput(Items.RED_MUSHROOM)
+                .input(Items.RED_MUSHROOM)
+                .catalyst(Items.PODZOL)
+                .unlockBy(getHasName(Items.RED_MUSHROOM), has(Items.RED_MUSHROOM))
+                .unlockBy(getHasName(Items.PODZOL), has(Items.PODZOL))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.create(Set.of(ChanceItemStack.of(Items.WARPED_STEM), ChanceItemStack.of(Items.STICK, 0.5f), ChanceItemStack.of(Items.SHROOMLIGHT, 0.2f), ChanceItemStack.of(Items.WARPED_FUNGUS, 0.1f)))
+                .input(Items.WARPED_FUNGUS)
+                .catalyst(Items.WARPED_NYLIUM)
+                .unlockBy(getHasName(Items.WARPED_FUNGUS), has(Items.WARPED_FUNGUS))
+                .unlockBy(getHasName(Items.WARPED_NYLIUM), has(Items.WARPED_NYLIUM))
+                .save(output);
+
+        FarmSimulationRecipeBuilder.create(Set.of(ChanceItemStack.of(Items.CRIMSON_STEM), ChanceItemStack.of(Items.STICK, 0.5f), ChanceItemStack.of(Items.SHROOMLIGHT, 0.2f), ChanceItemStack.of(Items.CRIMSON_FUNGUS, 0.1f)))
+                .input(Items.CRIMSON_FUNGUS)
+                .catalyst(Items.CRIMSON_NYLIUM)
+                .unlockBy(getHasName(Items.CRIMSON_FUNGUS), has(Items.CRIMSON_FUNGUS))
+                .unlockBy(getHasName(Items.CRIMSON_NYLIUM), has(Items.CRIMSON_NYLIUM))
                 .save(output);
     }
 }

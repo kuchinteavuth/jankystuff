@@ -7,6 +7,8 @@ import com.inteavuthkuch.jankystuff.block.blockaccelerator.EliteBlockAccelerator
 import com.inteavuthkuch.jankystuff.block.blockaccelerator.UltimateBlockAccelerator;
 import com.inteavuthkuch.jankystuff.block.crate.MetalCrateBlock;
 import com.inteavuthkuch.jankystuff.block.crate.WoodenCrateBlock;
+import com.inteavuthkuch.jankystuff.block.custom.FarmSimulationBlock;
+import com.inteavuthkuch.jankystuff.block.custom.JankyAmethystBlock;
 import com.inteavuthkuch.jankystuff.block.dirt.CorruptedDirtBlock;
 import com.inteavuthkuch.jankystuff.block.fluidtank.AdvancedFluidTank;
 import com.inteavuthkuch.jankystuff.block.fluidtank.BasicFluidTank;
@@ -16,12 +18,19 @@ import com.inteavuthkuch.jankystuff.block.plate.AdvanceDamagePlateBlock;
 import com.inteavuthkuch.jankystuff.block.plate.MobDamagePlateBlock;
 import com.inteavuthkuch.jankystuff.item.ModItems;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.AmethystClusterBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -47,6 +56,15 @@ public class ModBlocks {
     public static final DeferredBlock<Block> ULTIMATE_FLUID_TANK;
     public static final DeferredBlock<Block> WATER_SOURCE;
     public static final DeferredBlock<Block> SKY_SHIFTER;
+    public static final DeferredBlock<Block> ADVANCED_QUARRY;
+    public static final DeferredBlock<Block> SMALL_CERAMETRON_BUD;
+    public static final DeferredBlock<Block> MEDIUM_CERAMETRON_BUD;
+    public static final DeferredBlock<Block> LARGE_CERAMETRON_BUD;
+    public static final DeferredBlock<Block> CERAMETRON_CLUSTER;
+    public static final DeferredBlock<Block> BUDDING_CERAMETRON;
+    public static final DeferredBlock<Block> CERAMETRON_CLUSTER_BLOCK;
+    public static final DeferredBlock<Block> FARM_SIMULATION;
+
 
     static {
         BLOCKS = DeferredRegister.createBlocks(JankyStuff.MOD_ID);
@@ -72,6 +90,15 @@ public class ModBlocks {
         ULTIMATE_FLUID_TANK = registerBlockWithItem("ultimate_fluid_tank", UltimateFluidTank::new);
         WATER_SOURCE = registerBlockWithItem("water_source", WaterSourceBlock::new);
         SKY_SHIFTER = registerBlockWithItem("skyshifter", Skyshifter::new);
+        ADVANCED_QUARRY = registerBlockWithItem("advanced_quarry", AdvancedQuarryBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(BASIC_QUARRY.get()));
+        SMALL_CERAMETRON_BUD = BLOCKS.register("small_cerametron_bud", () -> new AmethystClusterBlock(3.0F, 4.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.SMALL_AMETHYST_BUD).noLootTable().noOcclusion()));
+        MEDIUM_CERAMETRON_BUD = BLOCKS.register("medium_cerametron_bud", () -> new AmethystClusterBlock(4.0F, 3.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.MEDIUM_AMETHYST_BUD).noLootTable().noOcclusion()));
+        LARGE_CERAMETRON_BUD = BLOCKS.register("large_cerametron_bud", () -> new AmethystClusterBlock(5.0F, 3.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.LARGE_AMETHYST_BUD).noLootTable().noOcclusion()));
+        CERAMETRON_CLUSTER = registerBlockWithItem("cerametron_cluster", () -> new AmethystClusterBlock(7.0F, 3.0F, BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER).noOcclusion()));
+        BUDDING_CERAMETRON = registerBlockWithItem("budding_cerametron", () -> new JankyAmethystBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BUDDING_AMETHYST).randomTicks(),
+                SMALL_CERAMETRON_BUD.get(), MEDIUM_CERAMETRON_BUD.get(), LARGE_CERAMETRON_BUD.get(), CERAMETRON_CLUSTER.get()));
+        CERAMETRON_CLUSTER_BLOCK = registerBlockWithItem("cerametron_cluster_block", Block::new, () -> BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK));
+        FARM_SIMULATION = registerBlockWithItem("farm_simulation", FarmSimulationBlock::new, () -> BlockBehaviour.Properties.ofFullCopy(BASIC_QUARRY.get()));
     }
 
     public static void register(IEventBus eventBus) {
@@ -87,6 +114,17 @@ public class ModBlocks {
     private static @NotNull DeferredBlock<Block> registerBlockWithItem(String name, Supplier<? extends Block> supplier, Item.Properties itemProps) {
         DeferredBlock<Block> block = BLOCKS.register(name, supplier);
         ModItems.ITEMS.registerSimpleBlockItem(name, block, itemProps);
+        return block;
+    }
+
+    @ParametersAreNonnullByDefault
+    @NotNull
+    private static DeferredBlock<Block> registerBlockWithItem(String name,
+                                                              Function<BlockBehaviour.Properties, ? extends Block> blockFactory,
+                                                              Supplier<BlockBehaviour.Properties> propertiesSupplier) {
+
+        DeferredBlock<Block> block = BLOCKS.register(name, () -> blockFactory.apply(propertiesSupplier.get()));
+        ModItems.ITEMS.registerSimpleBlockItem(name, block, new Item.Properties());
         return block;
     }
 }

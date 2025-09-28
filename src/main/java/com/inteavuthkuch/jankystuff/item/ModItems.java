@@ -1,6 +1,7 @@
 package com.inteavuthkuch.jankystuff.item;
 
 import com.inteavuthkuch.jankystuff.JankyStuff;
+import com.inteavuthkuch.jankystuff.item.custom.BasicItemFilterItem;
 import com.inteavuthkuch.jankystuff.item.food.EnergyDrink;
 import com.inteavuthkuch.jankystuff.item.misc.ExperienceBagItem;
 import com.inteavuthkuch.jankystuff.item.portable.MagnetItem;
@@ -72,6 +73,8 @@ public class ModItems {
     public static final DeferredItem<Item> ENERGY_DRINK;
 
     public static final DeferredItem<Item> EXPERIENCE_BAG;
+    public static final DeferredItem<Item> BASIC_ITEM_FILTER;
+    public static final DeferredItem<Item> CERAMETRON_SHARD;
 
     static {
         ITEMS = DeferredRegister.createItems(JankyStuff.MOD_ID);
@@ -124,6 +127,8 @@ public class ModItems {
         MINER_DIAMOND_PICKAXE = ITEMS.register("miner_diamond_pickaxe", () -> new MinerPickaxe(Tiers.DIAMOND));
         ENERGY_DRINK = ITEMS.register("energy_drink", EnergyDrink::new);
         EXPERIENCE_BAG = ITEMS.register("experience_bag", ExperienceBagItem::new);
+        BASIC_ITEM_FILTER = ITEMS.registerItem("basic_item_filter", BasicItemFilterItem::new, new Item.Properties().stacksTo(1));
+        CERAMETRON_SHARD = ITEMS.registerItem("cerametron_shard", Item::new);
     }
 
     public static void register(IEventBus bus) {

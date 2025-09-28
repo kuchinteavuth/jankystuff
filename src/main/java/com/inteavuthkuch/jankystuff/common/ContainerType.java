@@ -7,7 +7,9 @@ public enum ContainerType {
     PORTABLE("portable_crate", 8, 11, 0,UserInterface.CONTAINER_11_BY_8),
     BASIC_QUARRY("basic_quarry", 3, 3, 3,UserInterface.BASIC_QUARRY),
     METAL("metal_crate", 9,13, 0,UserInterface.CONTAINER_13_BY_9),
-    BLOCK_BREAKER("block_breaker", 3, 6, 4, UserInterface.BLOCK_BREAKER)
+    BLOCK_BREAKER("block_breaker", 3, 6, 4, UserInterface.BLOCK_BREAKER),
+    ADVANCED_QUARRY("advanced_quarry", 1, 9, 0, UserInterface.ADVANCED_QUARRY),
+    BASIC_ITEM_FILTER("basic_item_filter", 3, 9, 0, UserInterface.BASIC_ITEM_FILTER)
     ;
 
     private final String id;

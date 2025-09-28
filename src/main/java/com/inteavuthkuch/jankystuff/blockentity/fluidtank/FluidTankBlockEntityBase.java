@@ -1,9 +1,7 @@
 package com.inteavuthkuch.jankystuff.blockentity.fluidtank;
 
-import com.inteavuthkuch.jankystuff.JankyStuff;
 import com.inteavuthkuch.jankystuff.capability.JankyFluidTank;
 import com.inteavuthkuch.jankystuff.common.FluidTankTier;
-import com.inteavuthkuch.jankystuff.component.ModComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

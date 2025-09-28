@@ -38,4 +38,11 @@ public final class SaveDataContainer extends SimpleContainer {
         parent.set(DataComponents.CONTAINER, updatedComponent);
         super.stopOpen(pPlayer);
     }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        ItemContainerContents updatedComponent = ItemContainerContents.fromItems(getItems());
+        parent.set(DataComponents.CONTAINER, updatedComponent);
+    }
 }

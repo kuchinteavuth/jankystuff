@@ -1,5 +1,6 @@
 package com.inteavuthkuch.jankystuff.datagen;
 
+import com.inteavuthkuch.jankystuff.block.ModBlocks;
 import com.inteavuthkuch.jankystuff.item.ModItems;
 import com.inteavuthkuch.jankystuff.tag.ModTags;
 import net.minecraft.core.HolderLookup;
@@ -76,5 +77,8 @@ public class JankyItemTagProvider extends ItemTagsProvider {
         this.tag(Tags.Items.FOODS)
                 .add(ModItems.ENERGY_DRINK.get())
         ;
+
+        this.tag(Tags.Items.CLUSTERS)
+                .add(ModBlocks.CERAMETRON_CLUSTER.get().asItem());
     }
 }

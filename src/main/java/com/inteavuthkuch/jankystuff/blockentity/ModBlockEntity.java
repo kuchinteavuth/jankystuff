@@ -8,6 +8,7 @@ import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.EliteBlockAccel
 import com.inteavuthkuch.jankystuff.blockentity.blockaccelerator.UltimateBlockAcceleratorBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.MetalCrateBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.crate.WoodenCrateBlockEntity;
+import com.inteavuthkuch.jankystuff.blockentity.custom.FarmSimulationBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.AdvancedFluidTankBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.BasicFluidTankBlockEntity;
 import com.inteavuthkuch.jankystuff.blockentity.fluidtank.EliteFluidTankBlockEntity;
@@ -40,6 +41,8 @@ public class ModBlockEntity {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UltimateFluidTankBlockEntity>> ULTIMATE_FLUID_TANK_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WaterSourceBlockEntity>> WATER_SOURCE_BE;
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SkyShifterBlockEntity>> SKY_SHIFTER_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AdvancedQuarryBlockEntity>> ADVANCED_QUARRY_BE;
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FarmSimulationBlockEntity>> FARM_SIMULATION_BE;
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, JankyStuff.MOD_ID);
@@ -58,6 +61,8 @@ public class ModBlockEntity {
         ULTIMATE_FLUID_TANK_BE = createBlockEntity("ultimate_fluid_tank", UltimateFluidTankBlockEntity::new, ModBlocks.ULTIMATE_FLUID_TANK);
         WATER_SOURCE_BE = createBlockEntity("water_source_be", WaterSourceBlockEntity::new, ModBlocks.WATER_SOURCE);
         SKY_SHIFTER_BE = createBlockEntity("sky_shifter_be", SkyShifterBlockEntity::new, ModBlocks.SKY_SHIFTER);
+        ADVANCED_QUARRY_BE = createBlockEntity("advanced_quarry_be", AdvancedQuarryBlockEntity::new, ModBlocks.ADVANCED_QUARRY);
+        FARM_SIMULATION_BE = createBlockEntity("farm_simulation_be", FarmSimulationBlockEntity::new, ModBlocks.FARM_SIMULATION);
     }
 
     public static void register(IEventBus eventBus) {

@@ -42,7 +42,15 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
                         ModBlocks.ELITE_FLUID_TANK.get(),
                         ModBlocks.ULTIMATE_FLUID_TANK.get(),
                         ModBlocks.WATER_SOURCE.get(),
-                        ModBlocks.SKY_SHIFTER.get()
+                        ModBlocks.SKY_SHIFTER.get(),
+                        ModBlocks.ADVANCED_QUARRY.get(),
+                        ModBlocks.BUDDING_CERAMETRON.get(),
+                        ModBlocks.CERAMETRON_CLUSTER.get(),
+                        ModBlocks.LARGE_CERAMETRON_BUD.get(),
+                        ModBlocks.MEDIUM_CERAMETRON_BUD.get(),
+                        ModBlocks.SMALL_CERAMETRON_BUD.get(),
+                        ModBlocks.CERAMETRON_CLUSTER_BLOCK.get(),
+                        ModBlocks.FARM_SIMULATION.get()
                 );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
@@ -54,11 +62,17 @@ public class JankyBlockTagProvider extends BlockTagsProvider {
                 .addTag(BlockTags.MINEABLE_WITH_AXE);
 
         this.tag(Tags.Blocks.BUDDING_BLOCKS)
-                .add(Blocks.AMETHYST_BLOCK);
+                .add(Blocks.BUDDING_AMETHYST, ModBlocks.BUDDING_CERAMETRON.get());
 
         this.tag(ModTags.Blocks.ALLOW_ACCELERATION)
                 .addTag(Tags.Blocks.BUDDING_BLOCKS)
                 .addTag(BlockTags.SAPLINGS)
                 .addTag(BlockTags.CROPS);
+
+        this.tag(Tags.Blocks.BUDDING_BLOCKS)
+                .add(ModBlocks.CERAMETRON_CLUSTER_BLOCK.get());
+
+        this.tag(Tags.Blocks.CLUSTERS)
+                .add(ModBlocks.CERAMETRON_CLUSTER.get());
     }
 }
